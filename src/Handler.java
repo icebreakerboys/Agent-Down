@@ -7,10 +7,9 @@ public class Handler {
 	LinkedList<GameObject> object = new LinkedList<GameObject>();
 	
 	//Runs all math for GameObjects
-	public void tick() {
+	public void tick(){
 		for(int i = 0; i < object.size(); i++) {
 			GameObject tempObject = object.get(i);
-			
 			tempObject.tick();
 		}
 	}
