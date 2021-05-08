@@ -11,8 +11,11 @@ public class KeyInput extends KeyAdapter{
 	public KeyInput(Handler handler) {
 		this.handler = handler;
 	}
-	
-	//allows for keys to do things
+
+	/**
+	 * moves player from moving after key is pressed
+	 * @param e
+	 */
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		//test code
@@ -26,6 +29,19 @@ public class KeyInput extends KeyAdapter{
 					tempObject.setVelX(5);
 				if(key == KeyEvent.VK_A) 
 					tempObject.setVelX(-5);
+				if(key == KeyEvent.VK_W)
+					tempObject.setVelY(-5);
+				if(key == KeyEvent.VK_S)
+					tempObject.setVelY(5);
+				//Up and down keys
+				if(key == KeyEvent.VK_RIGHT)
+					tempObject.setVelX(5);
+				if(key == KeyEvent.VK_LEFT)
+					tempObject.setVelX(-5);
+				if(key == KeyEvent.VK_UP)
+					tempObject.setVelY(-5);
+				if(key == KeyEvent.VK_DOWN)
+					tempObject.setVelY(5);
 			}
 		}
 		//ends game
@@ -33,7 +49,10 @@ public class KeyInput extends KeyAdapter{
 			System.exit(1);
 	}
 
-	//stops keys from doing things
+	/**
+	 * Stops player from moving after key is released
+	 * @param e
+	 */
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
 		
@@ -46,6 +65,19 @@ public class KeyInput extends KeyAdapter{
 					tempObject.setVelX(0);
 				if(key == KeyEvent.VK_A) 
 					tempObject.setVelX(0);
+				if(key == KeyEvent.VK_W)
+					tempObject.setVelY(0);
+				if(key == KeyEvent.VK_S)
+					tempObject.setVelY(0);
+				//Up and down keys
+				if(key == KeyEvent.VK_RIGHT)
+					tempObject.setVelX(0);
+				if(key == KeyEvent.VK_LEFT)
+					tempObject.setVelX(0);
+				if(key == KeyEvent.VK_UP)
+					tempObject.setVelY(0);
+				if(key == KeyEvent.VK_DOWN)
+					tempObject.setVelY(0);
 			}
 		}
 	}

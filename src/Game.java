@@ -9,7 +9,7 @@ import java.util.Random;
 public class Game extends Canvas implements Runnable{
 	//idk what this is for
 	private static final long serialVersionUID = 7770517683426635406L;
-	
+
 	//variables and objects initialization
 	public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
 	
@@ -32,12 +32,12 @@ public class Game extends Canvas implements Runnable{
 		
 		
 		
-		for(int i = 0; i < 10; i++)
+		for(int i = 0; i < 10; i++) {
 			handler.addObject(new Enemy(r.nextInt(WIDTH), r.nextInt(HEIGHT) + HEIGHT, ID.Enemy, 16, 16, Color.red, 7));
-		handler.addObject(new ShooterEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT) + HEIGHT, ID.ShooterEnemy, 26, 26, Color.orange, 2));
-		handler.addObject(new Player(WIDTH/2  - 16, 100, ID.Player, 32, 32, Color.gray));
-		
-		
+		}
+			handler.addObject(new ShooterEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT) + HEIGHT, ID.ShooterEnemy, 26, 26, Color.orange, 2));
+			handler.addObject(new Player(WIDTH / 2 - 16, 100, ID.Player, 32, 32, Color.gray));
+
 	}
 
 	//Necessary Stuff Didn't Write
@@ -68,7 +68,9 @@ public class Game extends Canvas implements Runnable{
 			delta += (now - lastTime) / ns;
 			lastTime = now;
 			while(delta >= 1) {
-				tick();
+				//FIXME: the tick method is called several times here
+				// in too short of a time, therefore knocking off several hitpoints
+				this.tick();
 				delta--;
 			}
 			if(running)
@@ -85,7 +87,7 @@ public class Game extends Canvas implements Runnable{
 	}
 		
 	//Runs all math Components of the Game
-	private void tick() {
+	private void tick(){
 		handler.tick();
 		hud.tick();
 	}
@@ -113,14 +115,19 @@ public class Game extends Canvas implements Runnable{
 		bs.show();
 	}
 
-	//Helpful method that keeps a variable inside bounds
-	//Used in tick method for HUD and Player classes
-	//helpful Method
+	/**
+	 * keeps a variable within bounds
+	 * Used in tick method for HUD and Player classes
+	 * @param var initial var
+	 * @param min bound
+	 * @param max bound
+	 * @return the bound back
+	 */
 	public static int clamp(int var, int min, int max) {
 		if(var >= max)
-			return var = max;
+			return max;
 		else if(var <= min)
-			return var = min;
+			return min;
 		else
 			return var;
 	}
