@@ -1,3 +1,4 @@
+package realSkyDive.src;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -6,7 +7,7 @@ public class Bullet extends GameObject{
 
 	public Bullet(int x, int y, ID id, int w, int h, Color color) {
 		super(x, y, id, w, h, color);
-		pT(x, y);
+		targetPlayer(x, y);
 	}
 
 	public void tick() {
@@ -16,12 +17,12 @@ public class Bullet extends GameObject{
 		removeGameObject();
 	}
 	
-	public void pT(int x, int y) {
+	public void targetPlayer (int x, int y) {
 		int xD = PX - x;
 		int yD = PY - y;
 		
-		velY = ((yD)/50);
-		velX = ((xD)/50);
+		velY = ((7*yD)/(int) (Math.sqrt(xD*xD + yD*yD)));
+		velX = ((7*xD)/(int) (Math.sqrt(xD*xD + yD*yD)));
 	}
 	
 	@Override
