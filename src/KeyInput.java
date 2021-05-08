@@ -29,19 +29,23 @@ public class KeyInput extends KeyAdapter{
 					tempObject.setVelX(5);
 				if(key == KeyEvent.VK_A) 
 					tempObject.setVelX(-5);
-				if(key == KeyEvent.VK_W)
+				/*if(key == KeyEvent.VK_W)
 					tempObject.setVelY(-5);
 				if(key == KeyEvent.VK_S)
 					tempObject.setVelY(5);
+
+				 */
 				//Up and down keys
 				if(key == KeyEvent.VK_RIGHT)
 					tempObject.setVelX(5);
 				if(key == KeyEvent.VK_LEFT)
 					tempObject.setVelX(-5);
-				if(key == KeyEvent.VK_UP)
+			/*	if(key == KeyEvent.VK_UP)
 					tempObject.setVelY(-5);
 				if(key == KeyEvent.VK_DOWN)
 					tempObject.setVelY(5);
+
+			 */
 			}
 		}
 		//ends game
