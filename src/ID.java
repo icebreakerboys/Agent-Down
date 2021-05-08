@@ -1,4 +1,3 @@
-package realSkyDive.src.com.realSkyDive.main;
 
 public enum ID {
 	
