@@ -1,11 +1,15 @@
 package realSkyDive.src;
 
-import java.awt.Color;
+import java.awt.*;
 
 /**
  * Player class
  */
 public class Player extends GameObject{
+
+	public static int PX, PY;
+	private Boolean justHit = false;
+	private int counter = 0;
 
 	//constructor
 	public Player(int x, int y, ID id, int w, int h, Color color) {
@@ -22,17 +26,40 @@ public class Player extends GameObject{
 		PX = x;
 		PY = y;
 		//x bounds for window
-		x = Game.clamp(x, 0, Game.WIDTH-30 );
+		x = Game.clamp(x, 0, Game.WIDTH - 45);
 		//y bounds for window
-		y = Game.clamp(y, 0, Game.HEIGHT-60);
-		
-		collision();
-		
+		y = Game.clamp(y, 0, Game.HEIGHT/2 - 45);
+
+		if(!justHit) {
+			collision();
+		} else {
+			counter++;
+			if(counter % 50 == 0){
+				counter = 0;
+				justHit = false;
+			}
+		}
+	}
+
+	/**
+	 * Render controls the visual components of the player
+	 * @param g Graphics
+	 */
+	@Override
+	public void render(Graphics g){
+		if(justHit){
+			g.setColor(color);
+			if(counter % 5 != 0)
+				g.fillRect(x, y, w, h);
+		} else {
+			g.setColor(color);
+			g.fillRect(x, y, w, h);
+		}
 	}
 
 	/**
 	 * Handles player collision with
-	 * red enemy blocks
+	 * enemies
 	 */
 	private void collision(){
 		for(int i = 0; i < Game.handler.object.size(); i++) {
@@ -42,16 +69,8 @@ public class Player extends GameObject{
 			if(tempObject.getId() == ID.Enemy) {
 				//collision code
 				if(getBounds().intersects(tempObject.getBounds())) {
-					//FIXME: This bug is happening because your game loop is going too
-					// Fast so its calling this collision method several times each time
-					// The player hits the red block, taking away like 8 hitpoints at a time
-					// One way you could fix this is to either add in a delay every time the player hits
-					// a red block to prevent this method from being called again, or you can change how fast the game loop goes
-					// Another way you can fix this is to rewrite this method into the enemy class instead of here
-					// that way you can control its behavior better and allow it to only hit the player once
-					// check the Game.java file to see the problem area
-					HUD.HEALTH -= 1;
-
+					HUD.HEALTH -= 10;
+					justHit = true;
 				}
 			}
 			//shooter bullet math
@@ -59,7 +78,7 @@ public class Player extends GameObject{
 				if(getBounds().intersects(tempObject.getBounds())) {
 					HUD.HEALTH -= 10;
 					Game.handler.removeObject(tempObject);
-					
+					justHit = true;
 				}
 			}
 		}

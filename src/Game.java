@@ -7,8 +7,6 @@ import java.awt.image.BufferStrategy;
 import java.util.Random;
 
 public class Game extends Canvas implements Runnable{
-	//idk what this is for
-	private static final long serialVersionUID = 7770517683426635406L;
 
 	//variables and objects initialization
 	public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
@@ -23,24 +21,21 @@ public class Game extends Canvas implements Runnable{
 	public Game() {
 		this.setFocusable(true);
 		handler = new Handler();
-		this.addKeyListener(new KeyInput(handler));
+		this.addKeyListener(new KeyInput());
 
 		hud = new HUD();
 		r = new Random();
 		
 		new Window(WIDTH, HEIGHT, "Sky Dive", this);
-		
-		
-		
+
 		for(int i = 0; i < 10; i++) {
 			handler.addObject(new Enemy(r.nextInt(WIDTH), r.nextInt(HEIGHT) + HEIGHT, ID.Enemy, 16, 16, Color.red, 7));
 		}
-			handler.addObject(new ShooterEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT) + HEIGHT, ID.ShooterEnemy, 26, 26, Color.orange, 2));
-			handler.addObject(new Player(WIDTH / 2 - 16, 100, ID.Player, 32, 32, Color.gray));
+		handler.addObject(new ShooterEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT) + HEIGHT, ID.ShooterEnemy, 26, 26, Color.orange, 2));
+		handler.addObject(new Player(WIDTH / 2 - 16, 100, ID.Player, 32, 32, Color.gray));
 
 	}
 
-	//Necessary Stuff Didn't Write
 	public synchronized void start() {
 		thread = new Thread(this);
 		thread.start();
@@ -94,23 +89,20 @@ public class Game extends Canvas implements Runnable{
 	
 	//Runs all visual Components of the Game
 	private void render() {
-		//don't understand
 		BufferStrategy bs = this.getBufferStrategy();
 		if(bs == null) {
 			this.createBufferStrategy(3);
 			return;
 		}
-		
+
 		Graphics g = bs.getDrawGraphics();
-		
-		//do understand
+
 		g.setColor(Color.cyan);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
 		handler.render(g);
 		hud.render(g);
-		
-		//don't understand
+
 		g.dispose();
 		bs.show();
 	}
@@ -126,10 +118,7 @@ public class Game extends Canvas implements Runnable{
 	public static int clamp(int var, int min, int max) {
 		if(var >= max)
 			return max;
-		else if(var <= min)
-			return min;
-		else
-			return var;
+		else return Math.max(var, min);
 	}
 	
 	public static void main(String[] args) {

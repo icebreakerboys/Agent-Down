@@ -11,7 +11,6 @@ public abstract class GameObject {
 	
 	//variables
 	protected int x, y;
-	public static int PX, PY;
 	protected int velX, velY;
 	protected ID id;
 	protected int w, h;
@@ -42,6 +41,7 @@ public abstract class GameObject {
 			velY = -(r.nextInt(speed)) - 3;
 		}
 	}
+
 	public void removeGameObject() {
 		if(x <= -w || x >= Game.WIDTH + w || y <= -h || y >= Game.HEIGHT + h)
 			Game.handler.removeObject(this);

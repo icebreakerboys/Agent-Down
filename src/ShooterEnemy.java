@@ -17,7 +17,7 @@ public class ShooterEnemy extends GameObject{
 		y += velY;
 		
 		if(onScreen() && counter % 50 == 0) {
-				if((PX < x - 50 && PY < y - 50) || (PX > x + 50 && PY < y - 50) || PY > y + 50) {
+				if((Player.PX < x - 50 && Player.PY < y - 50) || (Player.PX > x + 50 && Player.PY < y - 50) || Player.PY > y + 50) {
 					shoot();
 				} else counter = 49;
 		}
@@ -28,10 +28,7 @@ public class ShooterEnemy extends GameObject{
 	}
 	
 	public boolean onScreen() {
-		if(x > 0 && x < Game.WIDTH - w && y > 0 && y < Game.HEIGHT)
-			return true;
-		else 
-			return false;
+		return x > 0 && x < Game.WIDTH - w && y > 0 && y < Game.HEIGHT;
 	}
 	
 	public void shoot() {
