@@ -18,8 +18,8 @@ public class Bullet extends GameObject{
 	}
 	
 	public void targetPlayer (int x, int y) {
-		int xD = Player.PX - x;
-		int yD = Player.PY - y;
+		int xD = Player.X - x;
+		int yD = Player.Y - y;
 		
 		velY = ((7*yD)/(int) (Math.sqrt(xD*xD + yD*yD)));
 		velX = ((7*xD)/(int) (Math.sqrt(xD*xD + yD*yD)));

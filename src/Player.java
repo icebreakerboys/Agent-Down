@@ -1,34 +1,40 @@
 package realSkyDive.src;
 
 import java.awt.*;
+import java.beans.ConstructorProperties;
 
 /**
  * Player class
  */
-public class Player extends GameObject{
+public class Player {
 
-	public static int PX, PY;
-	private Boolean justHit = false;
-	private int counter = 0;
+	public static int X, Y;
+	private static Boolean justHit = false;
+	private static int counter = 0;
+	public static int velX = 0, velY = 0;
+	private static int w, h;
+	private static Color color;
 
 	//constructor
-	public Player(int x, int y, ID id, int w, int h, Color color) {
-		super(x, y, id, w, h, color);
+	public Player(int x, int y, int w, int h, Color color) {
+		X = x;
+		Y = y;
+		Player.w = w;
+		Player.h = h;
+		Player.color = color;
 	}
 
 	/**
 	 * Tick class controls usr movement
 	 * and keeps player within window bounds
 	 */
-	public void tick() {
-		x += velX;
-		y += velY;
-		PX = x;
-		PY = y;
+	public static void tick() {
+		X += velX;
+		Y += velY;
 		//x bounds for window
-		x = Game.clamp(x, 0, Game.WIDTH - 45);
+		X = Game.clamp(X, 0, Game.WIDTH - 45);
 		//y bounds for window
-		y = Game.clamp(y, 0, Game.HEIGHT/2 - 45);
+		Y = Game.clamp(Y, 0, Game.HEIGHT/2 - 45);
 
 		if(!justHit) {
 			collision();
@@ -41,19 +47,22 @@ public class Player extends GameObject{
 		}
 	}
 
+	public static Rectangle getBounds() {
+		return new Rectangle(X, Y, w, h);
+	}
+
 	/**
 	 * Render controls the visual components of the player
 	 * @param g Graphics
 	 */
-	@Override
-	public void render(Graphics g){
+	public static void render(Graphics g){
 		if(justHit){
 			g.setColor(color);
 			if(counter % 5 != 0)
-				g.fillRect(x, y, w, h);
+				g.fillRect(X, Y, w, h);
 		} else {
 			g.setColor(color);
-			g.fillRect(x, y, w, h);
+			g.fillRect(X, Y, w, h);
 		}
 	}
 
@@ -61,7 +70,7 @@ public class Player extends GameObject{
 	 * Handles player collision with
 	 * enemies
 	 */
-	private void collision(){
+	private static void collision(){
 		for(int i = 0; i < Game.handler.object.size(); i++) {
 			
 			GameObject tempObject = Game.handler.object.get(i);

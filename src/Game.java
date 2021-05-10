@@ -15,6 +15,7 @@ public class Game extends Canvas implements Runnable{
 	private boolean running = false;
 	private Random r;
 	public static Handler handler;
+	public static Player player;
 	private HUD hud;
 	
 	//main game code
@@ -32,8 +33,7 @@ public class Game extends Canvas implements Runnable{
 			handler.addObject(new Enemy(r.nextInt(WIDTH), r.nextInt(HEIGHT) + HEIGHT, ID.Enemy, 16, 16, Color.red, 7));
 		}
 		handler.addObject(new ShooterEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT) + HEIGHT, ID.ShooterEnemy, 26, 26, Color.orange, 2));
-		handler.addObject(new Player(WIDTH / 2 - 16, 100, ID.Player, 32, 32, Color.gray));
-
+		player = new Player(WIDTH / 2 - 16, 100, 32, 32, Color.gray);
 	}
 
 	public synchronized void start() {
@@ -85,6 +85,7 @@ public class Game extends Canvas implements Runnable{
 	private void tick(){
 		handler.tick();
 		hud.tick();
+		Player.tick();
 	}
 	
 	//Runs all visual Components of the Game
@@ -99,9 +100,10 @@ public class Game extends Canvas implements Runnable{
 
 		g.setColor(Color.cyan);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
-		
+
 		handler.render(g);
 		hud.render(g);
+		Player.render(g);
 
 		g.dispose();
 		bs.show();

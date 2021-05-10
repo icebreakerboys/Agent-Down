@@ -17,7 +17,7 @@ public class ShooterEnemy extends GameObject{
 		y += velY;
 		
 		if(onScreen() && counter % 50 == 0) {
-				if((Player.PX < x - 50 && Player.PY < y - 50) || (Player.PX > x + 50 && Player.PY < y - 50) || Player.PY > y + 50) {
+				if((Player.X < x - 50 && Player.Y < y - 50) || (Player.X > x + 50 && Player.Y < y - 50) || Player.Y > y + 50) {
 					shoot();
 				} else counter = 49;
 		}
