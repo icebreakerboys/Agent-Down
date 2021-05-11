@@ -19,9 +19,9 @@ public class KeyInput extends KeyAdapter {
 		if(key == KeyEvent.VK_A)
 			Player.velX = -5;
 		if(key == KeyEvent.VK_W)
-			Player.velY = -5;
+			Player.velY = -2;
 		if(key == KeyEvent.VK_S)
-			Player.velY = 5;
+			Player.velY = 2;
 
 		//ends game
 		if(key == KeyEvent.VK_ESCAPE)

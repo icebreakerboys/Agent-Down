@@ -9,6 +9,8 @@ import java.beans.ConstructorProperties;
 public class Player {
 
 	public static int X, Y;
+	public static Boolean hasGun = true;
+
 	private static Boolean justHit = false;
 	private static int counter = 0;
 	public static int velX = 0, velY = 0;
@@ -74,22 +76,35 @@ public class Player {
 		for(int i = 0; i < Game.handler.object.size(); i++) {
 			
 			GameObject tempObject = Game.handler.object.get(i);
-			//red enemy math
+			//enemy collision
 			if(tempObject.getId() == ID.Enemy) {
-				//collision code
 				if(getBounds().intersects(tempObject.getBounds())) {
-					HUD.HEALTH -= 10;
+					HUD.HEALTH -= 1;
 					justHit = true;
 				}
 			}
-			//shooter bullet math
+			//bullet collision
 			if(tempObject.getId() == ID.Bullet){
 				if(getBounds().intersects(tempObject.getBounds())) {
-					HUD.HEALTH -= 10;
+					if(!tempObject.getIsFriendly()) {
+						HUD.HEALTH -= 1;
+						Game.handler.removeObject(tempObject);
+						justHit = true;
+					}
+				}
+			}
+			//gunItem collision
+			if(tempObject.getId() == ID.GunItem){
+				if(getBounds().intersects(tempObject.getBounds())) {
 					Game.handler.removeObject(tempObject);
-					justHit = true;
+					hasGun = true;
 				}
 			}
 		}
 	}
+
+	public static void shoot(int x, int y, boolean isFriendly){
+		Game.handler.addObject(new Bullet(Player.X, Player.Y, x, y, true, ID.Bullet, 12, 12, Color.black));
+	}
+
 }

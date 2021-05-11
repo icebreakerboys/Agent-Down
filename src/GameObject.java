@@ -16,7 +16,8 @@ public abstract class GameObject {
 	protected int w, h;
 	protected int speed;
 	protected Color color;
-	
+	protected boolean isFriendly;
+
 	//constructor
 	public GameObject(int x, int y, ID id, int w, int h, Color color) {
 		this.x = x;
@@ -82,5 +83,8 @@ public abstract class GameObject {
 	}
 	public int getVelY() {
 		return velY;
+	}
+	public boolean getIsFriendly(){
+		return isFriendly;
 	}
 }
