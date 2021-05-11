@@ -1,4 +1,3 @@
-package realSkyDive.src;
 
 import java.awt.*;
 import java.beans.ConstructorProperties;
