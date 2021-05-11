@@ -3,6 +3,8 @@
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 import java.util.Random;
 
@@ -23,17 +25,19 @@ public class Game extends Canvas implements Runnable{
 		this.setFocusable(true);
 		handler = new Handler();
 		this.addKeyListener(new KeyInput());
+		this.addMouseListener(new MouseInput());
 
 		hud = new HUD();
 		r = new Random();
 		
 		new Window(WIDTH, HEIGHT, "Sky Dive", this);
 
-		for(int i = 0; i < 10; i++) {
+		for(int i = 0; i < 1; i++) {
 			handler.addObject(new Enemy(r.nextInt(WIDTH), r.nextInt(HEIGHT) + HEIGHT, ID.Enemy, 16, 16, Color.red, 7));
 		}
 		handler.addObject(new ShooterEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT) + HEIGHT, ID.ShooterEnemy, 26, 26, Color.orange, 2));
 		player = new Player(WIDTH / 2 - 16, 100, 32, 32, Color.gray);
+		handler.addObject(new GunItem(r.nextInt(WIDTH), r.nextInt(HEIGHT) + HEIGHT, ID.GunItem, 16, 16, Color.blue, 1));
 	}
 
 	public synchronized void start() {
@@ -74,7 +78,7 @@ public class Game extends Canvas implements Runnable{
 			
 			if(System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
-				System.out.println("FPS: " + frames);
+				//System.out.println("FPS: " + frames);
 				frames = 0;
 			}
 		}

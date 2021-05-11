@@ -3,6 +3,7 @@ public enum ID {
 
 	Enemy(),
 	ShooterEnemy(),
-	Bullet()
+	Bullet(),
+	GunItem()
 
 }

@@ -4,9 +4,10 @@ import java.awt.Graphics;
 
 public class Bullet extends GameObject{
 
-	public Bullet(int x, int y, ID id, int w, int h, Color color) {
+	public Bullet(int x, int y, int tX, int tY, boolean isFriendly, ID id, int w, int h, Color color) {
 		super(x, y, id, w, h, color);
-		targetPlayer(x, y);
+		target(x, y, tX, tY);
+		super.isFriendly = isFriendly;
 	}
 
 	public void tick() {
@@ -16,9 +17,9 @@ public class Bullet extends GameObject{
 		removeGameObject();
 	}
 	
-	public void targetPlayer (int x, int y) {
-		int xD = Player.X - x;
-		int yD = Player.Y - y;
+	public void target (int x, int y, int tX, int tY) {
+		int xD = tX - x;
+		int yD = tY - y;
 		
 		velY = ((7*yD)/(int) (Math.sqrt(xD*xD + yD*yD)));
 		velX = ((7*xD)/(int) (Math.sqrt(xD*xD + yD*yD)));
@@ -28,6 +29,9 @@ public class Bullet extends GameObject{
 	public void render(Graphics g) {
 		g.setColor(color);
 		g.fillOval(x, y, w, h);
+	}
+	public boolean getIsFriendly(){
+		return isFriendly;
 	}
 
 }
