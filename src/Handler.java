@@ -1,4 +1,3 @@
-package realSkyDive.src;
 
 import java.awt.Graphics;
 import java.util.LinkedList;
