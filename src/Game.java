@@ -3,7 +3,10 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
+import javax.sound.sampled.*;
 
 public class Game extends Canvas implements Runnable{
 
@@ -124,8 +127,13 @@ public class Game extends Canvas implements Runnable{
 		else return Math.max(var, min);
 	}
 	
-	public static void main(String[] args) {
-		new Game();	
+	public static void main(String[] args) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+		new Game();
+		File file = new File("Possible Song 1.wav");
+		AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+		Clip clip = AudioSystem.getClip();
+		clip.open(audioStream);
+		clip.start();
 	}
 
 }

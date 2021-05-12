@@ -2,7 +2,7 @@
 
 import java.awt.Color;
 
-public class Enemy extends GameObject{
+public class Enemy extends GameObject {
 	
 	//constructor
 	public Enemy(int x, int y, ID id, int w, int h, Color color, int speed) {
