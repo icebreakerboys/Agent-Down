@@ -67,8 +67,6 @@ public class Game extends Canvas implements Runnable{
 			delta += (now - lastTime) / ns;
 			lastTime = now;
 			while(delta >= 1) {
-				//FIXME: the tick method is called several times here
-				// in too short of a time, therefore knocking off several hitpoints
 				this.tick();
 				delta--;
 			}
@@ -78,7 +76,7 @@ public class Game extends Canvas implements Runnable{
 			
 			if(System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
-				//System.out.println("FPS: " + frames);
+				System.out.println("FPS: " + frames);
 				frames = 0;
 			}
 		}

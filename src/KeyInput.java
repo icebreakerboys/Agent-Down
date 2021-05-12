@@ -13,34 +13,23 @@ public class KeyInput extends KeyAdapter {
 		//test code
 		//System.out.println(key);
 		//Key Events for Player
-		switch (key){
-			case KeyEvent.VK_D:
-			case  KeyEvent.VK_RIGHT: {
+		switch (key) {
+			case KeyEvent.VK_D, KeyEvent.VK_RIGHT -> {
 				Player.velX = 5;
-				break;
 			}
-			case KeyEvent.VK_A:
-			case KeyEvent.VK_LEFT: {
+			case KeyEvent.VK_A, KeyEvent.VK_LEFT -> {
 				Player.velX = -5;
-				break;
 			}
-			case KeyEvent.VK_W:
-			case KeyEvent.VK_UP: {
+			case KeyEvent.VK_W, KeyEvent.VK_UP -> {
 				Player.velY = -2;
-				break;
 			}
-			case KeyEvent.VK_S:
-			case KeyEvent.VK_DOWN: {
+			case KeyEvent.VK_S, KeyEvent.VK_DOWN -> {
 				Player.velY = 2;
-				break;
 			}
-
 
 
 			//ends game
-			case KeyEvent.VK_ESCAPE:
-				System.exit(1);
-				break;
+			case KeyEvent.VK_ESCAPE -> System.exit(1);
 		}
 
 	}
