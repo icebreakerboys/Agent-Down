@@ -6,7 +6,6 @@ import javax.swing.JFrame;
 //this basically just starts the game window and isn't used again don't really understand it
 public class Window extends Canvas{
 
-	private static final long serialVersionUID = 5619799561406492006L;
 	
 	public Window (int width, int height, String title, Game game) {
 		JFrame frame = new JFrame(title);
