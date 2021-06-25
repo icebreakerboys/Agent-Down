@@ -3,7 +3,9 @@ public enum ID {
 
 	Enemy(),
 	ShooterEnemy(),
-	Bullet(),
-	GunItem()
+	BulletEnemy(),
+	BulletFriendly(),
+	Magazine(),
+	HealthPack()
 
 }

@@ -1,43 +1,102 @@
 
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
 import java.io.File;
-import java.io.IOException;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.sound.sampled.*;
+import javax.swing.*;
 
 public class Game extends Canvas implements Runnable{
 
 	//variables and objects initialization
-	public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
-	
 	private Thread thread;
-	private boolean running = false;
-	private Random r;
+	public static boolean running = false;
+
+	private static Random r = new Random();
+
 	public static Handler handler;
 	public static Player player;
 	private HUD hud;
+
+	private static File musicPath;
+	private static int secondsRunning;
+
+	//testing Variables
+	public static STATE state = STATE.PlayScreen;
+	public enum STATE {
+		PlayScreen(),
+		PauseMenu(),
+		StartMenu(),
+		EndMenu(),
+		OptionsMenu,
+		HelpMenu()
+	}
 	
 	//main game code
-	public Game() {
+	public Game()  {
 		this.setFocusable(true);
+
+		new Window(this);
+
 		handler = new Handler();
+		hud = new HUD();
+		player = new Player(Window.WIDTH / 2 - 16, 100, 32, 32, Color.gray);
+
 		this.addKeyListener(new KeyInput());
 		this.addMouseListener(new MouseInput());
 
-		hud = new HUD();
-		r = new Random();
-		
-		new Window(WIDTH, HEIGHT, "Sky Dive", this);
+		musicPath = new File("Possible Song 1.wav");
+		musicPath = new File("Theme.wav");
+		//playMusic(musicPath);
 
-		for(int i = 0; i < 1; i++) {
-			handler.addObject(new Enemy(r.nextInt(WIDTH), r.nextInt(HEIGHT) + HEIGHT, ID.Enemy, 16, 16, Color.red, 7));
+		secondsRunning = 0;
+		Timer timer = new Timer();
+		TimerTask updateStage = new TimerTask() {
+			@Override
+			public void run() {
+				playRound(secondsRunning);
+				secondsRunning++;
+			}
+		};
+		timer.scheduleAtFixedRate(updateStage, 0, 1000);
+
+	}
+
+	private static void playRound(int secondsRunning) {
+		switch (secondsRunning){
+			case (0): {
+				for (int i = 0; i < 5; i++) {
+					//handler.addObject(new Enemy(r.nextInt(WIDTH), r.nextInt(HEIGHT) + HEIGHT, 1));
+					handler.addObject(new ShooterEnemy(r.nextInt(WIDTH) - 26, r.nextInt(HEIGHT) + HEIGHT, 2));
+				}
+				break;
+			}
+			case (60): {
+				handler.makeForDelete();
+				for (int i = 0; i < 10; i++) {
+					handler.addObject(new Enemy(r.nextInt(WIDTH) - 30, r.nextInt(HEIGHT) + HEIGHT, 7));
+					if (i % 3 == 0)
+						handler.addObject(new ShooterEnemy(r.nextInt(WIDTH) - 26, r.nextInt(HEIGHT) + HEIGHT, 2));
+				}
+			}
+			case (120): {
+
+			}
+			case (180): {
+
+			}
+			case (240): {
+			}
 		}
-		handler.addObject(new ShooterEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT) + HEIGHT, ID.ShooterEnemy, 26, 26, Color.orange, 2));
-		player = new Player(WIDTH / 2 - 16, 100, 32, 32, Color.gray);
-		handler.addObject(new GunItem(r.nextInt(WIDTH), r.nextInt(HEIGHT) + HEIGHT, ID.GunItem, 16, 16, Color.blue, 1));
+		if(secondsRunning % 20 == 0){
+			handler.addObject(new HealthPack(r.nextInt(WIDTH) - 16, HEIGHT + r.nextInt(50), ID.HealthPack, 16, 16, Color.green));
+
+			handler.addObject(new Magazine(r.nextInt(WIDTH) - 16, HEIGHT + r.nextInt(50), ID.Magazine, 16, 16, Color.blue));
+		}
 	}
 
 	public synchronized void start() {
@@ -45,6 +104,7 @@ public class Game extends Canvas implements Runnable{
 		thread.start();
 		running = true;
 	}
+
 	public synchronized void stop() {
 		try {
 			thread.join();
@@ -52,10 +112,12 @@ public class Game extends Canvas implements Runnable{
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+
 	}
 	
 	//Necessary Stuff Didn't Write, but do understand
 	public void run() {
+		requestFocus();
 		long lastTime = System.nanoTime();
 		double amountOfTicks = 60.0;
 		double ns = 1000000000 / amountOfTicks;
@@ -77,6 +139,8 @@ public class Game extends Canvas implements Runnable{
 			if(System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
 				System.out.println("FPS: " + frames);
+				System.out.println("HP: " + Player.HEALTH);
+
 				frames = 0;
 			}
 		}
@@ -85,9 +149,11 @@ public class Game extends Canvas implements Runnable{
 		
 	//Runs all math Components of the Game
 	private void tick(){
-		handler.tick();
-		hud.tick();
-		Player.tick();
+		if(state == STATE.PlayScreen) {
+			handler.tick();
+			hud.tick();
+			Player.tick();
+		}
 	}
 	
 	//Runs all visual Components of the Game
@@ -100,12 +166,20 @@ public class Game extends Canvas implements Runnable{
 
 		Graphics g = bs.getDrawGraphics();
 
-		g.setColor(Color.cyan);
-		g.fillRect(0, 0, WIDTH, HEIGHT);
+		g.setColor(Color.CYAN);
+		g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
 
-		handler.render(g);
-		hud.render(g);
-		Player.render(g);
+		if(state == STATE.PlayScreen || state == STATE.PauseMenu) {
+			handler.render(g);
+			hud.render(g);
+			player.render(g);
+			if(state == STATE.PauseMenu)
+			Menu.pauseRender(g);
+		} else {
+			Menu.render(g);
+		}
+
+
 
 		g.dispose();
 		bs.show();
@@ -124,14 +198,22 @@ public class Game extends Canvas implements Runnable{
 			return max;
 		else return Math.max(var, min);
 	}
-	
-	public static void main(String[] args) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+
+	public static synchronized void playMusic(File file){
+		new Thread(() -> {
+			try {
+				Clip clip = AudioSystem.getClip();
+				AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+				clip.open(audioStream);
+				clip.start();
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
+			}
+		}).start();
+	}
+
+	public static void main(String[] args) {
 		new Game();
-		File file = new File("Possible Song 1.wav");
-		AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
-		Clip clip = AudioSystem.getClip();
-		clip.open(audioStream);
-		clip.start();
 	}
 
 }

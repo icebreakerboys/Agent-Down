@@ -11,11 +11,11 @@ public abstract class GameObject {
 	//variables
 	protected int x, y;
 	protected int velX, velY;
+	protected int speed;
 	protected ID id;
 	protected int w, h;
-	protected int speed;
 	protected Color color;
-	protected boolean isFriendly;
+	protected boolean markedForDelete = false;
 
 	//constructor
 	public GameObject(int x, int y, ID id, int w, int h, Color color) {
@@ -29,21 +29,37 @@ public abstract class GameObject {
 	
 	//tick
 	public abstract void tick();
-	
+
+	public void collision(){
+		for(int i = 0; i < Game.handler.object.size(); i++){
+			GameObject tempObject = Game.handler.object.get(i);
+			if(tempObject.getId() == ID.BulletFriendly && getBounds().intersects(tempObject.getBounds())){
+				Game.handler.removeObject(this);
+			}
+		}
+	}
+
+	public void markForDelete() {
+		markedForDelete = true;
+	}
+
 	public Rectangle getBounds() {
 		return new Rectangle(x, y, w, h);
 	}
 	
 	public void resetPositionAndSpeed(int h, int speed) {
 		if(y <= -h) {
-			y = Game.HEIGHT;
-			x = r.nextInt(Game.WIDTH - w);
+			y = Window.HEIGHT;
+			x = r.nextInt(Window.WIDTH - w);
 			velY = -(r.nextInt(speed)) - 3;
+			if(markedForDelete){
+				Game.handler.removeObject(this);
+			}
 		}
 	}
 
 	public void removeGameObject() {
-		if(x <= -w || x >= Game.WIDTH + w || y <= -h || y >= Game.HEIGHT + h)
+		if(x <= -w || x >= Window.WIDTH + w || y <= -h || y >= Window.HEIGHT + h)
 			Game.handler.removeObject(this);
 	}
 	
@@ -83,7 +99,6 @@ public abstract class GameObject {
 	public int getVelY() {
 		return velY;
 	}
-	public boolean getIsFriendly(){
-		return isFriendly;
-	}
+
+
 }

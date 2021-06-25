@@ -1,20 +1,23 @@
 
+import javax.swing.*;
 import java.awt.*;
 import java.beans.ConstructorProperties;
 
 /**
  * Player class
  */
-public class Player {
+public class Player extends Canvas{
 
 	public static int X, Y;
-	public static Boolean hasGun = true;
+	public static int velX = 0, velY = 0;
+	private static Color color;
+	private static int w, h;
 
 	private static Boolean justHit = false;
 	private static int counter = 0;
-	public static int velX = 0, velY = 0;
-	private static int w, h;
-	private static Color color;
+
+	public static int AMMO = 0;
+	public static int HEALTH;
 
 	//constructor
 	public Player(int x, int y, int w, int h, Color color) {
@@ -23,6 +26,7 @@ public class Player {
 		Player.w = w;
 		Player.h = h;
 		Player.color = color;
+		HEALTH = 100;
 	}
 
 	/**
@@ -33,13 +37,13 @@ public class Player {
 		X += velX;
 		Y += velY;
 		//x bounds for window
-		X = Game.clamp(X, 0, Game.WIDTH - 45);
+		X = Game.clamp(X, 0, Window.WIDTH - 45);
 		//y bounds for window
-		Y = Game.clamp(Y, 0, Game.HEIGHT/2 - 45);
+		Y = Game.clamp(Y, 0, 3 * (Window.HEIGHT/4) - 45);
 
-		if(!justHit) {
-			collision();
-		} else {
+		collision();
+
+		if(justHit) {
 			counter++;
 			if(counter % 50 == 0){
 				counter = 0;
@@ -48,7 +52,8 @@ public class Player {
 		}
 	}
 
-	public static Rectangle getBounds() {
+
+	public Rectangle getBounds() {
 		return new Rectangle(X, Y, w, h);
 	}
 
@@ -56,14 +61,14 @@ public class Player {
 	 * Render controls the visual components of the player
 	 * @param g Graphics
 	 */
-	public static void render(Graphics g){
+	public void render(Graphics g){
+		Image image = new ImageIcon("mr skeleton.png").getImage();
+
 		if(justHit){
-			g.setColor(color);
 			if(counter % 5 != 0)
-				g.fillRect(X, Y, w, h);
+				g.drawImage(image, X, Y ,w, h, this);
 		} else {
-			g.setColor(color);
-			g.fillRect(X, Y, w, h);
+			g.drawImage(image, X, Y ,w, h, this);
 		}
 	}
 
@@ -76,34 +81,31 @@ public class Player {
 			
 			GameObject tempObject = Game.handler.object.get(i);
 			//enemy collision
-			if(tempObject.getId() == ID.Enemy) {
-				if(getBounds().intersects(tempObject.getBounds())) {
-					HUD.HEALTH -= 1;
-					justHit = true;
-				}
+			if(tempObject.getId() == ID.Enemy && Game.player.getBounds().intersects(tempObject.getBounds()) && !justHit) {
+				HEALTH -= 10;
+				justHit = true;
 			}
 			//bullet collision
-			if(tempObject.getId() == ID.Bullet){
-				if(getBounds().intersects(tempObject.getBounds())) {
-					if(!tempObject.getIsFriendly()) {
-						HUD.HEALTH -= 1;
-						Game.handler.removeObject(tempObject);
-						justHit = true;
-					}
-				}
+			if(tempObject.getId() == ID.BulletEnemy && Game.player.getBounds().intersects(tempObject.getBounds()) && !justHit) {
+				HEALTH -= 10;
+				Game.handler.removeObject(tempObject);
+				justHit = true;
 			}
 			//gunItem collision
-			if(tempObject.getId() == ID.GunItem){
-				if(getBounds().intersects(tempObject.getBounds())) {
-					Game.handler.removeObject(tempObject);
-					hasGun = true;
-				}
+			if(tempObject.getId() == ID.Magazine && Game.player.getBounds().intersects(tempObject.getBounds())) {
+				AMMO += 10;
+				Game.handler.removeObject(tempObject);
+			}
+
+			if(tempObject.getId() == ID.HealthPack && Game.player.getBounds().intersects(tempObject.getBounds())){
+				HEALTH += 30;
+				Game.handler.removeObject(tempObject);
 			}
 		}
 	}
 
-	public static void shoot(int x, int y, boolean isFriendly){
-		Game.handler.addObject(new Bullet(Player.X, Player.Y, x, y, true, ID.Bullet, 12, 12, Color.black));
+	public static void shoot(int x, int y){
+		Game.handler.addObject(new Bullet(Player.X + 16, Player.Y + 16, x, y, ID.BulletFriendly));
 	}
 
 }

@@ -3,18 +3,16 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class HUD {
-	//FIXME: I think this health feature would be better implemented
-	// if you had it as a variable of the player class instead of the hud class, up to you tho
-	public static int HEALTH = 100;
 
 	/**
 	 * this method is called repeatedly to update the HUD
 	 */
 	public void tick() {
-		HEALTH = Game.clamp(HEALTH, 0, 100);
-		if(HEALTH == 0)
-			//currently ends game at 0 health
-			System.exit(1);
+		Player.HEALTH = Game.clamp(Player.HEALTH, 0, 100);
+		if(Player.HEALTH == 0) {
+			Game.running = false;
+
+		}
 	}
 
 	/**
@@ -25,9 +23,10 @@ public class HUD {
 		g.setColor(Color.darkGray);
 		g.fillRect(15, 15, 200, 16);
 		g.setColor(Color.green);
-		g.fillRect(15, 15, HEALTH * 2, 16);
+		g.fillRect(15, 15, Player.HEALTH * 2, 16);
 		g.setColor(Color.black);
 		g.drawRect(15, 15, 200, 16);
+		g.drawString("" + Player.AMMO, 600, 28);
 	}
 	
 }

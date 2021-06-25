@@ -1,26 +1,25 @@
 
-import java.awt.Canvas;
-import java.awt.Dimension;
-import javax.swing.JFrame;
+import java.awt.*;
+import javax.swing.*;
 
 //this basically just starts the game window and isn't used again don't really understand it
-public class Window extends Canvas{
+public class Window extends Canvas {
 
-	
-	public Window (int width, int height, String title, Game game) {
-		JFrame frame = new JFrame(title);
-		
-		frame.setPreferredSize(new Dimension(width, height));
-		frame.setMaximumSize(new Dimension(width, height));
-		frame.setMinimumSize(new Dimension(width, height));
-		
+	public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
+	private static JFrame frame;
+
+	public Window(Game game){
+		frame = new JFrame("Agent Down");
+
+		frame.setSize(new Dimension(WIDTH, HEIGHT));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
+		//frame.setLayout(null);
 		frame.setLocationRelativeTo(null);
 		frame.add(game);
 		frame.setVisible(true);
-		
 		game.start();
-		
+
 	}
+
 }

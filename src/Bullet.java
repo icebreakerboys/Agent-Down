@@ -4,16 +4,15 @@ import java.awt.Graphics;
 
 public class Bullet extends GameObject{
 
-	public Bullet(int x, int y, int tX, int tY, boolean isFriendly, ID id, int w, int h, Color color) {
-		super(x, y, id, w, h, color);
+	public Bullet(int x, int y, int tX, int tY, ID id) {
+		super(x, y, id, 12, 12, Color.black);
 		target(x, y, tX, tY);
-		super.isFriendly = isFriendly;
 	}
 
 	public void tick() {
 		x += velX;
 		y += velY;
-		
+		collision();
 		removeGameObject();
 	}
 	
@@ -30,8 +29,12 @@ public class Bullet extends GameObject{
 		g.setColor(color);
 		g.fillOval(x, y, w, h);
 	}
-	public boolean getIsFriendly(){
-		return isFriendly;
+	@Override
+	public void collision(){
+		for(int i = 0; i < Game.handler.object.size(); i++) {
+			GameObject tempObject = Game.handler.object.get(i);
+			if(tempObject.getId() == ID.BulletFriendly && id == ID.BulletEnemy && getBounds().intersects(tempObject.getBounds()))
+				Game.handler.removeObject(this);
+		}
 	}
-
 }
