@@ -1,13 +1,16 @@
+import javax.swing.*;
 import java.awt.*;
 
-public class Menu {
+public class Menu extends Canvas{
 
-    public static void render(Graphics g) {
+    public void render(Graphics g) {
         if(Game.state == Game.STATE.StartMenu){
             Font font1 = new Font("Arial", Font.BOLD, 50);
             g.setColor(Color.GRAY);
-            g.setFont(font1);
-            g.drawString("AGENT DOWN", Window.WIDTH/4 - 20, 100);
+            //g.setFont(font1);
+            //g.drawString("AGENT DOWN", Window.WIDTH/4 - 20, 100);
+            g.drawImage(new ImageIcon("AgentPix.png").getImage(), 100, 100, 200, 200, this);
+            g.drawImage(new ImageIcon("DownPix.png").getImage(), 350, 100, 200, 200, this);
 
         }
         if(Game.state == Game.STATE.EndMenu){

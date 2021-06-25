@@ -1,14 +1,11 @@
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
 import java.io.File;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.sound.sampled.*;
-import javax.swing.*;
 
 public class Game extends Canvas implements Runnable{
 
@@ -23,10 +20,12 @@ public class Game extends Canvas implements Runnable{
 	private HUD hud;
 
 	private static File musicPath;
-	private static int secondsRunning;
+	private static int secondsRunning = 0;
 
 	//testing Variables
 	public static STATE state = STATE.PlayScreen;
+	private Menu menu;
+
 	public enum STATE {
 		PlayScreen(),
 		PauseMenu(),
@@ -45,15 +44,15 @@ public class Game extends Canvas implements Runnable{
 		handler = new Handler();
 		hud = new HUD();
 		player = new Player(Window.WIDTH / 2 - 16, 100, 32, 32, Color.gray);
+		menu = new Menu();
 
 		this.addKeyListener(new KeyInput());
 		this.addMouseListener(new MouseInput());
 
 		musicPath = new File("Possible Song 1.wav");
 		musicPath = new File("Theme.wav");
-		//playMusic(musicPath);
+		playMusic(musicPath);
 
-		secondsRunning = 0;
 		Timer timer = new Timer();
 		TimerTask updateStage = new TimerTask() {
 			@Override
@@ -69,7 +68,7 @@ public class Game extends Canvas implements Runnable{
 	private static void playRound(int secondsRunning) {
 		switch (secondsRunning){
 			case (0): {
-				for (int i = 0; i < 5; i++) {
+				for (int i = 0; i < 2; i++) {
 					//handler.addObject(new Enemy(r.nextInt(WIDTH), r.nextInt(HEIGHT) + HEIGHT, 1));
 					handler.addObject(new ShooterEnemy(r.nextInt(WIDTH) - 26, r.nextInt(HEIGHT) + HEIGHT, 2));
 				}
@@ -82,20 +81,18 @@ public class Game extends Canvas implements Runnable{
 					if (i % 3 == 0)
 						handler.addObject(new ShooterEnemy(r.nextInt(WIDTH) - 26, r.nextInt(HEIGHT) + HEIGHT, 2));
 				}
+				break;
 			}
 			case (120): {
-
-			}
-			case (180): {
-
-			}
-			case (240): {
+				break;
 			}
 		}
-		if(secondsRunning % 20 == 0){
-			handler.addObject(new HealthPack(r.nextInt(WIDTH) - 16, HEIGHT + r.nextInt(50), ID.HealthPack, 16, 16, Color.green));
 
-			handler.addObject(new Magazine(r.nextInt(WIDTH) - 16, HEIGHT + r.nextInt(50), ID.Magazine, 16, 16, Color.blue));
+		if(secondsRunning % 10 == 0) {
+
+			handler.addObject(new HealthPack(r.nextInt(WIDTH) - 16, HEIGHT + r.nextInt(10), ID.HealthPack, 16, 16, Color.green));
+
+			handler.addObject(new Magazine(r.nextInt(WIDTH) - 16, HEIGHT + r.nextInt(10), ID.Magazine, 16, 16, Color.blue));
 		}
 	}
 
@@ -140,6 +137,7 @@ public class Game extends Canvas implements Runnable{
 				timer += 1000;
 				System.out.println("FPS: " + frames);
 				System.out.println("HP: " + Player.HEALTH);
+				System.out.println("Seconds Ran: " + secondsRunning);
 
 				frames = 0;
 			}
@@ -166,7 +164,7 @@ public class Game extends Canvas implements Runnable{
 
 		Graphics g = bs.getDrawGraphics();
 
-		g.setColor(Color.CYAN);
+		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
 
 		if(state == STATE.PlayScreen || state == STATE.PauseMenu) {
@@ -174,12 +172,10 @@ public class Game extends Canvas implements Runnable{
 			hud.render(g);
 			player.render(g);
 			if(state == STATE.PauseMenu)
-			Menu.pauseRender(g);
+			menu.pauseRender(g);
 		} else {
-			Menu.render(g);
+			menu.render(g);
 		}
-
-
 
 		g.dispose();
 		bs.show();

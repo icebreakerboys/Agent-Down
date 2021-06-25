@@ -62,13 +62,13 @@ public class Player extends Canvas{
 	 * @param g Graphics
 	 */
 	public void render(Graphics g){
-		Image image = new ImageIcon("mr skeleton.png").getImage();
+		Image image = new ImageIcon("Player.png").getImage();
 
 		if(justHit){
 			if(counter % 5 != 0)
-				g.drawImage(image, X, Y ,w, h, this);
+				g.drawImage(image, X, Y , 90, 60,this);
 		} else {
-			g.drawImage(image, X, Y ,w, h, this);
+			g.drawImage(image, X, Y, 90, 60,this);
 		}
 	}
 

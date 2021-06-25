@@ -1,7 +1,8 @@
 
-import java.awt.Color;
+import javax.swing.*;
+import java.awt.*;
 
-public class ShooterEnemy extends GameObject{
+public class ShooterEnemy extends GameObject {
 	
 	private int counter = 20;
 	
@@ -9,6 +10,12 @@ public class ShooterEnemy extends GameObject{
 		super(x, y, ID.ShooterEnemy, 26, 26, Color.orange);
 		this.speed = speed;
 		velY = -(r.nextInt(speed)) - 3;
+		int picSelect = r.nextInt(2);
+		if(picSelect == 0){
+			image = new ImageIcon("Badguy1.png").getImage();
+		} else {
+			image = new ImageIcon("Badguy2.png").getImage();
+		}
 	}
 	
 	public void tick() {

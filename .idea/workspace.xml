@@ -4,36 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b5c558b8-f9f5-4e28-8844-6c14bf93ca2d" name="Default Changelist" comment="last update of the night">
-      <change afterPath="$PROJECT_DIR$/Theme.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mr skeleton.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/HealthPack.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Magazine.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Menu.java" afterDir="false" />
+    <list default="true" id="b5c558b8-f9f5-4e28-8844-6c14bf93ca2d" name="Default Changelist" comment="Alpha version 1.0">
+      <change afterPath="$PROJECT_DIR$/Agent.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AgentPix.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Badguy1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DownPix.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Player.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/badguy2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/down.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/Bullet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/Bullet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/Enemy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/Enemy.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/Game.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/GameObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/GameObject.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/GunItem.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/HUD.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/HUD.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/Handler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/Handler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/ID.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/ID.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/KeyInput.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/KeyInput.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/MouseInput.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/MouseInput.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/Player.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/ShooterEnemy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/ShooterEnemy.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/Window.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/Window.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bullet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GunItem.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HUD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HUD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Handler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Handler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ID.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ID.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/KeyInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/KeyInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MouseInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MouseInput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/HealthPack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HealthPack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Magazine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Magazine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Menu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ShooterEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ShooterEnemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Window.java" afterDir="false" />
@@ -63,6 +52,18 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/Player.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Handler.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/ShooterEnemy.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/KeyInput.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Game.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Magazine.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Menu.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Window.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/GameObject.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/HealthPack.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProblemsViewState">
     <option name="showPreview" value="true" />
@@ -138,7 +139,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620798241914</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Alpha version 1.0">
+      <created>1624613303656</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1624613303657</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -155,7 +163,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="last update of the night" />
-    <option name="LAST_COMMIT_MESSAGE" value="last update of the night" />
+    <MESSAGE value="Alpha version 1.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="Alpha version 1.0" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

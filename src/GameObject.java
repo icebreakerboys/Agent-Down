@@ -1,10 +1,8 @@
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.util.Random;
 
-public abstract class GameObject {
+public abstract class GameObject extends Canvas {
 	
 	protected Random r = new Random();
 	
@@ -15,6 +13,7 @@ public abstract class GameObject {
 	protected ID id;
 	protected int w, h;
 	protected Color color;
+	protected Image image;
 	protected boolean markedForDelete = false;
 
 	//constructor
@@ -51,7 +50,7 @@ public abstract class GameObject {
 		if(y <= -h) {
 			y = Window.HEIGHT;
 			x = r.nextInt(Window.WIDTH - w);
-			velY = -(r.nextInt(speed)) - 3;
+			velY = -(r.nextInt(speed)) -1;
 			if(markedForDelete){
 				Game.handler.removeObject(this);
 			}
@@ -65,7 +64,8 @@ public abstract class GameObject {
 	
 	public void render(Graphics g) {
 		g.setColor(color);
-		g.fillRect(x, y, w, h);
+		//g.fillRect(x, y, w, h);
+		g.drawImage(image, x, y, 90, 60, this);
 	}
 	
 	//getters and setters
