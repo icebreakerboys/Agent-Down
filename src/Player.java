@@ -66,9 +66,9 @@ public class Player extends Canvas{
 
 		if(justHit){
 			if(counter % 5 != 0)
-				g.drawImage(image, X, Y , 90, 60,this);
+				g.drawImage(image, X, Y , 69, 56,this);
 		} else {
-			g.drawImage(image, X, Y, 90, 60,this);
+			g.drawImage(image, X, Y, 69, 56,this);
 		}
 	}
 

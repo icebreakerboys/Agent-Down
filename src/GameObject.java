@@ -50,7 +50,7 @@ public abstract class GameObject extends Canvas {
 		if(y <= -h) {
 			y = Window.HEIGHT;
 			x = r.nextInt(Window.WIDTH - w);
-			velY = -(r.nextInt(speed)) -1;
+			velY = -(r.nextInt(speed)) - 1;
 			if(markedForDelete){
 				Game.handler.removeObject(this);
 			}

@@ -9,7 +9,6 @@ import javax.sound.sampled.*;
 
 public class Game extends Canvas implements Runnable{
 
-	//variables and objects initialization
 	private Thread thread;
 	public static boolean running = false;
 
@@ -18,14 +17,13 @@ public class Game extends Canvas implements Runnable{
 	public static Handler handler;
 	public static Player player;
 	private HUD hud;
+	private Menu menu;
+	private Background background;
 
 	private static File musicPath;
 	private static int secondsRunning = 0;
 
-	//testing Variables
-	public static STATE state = STATE.PlayScreen;
-	private Menu menu;
-
+	public static STATE state = STATE.StartMenu;
 	public enum STATE {
 		PlayScreen(),
 		PauseMenu(),
@@ -34,8 +32,7 @@ public class Game extends Canvas implements Runnable{
 		OptionsMenu,
 		HelpMenu()
 	}
-	
-	//main game code
+
 	public Game()  {
 		this.setFocusable(true);
 
@@ -45,13 +42,14 @@ public class Game extends Canvas implements Runnable{
 		hud = new HUD();
 		player = new Player(Window.WIDTH / 2 - 16, 100, 32, 32, Color.gray);
 		menu = new Menu();
+		background = new Background();
 
 		this.addKeyListener(new KeyInput());
 		this.addMouseListener(new MouseInput());
 
 		musicPath = new File("Possible Song 1.wav");
 		musicPath = new File("Theme.wav");
-		playMusic(musicPath);
+		//playMusic(musicPath);
 
 		Timer timer = new Timer();
 		TimerTask updateStage = new TimerTask() {
@@ -111,8 +109,7 @@ public class Game extends Canvas implements Runnable{
 		}
 
 	}
-	
-	//Necessary Stuff Didn't Write, but do understand
+
 	public void run() {
 		requestFocus();
 		long lastTime = System.nanoTime();
@@ -144,17 +141,16 @@ public class Game extends Canvas implements Runnable{
 		}
 		stop();
 	}
-		
-	//Runs all math Components of the Game
-	private void tick(){
+
+	private void tick() {
+		background.tick();
 		if(state == STATE.PlayScreen) {
 			handler.tick();
 			hud.tick();
 			Player.tick();
 		}
 	}
-	
-	//Runs all visual Components of the Game
+
 	private void render() {
 		BufferStrategy bs = this.getBufferStrategy();
 		if(bs == null) {
@@ -166,6 +162,7 @@ public class Game extends Canvas implements Runnable{
 
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
+		background.render(g);
 
 		if(state == STATE.PlayScreen || state == STATE.PauseMenu) {
 			handler.render(g);
