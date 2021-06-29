@@ -27,6 +27,7 @@ public class Player extends Canvas{
 		Player.h = h;
 		Player.color = color;
 		HEALTH = 100;
+		Game.handler.addObject(new JetStreams());
 	}
 
 	/**
@@ -70,6 +71,7 @@ public class Player extends Canvas{
 		} else {
 			g.drawImage(image, X, Y, 69, 56,this);
 		}
+
 	}
 
 	/**

@@ -4,12 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="b5c558b8-f9f5-4e28-8844-6c14bf93ca2d" name="Default Changelist" comment="Alpha version 1.1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/Game.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/HUD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HUD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Menu.java" afterDir="false" />
+=======
+    <list default="true" id="b5c558b8-f9f5-4e28-8844-6c14bf93ca2d" name="Default Changelist" comment="Alpha Version 1.2">
+      <change afterPath="$PROJECT_DIR$/src/JetStreams.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/GameObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/GameObject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/ID.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/ID.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/ShooterEnemy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/ShooterEnemy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Background.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Background.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ID.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ID.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ShooterEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ShooterEnemy.java" afterDir="false" />
+>>>>>>> e482661eaf0b4e2d2f408fadeb183eabcb8a938f
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +144,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624648872590</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Alpha Version 1.2">
+      <created>1624932301302</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1624932301302</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -149,7 +173,8 @@
     <MESSAGE value="last update of the night" />
     <MESSAGE value="Alpha version 1.0" />
     <MESSAGE value="Alpha version 1.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Alpha version 1.1" />
+    <MESSAGE value="Alpha Version 1.2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Alpha Version 1.2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

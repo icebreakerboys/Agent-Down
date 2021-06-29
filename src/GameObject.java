@@ -64,8 +64,8 @@ public abstract class GameObject extends Canvas {
 	
 	public void render(Graphics g) {
 		g.setColor(color);
-		//g.fillRect(x, y, w, h);
-		g.drawImage(image, x, y, 90, 60, this);
+		g.fillRect(x, y, w, h);
+		//g.drawImage(image, x, y, 90, 60, this);
 	}
 	
 	//getters and setters

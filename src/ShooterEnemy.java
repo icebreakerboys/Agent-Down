@@ -32,7 +32,12 @@ public class ShooterEnemy extends GameObject {
 		counter++;
 		
 	}
-	
+
+	@Override
+	public void render(Graphics g){
+		g.drawImage(image, x, y, 90, 60, this);
+	}
+
 	public boolean onScreen() {
 		return x > 0 && x < Window.WIDTH - w && y > 0 && y < Window.HEIGHT;
 	}

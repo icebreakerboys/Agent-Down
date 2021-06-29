@@ -11,7 +11,7 @@ public class Background extends Canvas {
     public void tick(){
         Y -= yVel;
         Y2 -= yVel;
-        if(Y<= -1472||Y2<=-1472){
+        if(Y<= -1472 ||Y2<=-1472){
             resetYValues();
         }
 
