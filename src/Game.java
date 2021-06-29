@@ -23,7 +23,7 @@ public class Game extends Canvas implements Runnable{
 	private static File musicPath;
 	private static int secondsRunning = 0;
 
-	public static STATE state = STATE.StartMenu;
+	public static STATE state = STATE.PlayScreen;
 	public enum STATE {
 		PlayScreen(),
 		PauseMenu(),
@@ -49,7 +49,7 @@ public class Game extends Canvas implements Runnable{
 
 		musicPath = new File("Possible Song 1.wav");
 		musicPath = new File("Theme.wav");
-		//playMusic(musicPath);
+		playMusic(musicPath);
 
 		Timer timer = new Timer();
 		TimerTask updateStage = new TimerTask() {

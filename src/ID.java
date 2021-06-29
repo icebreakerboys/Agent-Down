@@ -6,6 +6,7 @@ public enum ID {
 	BulletEnemy(),
 	BulletFriendly(),
 	Magazine(),
-	HealthPack()
+	HealthPack(),
+	JetStream()
 
 }
