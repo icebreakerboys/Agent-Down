@@ -49,7 +49,7 @@ public class Game extends Canvas implements Runnable{
 
 		musicPath = new File("Possible Song 1.wav");
 		musicPath = new File("Theme.wav");
-		//playMusic(musicPath);
+		playMusic(musicPath);
 
 		Timer timer = new Timer();
 		TimerTask updateStage = new TimerTask() {
@@ -138,6 +138,7 @@ public class Game extends Canvas implements Runnable{
 
 				frames = 0;
 			}
+
 		}
 		stop();
 	}
@@ -198,6 +199,7 @@ public class Game extends Canvas implements Runnable{
 				Clip clip = AudioSystem.getClip();
 				AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
 				clip.open(audioStream);
+				clip.loop(Clip.LOOP_CONTINUOUSLY);
 				clip.start();
 			} catch (Exception e) {
 				System.err.println(e.getMessage());
