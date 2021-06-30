@@ -12,6 +12,8 @@ public class Menu extends Canvas{
             g.drawImage(new ImageIcon("Agent.png").getImage(), 100, 100, 200, 200, this);
             g.drawImage(new ImageIcon("Down.png").getImage(), 350, 100, 200, 200, this);
             g.drawImage(new ImageIcon("Agent Down.png").getImage(), 100, 350, 450, 150, this);
+          
+
 
         }
         if(Game.state == Game.STATE.EndMenu){
