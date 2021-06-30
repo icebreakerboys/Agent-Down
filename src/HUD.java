@@ -8,7 +8,7 @@ public class HUD {
 	 * this method is called repeatedly to update the HUD
 	 */
 	public void tick() {
-		Player.HEALTH = Game.clamp(Player.HEALTH, 0, 100);
+		Player.HEALTH = Game.clamp(Player.HEALTH, 0, Player.HEALTH);
 		if(Player.HEALTH == 0) {
 			Game.running = false;
 
