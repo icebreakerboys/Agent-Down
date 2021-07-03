@@ -1,10 +1,12 @@
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.net.URL;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.sound.sampled.*;
+import javax.swing.*;
 
 public class Game extends Canvas implements Runnable {
   private Thread thread;
@@ -12,8 +14,8 @@ public class Game extends Canvas implements Runnable {
   private static Random r = new Random();
   public static Handler handler;
   public static Player player;
-  public static String enemyPic1;
-  public static String enemyPic2;
+  public static Image enemyPic1;
+  public static Image enemyPic2;
   private HUD hud;
   private Menu menu;
   private Background background;
@@ -37,8 +39,9 @@ public class Game extends Canvas implements Runnable {
     player = new Player(Window.WIDTH / 2 - 16, 100, 32, 32, Color.gray);
     menu = new Menu();
     background = new Background();
-    enemyPic1 = "images/Badguy1.png";
-    enemyPic2 = "images/badguy2.png";
+    //TODO: Quick Hack to load enemies in faster
+    enemyPic1 = new ImageIcon(getClass().getClassLoader().getResource("images/Badguy1.png")).getImage();
+    enemyPic2 =  new ImageIcon(getClass().getClassLoader().getResource("images/badguy2.png")).getImage();
     new Window(this);
     this.addKeyListener(new KeyInput());
     this.addMouseListener(new MouseInput());
@@ -105,7 +108,7 @@ public class Game extends Canvas implements Runnable {
     double TARGET_TICK = 60.0;
     double OPTIMAL_TIME_TICKS = 1000000000 / TARGET_TICK;
     double delta = 0;
-    final int TARGET_FPS = 120;
+    final int TARGET_FPS = 60;
     final long OPTIMAL_TIME_FRAMES = 1000000000 / TARGET_FPS;
     long lastFpsTime = 0;
     long timer = System.currentTimeMillis();
