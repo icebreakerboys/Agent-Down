@@ -11,7 +11,7 @@ public class Menu extends Canvas{
             //g.drawString("AGENT DOWN", Window.WIDTH/4 - 20, 100);
             //g.drawImage(new ImageIcon("Agent.png").getImage(), 100, 100, 200, 200, this);
             //g.drawImage(new ImageIcon("Down.png").getImage(), 350, 100, 200, 200, this);
-            g.drawImage(new ImageIcon("Agent Down.png").getImage(), 75, 75, 490, 189, this);
+            g.drawImage(new ImageIcon(getClass().getClassLoader().getResource("images/Agent Down.png")).getImage(), 75, 75, 490, 189, this);
 
 
         }

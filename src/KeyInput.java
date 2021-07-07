@@ -39,7 +39,7 @@ public class KeyInput extends KeyAdapter {
     if (key == KeyEvent.VK_P) {
       if (Game.state == Game.STATE.PlayScreen) {
         Game.state = Game.STATE.PauseMenu;
-      } else {
+      } else if (Game.state == Game.STATE.PauseMenu || Game.state == Game.STATE.StartMenu) {
         Game.state = Game.STATE.PlayScreen;
       }
     }

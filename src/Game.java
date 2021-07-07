@@ -22,7 +22,7 @@ public class Game extends Canvas implements Runnable {
   private Background background;
   private static String musicPath;
   private static int secondsRunning = 0;
-  public static STATE state = STATE.PlayScreen;
+  public static STATE state = STATE.StartMenu;
 
   public enum STATE {
     PlayScreen(),
@@ -40,7 +40,6 @@ public class Game extends Canvas implements Runnable {
     player = new Player(Window.WIDTH / 2 - 16, 100, 48, 48, Color.gray);
     menu = new Menu();
     background = new Background();
-    //TODO: Quick Hack to load enemies in faster
     enemyPic1 = new ImageIcon(getClass().getClassLoader().getResource("images/Badguy1.png")).getImage();
     //enemyPic2 =  new ImageIcon(getClass().getClassLoader().getResource("images/badguy2.png")).getImage();
     new Window(this);

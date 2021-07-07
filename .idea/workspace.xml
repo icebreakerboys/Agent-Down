@@ -10,58 +10,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5c558b8-f9f5-4e28-8844-6c14bf93ca2d" name="Default Changelist" comment="Alpha verison 1.4 Fixed Game Loop">
-      <change afterPath="$PROJECT_DIR$/out/production/RealSkyDive/META-INF/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/RealSkyDive/images/Agent Down.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/RealSkyDive/images/Agent.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/RealSkyDive/images/Badguy1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/RealSkyDive/images/Down.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/RealSkyDive/images/Player.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/RealSkyDive/images/background.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/RealSkyDive/images/badguy2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/RealSkyDive/images/mr skeleton.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/RealSkyDive/sounds/Possible Song 1.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/RealSkyDive/sounds/Theme.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/images/Agent.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/images/Down.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/images/badguy2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/Background.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/Background.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/Bullet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/Bullet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/Enemy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/Enemy.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/Game$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/Game$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/Game$STATE.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/Game$STATE.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/GameObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/GameObject.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/HUD.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/HUD.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/Handler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/Handler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/HealthPack.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/HealthPack.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/ID.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/ID.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/JetStreams.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/JetStreams.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/KeyInput.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/KeyInput.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/Menu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/MouseInput.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/MouseInput.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/ShooterEnemy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/ShooterEnemy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/Window.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/Window.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/images/Agent Down.png" beforeDir="false" afterPath="$PROJECT_DIR$/res/images/Agent Down.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/images/Badguy2.png" beforeDir="false" afterPath="$PROJECT_DIR$/res/images/Badguy2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Background.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Background.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bullet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/images/badguy2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/images/mr skeleton.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/mr skeleton.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HUD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HUD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Handler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Handler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HealthPack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HealthPack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ID.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ID.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JetStreams.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JetStreams.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/KeyInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/KeyInput.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MouseInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MouseInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ShooterEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ShooterEnemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Window.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,11 +91,11 @@
       <recent name="src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\nicho\Documents\Programs\RealSkyDive\.idea" />
       <recent name="$PROJECT_DIR$/res/sounds" />
       <recent name="$PROJECT_DIR$/res/images" />
       <recent name="C:\Users\nicho\Documents\Programs\RealSkyDive" />
       <recent name="C:\Users\nicho\Documents\Programs\RealSkyDive\src" />
-      <recent name="$PROJECT_DIR$/out/production/RealSkyDive" />
     </key>
   </component>
   <component name="RunManager">
