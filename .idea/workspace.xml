@@ -11,8 +11,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b5c558b8-f9f5-4e28-8844-6c14bf93ca2d" name="Default Changelist" comment="Alpha verison 1.3 Added JetStreams to player">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ShooterEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ShooterEnemy.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +109,9 @@
       <option name="presentableId" value="Default" />
       <updated>1620778176191</updated>
       <workItem from="1625320712995" duration="2578000" />
-      <workItem from="1625350381476" duration="409000" />
+      <workItem from="1625350381476" duration="750000" />
+      <workItem from="1625683840457" duration="748000" />
+      <workItem from="1625698101221" duration="288000" />
     </task>
     <task id="LOCAL-00001" summary="last update of the night">
       <created>1620798241914</created>
