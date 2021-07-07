@@ -43,6 +43,6 @@ public class ShooterEnemy extends GameObject {
 	}
 	
 	public void shoot() {
-		Game.handler.addObject(new Bullet(x, y, Player.X, Player.Y, ID.BulletEnemy));
+		Game.handler.addObject(new Bullet(x + 13, y + 13, Player.X + 24, Player.Y + 24, ID.BulletEnemy));
 	}
 }

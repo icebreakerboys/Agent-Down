@@ -67,9 +67,9 @@ public class Player extends Canvas{
 
 		if(justHit){
 			if(counter % 5 != 0)
-				g.drawImage(image, X, Y , 69, 56,this);
+				g.drawImage(image, X - 8, Y - 4 , 69, 56,this);
 		} else {
-			g.drawImage(image, X, Y, 69, 56,this);
+			g.drawImage(image, X - 8, Y - 4, 69, 56,this);
 		}
 
 	}
@@ -100,14 +100,18 @@ public class Player extends Canvas{
 			}
 
 			if(tempObject.getId() == ID.HealthPack && Game.player.getBounds().intersects(tempObject.getBounds())){
-				HEALTH += 30;
-				Game.handler.removeObject(tempObject);
+				if(HEALTH != 100){
+					HEALTH += 30;
+					Game.handler.removeObject(tempObject);
+				}
+
 			}
+			HEALTH = Game.clamp(HEALTH, 0, 100);
 		}
 	}
 
 	public static void shoot(int x, int y){
-		Game.handler.addObject(new Bullet(Player.X + 16, Player.Y + 16, x, y, ID.BulletFriendly));
+		Game.handler.addObject(new Bullet(Player.X + 24, Player.Y + 24, x, y, ID.BulletFriendly));
 	}
 
 }

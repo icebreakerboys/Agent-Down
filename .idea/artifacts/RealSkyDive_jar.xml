@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="RealSkyDive:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/RealSkyDive_jar</output-path>
+    <root id="archive" name="RealSkyDive.jar">
+      <element id="module-output" name="RealSkyDive" />
+      <element id="dir-copy" path="$PROJECT_DIR$/res" />
+    </root>
+  </artifact>
+</component>

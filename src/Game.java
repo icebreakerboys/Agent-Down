@@ -23,7 +23,7 @@ public class Game extends Canvas implements Runnable {
     private static File musicPath;
     private static int secondsRunning = 0;
 
-    public static STATE state = STATE.PlayScreen;
+    public static STATE state = STATE.StartMenu;
 
     public enum STATE {
         PlayScreen(),
@@ -39,7 +39,7 @@ public class Game extends Canvas implements Runnable {
 
         handler = new Handler();
         hud = new HUD();
-        player = new Player(Window.WIDTH / 2 - 16, 100, 32, 32, Color.gray);
+        player = new Player(Window.WIDTH / 2 - 16, 100, 48, 48, Color.gray);
         menu = new Menu();
         background = new Background();
 
