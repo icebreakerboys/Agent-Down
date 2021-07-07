@@ -9,8 +9,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b5c558b8-f9f5-4e28-8844-6c14bf93ca2d" name="Default Changelist" comment="Alpha verison 1.3 Added JetStreams to player">
+    <list default="true" id="b5c558b8-f9f5-4e28-8844-6c14bf93ca2d" name="Default Changelist" comment="Alpha verison 1.4 Fixed Game Loop">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+
+      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/Game$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/Game$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RealSkyDive/Menu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/images/badguy2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RealSkyDive/images/mr skeleton.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/mr skeleton.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/KeyInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/KeyInput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Menu.java" afterDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,16 +53,16 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/KeyInput.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Magazine.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/GameObject.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Game.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/HealthPack.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Handler.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Window.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/ShooterEnemy.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Player.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Handler.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/ShooterEnemy.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/KeyInput.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Game.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Magazine.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Menu.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Window.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/GameObject.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/HealthPack.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProblemsViewState">
     <option name="showPreview" value="true" />
@@ -79,11 +93,11 @@
       <recent name="src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\nicho\Documents\Programs\RealSkyDive\.idea" />
       <recent name="$PROJECT_DIR$/res/sounds" />
       <recent name="$PROJECT_DIR$/res/images" />
       <recent name="C:\Users\nicho\Documents\Programs\RealSkyDive" />
       <recent name="C:\Users\nicho\Documents\Programs\RealSkyDive\src" />
-      <recent name="$PROJECT_DIR$/out/production/RealSkyDive" />
     </key>
   </component>
   <component name="RunManager">
@@ -159,7 +173,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625012351775</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Alpha verison 1.4 Fixed Game Loop">
+      <created>1625282511657</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1625282511657</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -183,7 +204,8 @@
     <MESSAGE value="Alpha version 1.1" />
     <MESSAGE value="Alpha Version 1.2" />
     <MESSAGE value="Alpha verison 1.3 Added JetStreams to player" />
-    <option name="LAST_COMMIT_MESSAGE" value="Alpha verison 1.3 Added JetStreams to player" />
+    <MESSAGE value="Alpha verison 1.4 Fixed Game Loop" />
+    <option name="LAST_COMMIT_MESSAGE" value="Alpha verison 1.4 Fixed Game Loop" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

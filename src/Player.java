@@ -61,9 +61,9 @@ public class Player extends Canvas {
     Image image = new ImageIcon(getClass().getClassLoader().getResource("images/Player.png")).getImage();
     if (justHit) {
       if (counter % 5 != 0)
-        g.drawImage(image, X, Y, 69, 56, this);
+        g.drawImage(image, X - 8, Y - 4, 69, 56, this);
     } else {
-      g.drawImage(image, X, Y, 69, 56, this);
+      g.drawImage(image, X - 8, Y - 4, 69, 56, this);
     }
   }
 
@@ -98,6 +98,6 @@ public class Player extends Canvas {
   }
 
   public static void shoot(int x, int y) {
-    Game.handler.addObject(new Bullet(Player.X + 16, Player.Y + 16, x, y, ID.BulletFriendly));
+    Game.handler.addObject(new Bullet(Player.X + 24, Player.Y + 24, x, y, ID.BulletFriendly));
   }
 }

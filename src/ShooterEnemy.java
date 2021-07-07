@@ -18,6 +18,14 @@ public class ShooterEnemy extends GameObject {
     }
   }
 
+	public boolean onScreen() {
+		return x > 0 && x < Window.WIDTH - w && y > 0 && y < Window.HEIGHT;
+	}
+	
+	public void shoot() {
+		Game.handler.addObject(new Bullet(x + 13, y + 13, Player.X + 24, Player.Y + 24, ID.BulletEnemy));
+	}
+
   public void tick() {
     x += velX;
     y += velY;
@@ -36,11 +44,5 @@ public class ShooterEnemy extends GameObject {
     g.drawImage(image, x, y, 90, 60, this);
   }
 
-  public boolean onScreen() {
-    return x > 0 && x < Window.WIDTH - w && y > 0 && y < Window.HEIGHT;
-  }
 
-  public void shoot() {
-    Game.handler.addObject(new Bullet(x, y, Player.X, Player.Y, ID.BulletEnemy));
-  }
 }

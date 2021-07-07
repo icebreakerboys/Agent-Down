@@ -9,6 +9,7 @@ import javax.sound.sampled.*;
 import javax.swing.*;
 
 public class Game extends Canvas implements Runnable {
+
   private Thread thread;
   public static boolean running = false;
   private static Random r = new Random();
@@ -21,7 +22,7 @@ public class Game extends Canvas implements Runnable {
   private Background background;
   private static String musicPath;
   private static int secondsRunning = 0;
-  public static STATE state = STATE.PlayScreen;
+  public static STATE state = STATE.StartMenu;
 
   public enum STATE {
     PlayScreen(),
@@ -36,12 +37,11 @@ public class Game extends Canvas implements Runnable {
     this.setFocusable(true);
     handler = new Handler();
     hud = new HUD();
-    player = new Player(Window.WIDTH / 2 - 16, 100, 32, 32, Color.gray);
+    player = new Player(Window.WIDTH / 2 - 16, 100, 48, 48, Color.gray);
     menu = new Menu();
     background = new Background();
-    //TODO: Quick Hack to load enemies in faster
     enemyPic1 = new ImageIcon(getClass().getClassLoader().getResource("images/Badguy1.png")).getImage();
-    enemyPic2 =  new ImageIcon(getClass().getClassLoader().getResource("images/badguy2.png")).getImage();
+    //enemyPic2 =  new ImageIcon(getClass().getClassLoader().getResource("images/badguy2.png")).getImage();
     new Window(this);
     this.addKeyListener(new KeyInput());
     this.addMouseListener(new MouseInput());
@@ -64,7 +64,7 @@ public class Game extends Canvas implements Runnable {
       case (0): {
         for (int i = 0; i < 2; i++) {
           //handler.addObject(new Enemy(r.nextInt(WIDTH), r.nextInt(HEIGHT) + HEIGHT, 1));
-          handler.addObject(new ShooterEnemy(r.nextInt(WIDTH) - 26, r.nextInt(HEIGHT) + HEIGHT, 2, enemyPic1, enemyPic2));
+          handler.addObject(new ShooterEnemy(r.nextInt(WIDTH) - 26, r.nextInt(HEIGHT) + HEIGHT, 2, enemyPic1, enemyPic1));
         }
         break;
       }
@@ -73,7 +73,7 @@ public class Game extends Canvas implements Runnable {
         for (int i = 0; i < 10; i++) {
           handler.addObject(new Enemy(r.nextInt(WIDTH) - 30, r.nextInt(HEIGHT) + HEIGHT, 7));
           if (i % 3 == 0)
-            handler.addObject(new ShooterEnemy(r.nextInt(WIDTH) - 26, r.nextInt(HEIGHT) + HEIGHT, 2, enemyPic1, enemyPic2));
+            handler.addObject(new ShooterEnemy(r.nextInt(WIDTH) - 26, r.nextInt(HEIGHT) + HEIGHT, 2, enemyPic1, enemyPic1));
         }
         break;
       }
