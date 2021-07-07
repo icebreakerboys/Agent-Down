@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 Manifest-Version: 1.0
 Main-Class: Game
 
+=======
+Manifest-Version: 1.0
+Main-Class: Game
+
+>>>>>>> ac984379d9bd4bb288dfdf16e3e64f8aa5929310
