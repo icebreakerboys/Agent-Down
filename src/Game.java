@@ -12,14 +12,14 @@ public class Game extends Canvas implements Runnable {
 
   private Thread thread;
   public static boolean running = false;
-  private static Random r = new Random();
+  private static final Random r = new Random();
   public static Handler handler;
   public static Player player;
   public static Image enemyPic1;
   public static Image enemyPic2;
-  private HUD hud;
-  private Menu menu;
-  private Background background;
+  private final HUD hud;
+  private final Menu menu;
+  private final Background background;
   private static String musicPath;
   private static int secondsRunning = 0;
   public static STATE state = STATE.StartMenu;
@@ -52,14 +52,14 @@ public class Game extends Canvas implements Runnable {
     TimerTask updateStage = new TimerTask() {
       @Override
       public void run() {
-        playRound(secondsRunning);
+        Spawner(secondsRunning);
         secondsRunning++;
       }
     };
     timer.scheduleAtFixedRate(updateStage, 0, 1000);
   }
 
-  private static void playRound(int secondsRunning) {
+  private static void Spawner(int secondsRunning) {
     int randomVar = r.nextInt(3);
     if(randomVar == 0){
       handler.addObject(new ShooterEnemy(r.nextInt(Window.WIDTH), r.nextInt(Window.HEIGHT) + Window.HEIGHT, 2, enemyPic1, enemyPic1));
@@ -140,6 +140,8 @@ public class Game extends Canvas implements Runnable {
       handler.tick();
       hud.tick();
       Player.tick();
+    } else if(state == STATE.StartMenu){
+
     }
   }
 
