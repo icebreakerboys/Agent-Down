@@ -14,7 +14,7 @@ public class Window extends Canvas {
     frame.setResizable(false);
     //frame.setLayout(null);
     frame.setLocationRelativeTo(null);
-    frame.setIconImage(new ImageIcon("Player.png").getImage());
+    frame.setIconImage(new ImageIcon(getClass().getClassLoader().getResource("Player.png")).getImage());
     frame.add(game);
     frame.setVisible(true);
     game.start();

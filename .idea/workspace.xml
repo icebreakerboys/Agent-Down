@@ -9,13 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-<<<<<<< HEAD
-    <list default="true" id="b5c558b8-f9f5-4e28-8844-6c14bf93ca2d" name="Default Changelist" comment="Alpha verison 1.4 Fixed Game Loop">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-=======
     <list default="true" id="b5c558b8-f9f5-4e28-8844-6c14bf93ca2d" name="Default Changelist" comment="Alpha verison 1.5 Fixed Stuff">
->>>>>>> cd9a6221dd1773bc2ed254a3574c3a866d673506
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/HUD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HUD.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +42,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/KeyInput.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/.idea/workspace.xml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Magazine.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/GameObject.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Game.java" root0="FORCE_HIGHLIGHTING" />
@@ -54,6 +52,7 @@
     <setting file="file://$PROJECT_DIR$/src/ShooterEnemy.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Player.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Menu.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/MouseInput.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProblemsViewState">
     <option name="showPreview" value="true" />
@@ -99,6 +98,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Game" />
@@ -117,6 +127,11 @@
       <workItem from="1625350381476" duration="750000" />
       <workItem from="1625683840457" duration="748000" />
       <workItem from="1625698101221" duration="288000" />
+      <workItem from="1625796528255" duration="65000" />
+      <workItem from="1625839507864" duration="1445000" />
+      <workItem from="1625960830335" duration="37000" />
+      <workItem from="1626361971773" duration="22000" />
+      <workItem from="1626466401294" duration="2968000" />
     </task>
     <task id="LOCAL-00001" summary="last update of the night">
       <created>1620798241914</created>
