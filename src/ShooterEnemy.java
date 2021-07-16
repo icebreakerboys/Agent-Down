@@ -35,7 +35,7 @@ public class ShooterEnemy extends GameObject {
         shoot();
       } else counter = 49;
     }
-    resetPositionAndSpeed(h, speed);
+   removeEnemy();
     counter++;
   }
 

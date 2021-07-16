@@ -10,10 +10,10 @@ public class HUD {
    */
   public void tick() {
     counter++;
-    if(counter%5==0){
+    if(counter % 5 == 0 ){
       points++;
     }
-    Player.HEALTH = Game.clamp(Player.HEALTH, 0, Player.HEALTH);
+    Player.HEALTH = Game.clamp(Player.HEALTH, 0, 100);
     if (Player.HEALTH == 0) {
       Game.running = false;
     }

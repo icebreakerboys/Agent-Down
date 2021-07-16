@@ -44,14 +44,9 @@ public abstract class GameObject extends Canvas {
     return new Rectangle(x, y, w, h);
   }
 
-  public void resetPositionAndSpeed(int h, int speed) {
+  public void removeEnemy() {
     if (y <= -h) {
-      y = Window.HEIGHT;
-      x = r.nextInt(Window.WIDTH - w);
-      velY = -(r.nextInt(speed)) - 1;
-      if (markedForDelete) {
-        Game.handler.removeObject(this);
-      }
+      Game.handler.removeObject(this);
     }
   }
 

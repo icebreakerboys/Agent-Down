@@ -2,7 +2,6 @@
 import java.awt.*;
 import javax.swing.*;
 
-//this basically just starts the game window and isn't used again don't really understand it
 public class Window extends Canvas {
   public static final int WIDTH = 640, HEIGHT = 740;
   private static JFrame frame;
@@ -14,7 +13,7 @@ public class Window extends Canvas {
     frame.setResizable(false);
     //frame.setLayout(null);
     frame.setLocationRelativeTo(null);
-    frame.setIconImage(new ImageIcon(getClass().getClassLoader().getResource("Player.png")).getImage());
+    frame.setIconImage(new ImageIcon(getClass().getClassLoader().getResource("images/Player.png")).getImage());
     frame.add(game);
     frame.setVisible(true);
     game.start();

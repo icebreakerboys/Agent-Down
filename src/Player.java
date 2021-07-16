@@ -91,8 +91,10 @@ public class Player extends Canvas {
         Game.handler.removeObject(tempObject);
       }
       if (tempObject.getId() == ID.HealthPack && Game.player.getBounds().intersects(tempObject.getBounds())) {
-        HEALTH += 30;
-        Game.handler.removeObject(tempObject);
+        if (HEALTH < 100) {
+          HEALTH += 30;
+          Game.handler.removeObject(tempObject);
+        }
       }
     }
   }

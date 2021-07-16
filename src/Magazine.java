@@ -11,6 +11,7 @@ public class Magazine extends GameObject{
 
     public void tick(){
         y += velY;
-        resetPositionAndSpeed(h, 1);
+        removeEnemy();
     }
+
 }

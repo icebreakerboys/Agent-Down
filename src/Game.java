@@ -60,27 +60,13 @@ public class Game extends Canvas implements Runnable {
   }
 
   private static void playRound(int secondsRunning) {
-//    switch (secondsRunning) {
-//      case (0): {
-//        for (int i = 0; i < 10; i++) {
-//          //handler.addObject(new Enemy(r.nextInt(WIDTH), r.nextInt(HEIGHT) + HEIGHT, 1))
-//          handler.addObject(new ShooterEnemy(r.nextInt(Window.WIDTH) - 26, r.nextInt(Window.HEIGHT) + Window.HEIGHT, 2, enemyPic1, enemyPic1));
-//        }
-//        break;
-//      }
-//      case (60): {
-//        handler.makeForDelete();
-//        for (int i = 0; i < 10; i++) {
-//          handler.addObject(new Enemy(r.nextInt(WIDTH) - 30, r.nextInt(HEIGHT) + HEIGHT, 7));
-//          if (i % 3 == 0)
-//            handler.addObject(new ShooterEnemy(r.nextInt(WIDTH) - 26, r.nextInt(HEIGHT) + HEIGHT, 2, enemyPic1, enemyPic1));
-//        }
-//        break;
-//      }
-//      case (120): {
-//        break;
-//      }
-//    }
+    int randomVar = r.nextInt(3);
+    if(randomVar == 0){
+      handler.addObject(new ShooterEnemy(r.nextInt(Window.WIDTH), r.nextInt(Window.HEIGHT) + Window.HEIGHT, 2, enemyPic1, enemyPic1));
+    } else {
+      handler.addObject(new Enemy(r.nextInt(Window.WIDTH), r.nextInt(Window.HEIGHT) + Window.HEIGHT, 2));
+    }
+
     if (secondsRunning % 10 == 0) {
       handler.addObject(new HealthPack(r.nextInt(Window.WIDTH) - 16, Window.HEIGHT + r.nextInt(10), ID.HealthPack, 16, 16, Color.green));
       handler.addObject(new Magazine(r.nextInt(Window.WIDTH) - 16, Window.HEIGHT + r.nextInt(10), ID.Magazine, 16, 16, Color.blue));
