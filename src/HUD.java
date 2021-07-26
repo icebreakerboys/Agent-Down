@@ -3,7 +3,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class HUD {
-  private int points = 0;
+  public static int points = 0;
   private long counter = 0L;
   /**
    * this method is called repeatedly to update the HUD
@@ -15,7 +15,7 @@ public class HUD {
     }
     Player.HEALTH = Game.clamp(Player.HEALTH, 0, 100);
     if (Player.HEALTH == 0) {
-      Game.running = false;
+      Game.state = Game.STATE.EndMenu;
     }
   }
 

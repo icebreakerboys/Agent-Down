@@ -15,14 +15,26 @@ public class MouseInput extends MouseAdapter {
         Player.AMMO--;
       }
     } else if (Game.state == Game.STATE.StartMenu) {
-      if (mouseOver(mx, my, 150, 270, 300, 100))
+      if (mouseOver(mx, my, 150, 270, 300, 100)) {
         Game.state = Game.STATE.PlayScreen;
+        Player.HEALTH = 100;
+        Player.AMMO = 0;
+        Player.X = Window.WIDTH/2;
+        Player.Y = 100;
+        HUD.points = 0;
+        while(Game.handler.object.size() != 0){
+          Game.handler.object.remove(0);
+        }
+      }
       if (mouseOver(mx, my, 150, 410, 300, 100))
-        Game.state = Game.STATE.HelpMenu;
-      if(mouseOver(mx, my, 150, 550, 300, 100))
         Game.state = Game.STATE.OptionsMenu;
+      if(mouseOver(mx, my, 150, 550, 300, 100))
+        Game.state = Game.STATE.HelpMenu;
     } else if (Game.state == Game.STATE.OptionsMenu || Game.state == Game.STATE.HelpMenu){
       if (mouseOver(mx, my, 150, 550, 300, 100))
+        Game.state = Game.STATE.StartMenu;
+    } else if (Game.state == Game.STATE.EndMenu){
+      if(mouseOver(mx, my, 150, 550, 300, 100))
         Game.state = Game.STATE.StartMenu;
     }
   }

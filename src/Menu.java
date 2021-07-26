@@ -16,21 +16,39 @@ public class Menu extends Canvas{
             g.fillRect(150, 270, 300, 100);
             g.fillRect(150, 410, 300, 100);
             g.fillRect(150, 550 , 300, 100);
-
-
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Helvetica", Font.PLAIN, 50));
+            g.drawString("Play!", 240, 335);
+            g.drawString("Options", 220, 475);
+            g.drawString("Help", 245, 615);
         }
         if (Game.state == Game.STATE.EndMenu) {
+            g.setColor(Color.gray);
+            g.fillRect(100, 100, 425, 400);
+            g.fillRect(150, 550, 300, 100);
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Helvetica", Font.PLAIN, 50));
+            g.drawString("Game Over!", 175, 200);
+            g.drawString("Score:", 250, 300);
+            g.drawString("" + HUD.points, 200, 400);
+            g.setFont(new Font("Helvetica", Font.PLAIN, 40));
+            g.drawString("Back to Start", 190, 615);
 
         }
         if (Game.state == Game.STATE.HelpMenu) {
             g.setColor(Color.gray);
             g.fillRect(150, 550, 300, 100);
+            g.setColor(Color.white);
+            g.setFont(new Font("Helvetica", Font.PLAIN, 40));
+            g.drawString("Back to Start", 190, 615);
 
         }
         if (Game.state == Game.STATE.OptionsMenu) {
             g.setColor(Color.gray);
             g.fillRect(150, 550, 300, 100);
-
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Helvetica", Font.PLAIN, 40));
+            g.drawString("Back to Start", 190, 615);
         }
     }
 

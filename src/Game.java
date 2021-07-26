@@ -52,8 +52,10 @@ public class Game extends Canvas implements Runnable {
     TimerTask updateStage = new TimerTask() {
       @Override
       public void run() {
-        Spawner(secondsRunning);
-        secondsRunning++;
+        if(Game.state == STATE.PlayScreen){
+          Spawner(secondsRunning);
+          secondsRunning++;
+        }
       }
     };
     timer.scheduleAtFixedRate(updateStage, 0, 1000);
