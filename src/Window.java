@@ -4,10 +4,9 @@ import javax.swing.*;
 
 public class Window extends Canvas {
   public static final int WIDTH = 640, HEIGHT = 740;
-  private static JFrame frame;
 
   public Window(Game game) {
-    frame = new JFrame("Agent Down");
+    JFrame frame = new JFrame("Agent Down");
     frame.setSize(new Dimension(WIDTH, HEIGHT));
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setResizable(false);

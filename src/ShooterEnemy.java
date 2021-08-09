@@ -39,10 +39,10 @@ public class ShooterEnemy extends GameObject {
     counter++;
   }
 
-  @Override
-  public void render(Graphics g) {
-    g.drawImage(image, x, y, 90, 60, this);
-  }
+//  @Override
+//  public void render(Graphics g) {
+//    g.drawImage(image, x, y, 90, 60, this);
+//  }
 
 
 }

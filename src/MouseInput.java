@@ -22,20 +22,29 @@ public class MouseInput extends MouseAdapter {
         Player.X = Window.WIDTH/2;
         Player.Y = 100;
         HUD.points = 0;
+        HUD.score = 0;
+
         while(Game.handler.object.size() != 0){
           Game.handler.object.remove(0);
         }
+        Game.handler.addObject(new JetStreams());
       }
       if (mouseOver(mx, my, 150, 410, 300, 100))
         Game.state = Game.STATE.OptionsMenu;
       if(mouseOver(mx, my, 150, 550, 300, 100))
         Game.state = Game.STATE.HelpMenu;
-    } else if (Game.state == Game.STATE.OptionsMenu || Game.state == Game.STATE.HelpMenu){
+    } else if (Game.state == Game.STATE.OptionsMenu || Game.state == Game.STATE.HelpMenu || Game.state == Game.STATE.EndMenu){
       if (mouseOver(mx, my, 150, 550, 300, 100))
         Game.state = Game.STATE.StartMenu;
-    } else if (Game.state == Game.STATE.EndMenu){
-      if(mouseOver(mx, my, 150, 550, 300, 100))
-        Game.state = Game.STATE.StartMenu;
+    } else if (Game.state == Game.STATE.PauseMenu){
+      if(mouseOver(mx, my, 400, 120, 120, 100) && HUD.points == 5000)
+        Player.hasShotgun = true;
+      if(mouseOver(mx, my, 400, 253, 120, 100) && HUD.points == 5000)
+        Player.speedBuff = true;
+      if(mouseOver(mx, my, 400, 386, 120, 100) && HUD.points == 5000)
+        Player.healthBuff = true;
+      if(mouseOver(mx, my, 400, 519, 120, 100) && HUD.points == 5000)
+        Player.resistanceBuff = true;
     }
   }
 

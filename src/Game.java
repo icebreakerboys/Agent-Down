@@ -1,7 +1,6 @@
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
-import java.net.URL;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -16,12 +15,11 @@ public class Game extends Canvas implements Runnable {
   public static Handler handler;
   public static Player player;
   public static Image enemyPic1;
-  public static Image enemyPic2;
   private final HUD hud;
   private final Menu menu;
   private final Background background;
   private static String musicPath;
-  private static int secondsRunning = 0;
+  private static int challengeVar = 1;
   public static STATE state = STATE.StartMenu;
 
   public enum STATE {
@@ -37,41 +35,48 @@ public class Game extends Canvas implements Runnable {
     this.setFocusable(true);
     handler = new Handler();
     hud = new HUD();
-    player = new Player(Window.WIDTH / 2 - 16, 100, 48, 48, Color.gray);
+    player = new Player(Window.WIDTH / 2 - 16, 100);
     menu = new Menu();
     background = new Background();
     enemyPic1 = new ImageIcon(getClass().getClassLoader().getResource("images/Badguy1.png")).getImage();
-    //enemyPic2 =  new ImageIcon(getClass().getClassLoader().getResource("images/badguy2.png")).getImage();
     new Window(this);
     this.addKeyListener(new KeyInput());
     this.addMouseListener(new MouseInput());
     musicPath = ("sounds/Possible Song 1.wav");
     musicPath = ("sounds/Theme.wav");
-    playMusic(musicPath);
+    //playMusic(musicPath);
     Timer timer = new Timer();
     TimerTask updateStage = new TimerTask() {
+      int timeRunning = 0;
       @Override
       public void run() {
         if(Game.state == STATE.PlayScreen){
-          Spawner(secondsRunning);
-          secondsRunning++;
+          Spawner(timeRunning);
+          timeRunning++;
         }
       }
     };
-    timer.scheduleAtFixedRate(updateStage, 0, 1000);
+    timer.scheduleAtFixedRate(updateStage, 0, 100);
   }
 
-  private static void Spawner(int secondsRunning) {
+  private static void Spawner(int timeRunning) {
     int randomVar = r.nextInt(3);
-    if(randomVar == 0){
-      handler.addObject(new ShooterEnemy(r.nextInt(Window.WIDTH), r.nextInt(Window.HEIGHT) + Window.HEIGHT, 2, enemyPic1, enemyPic1));
-    } else {
-      handler.addObject(new Enemy(r.nextInt(Window.WIDTH), r.nextInt(Window.HEIGHT) + Window.HEIGHT, 2));
+    int timeDelay = 11 - challengeVar;
+    if(timeDelay <= 1)
+      timeDelay = 1;
+    if(timeRunning % timeDelay == 0){
+      if(randomVar == 0){
+        handler.addObject(new ShooterEnemy(r.nextInt(Window.WIDTH), r.nextInt(Window.HEIGHT) + Window.HEIGHT, challengeVar, enemyPic1, enemyPic1));
+      } else {
+        handler.addObject(new Enemy(r.nextInt(Window.WIDTH), r.nextInt(Window.HEIGHT) + Window.HEIGHT, challengeVar));
+      }
     }
-
-    if (secondsRunning % 10 == 0) {
+    if (timeRunning % 100  == 0) {
       handler.addObject(new HealthPack(r.nextInt(Window.WIDTH) - 16, Window.HEIGHT + r.nextInt(10), ID.HealthPack, 16, 16, Color.green));
       handler.addObject(new Magazine(r.nextInt(Window.WIDTH) - 16, Window.HEIGHT + r.nextInt(10), ID.Magazine, 16, 16, Color.blue));
+    }
+    if(timeRunning % 300 == 0){
+      challengeVar++;
     }
   }
 
@@ -125,10 +130,9 @@ public class Game extends Canvas implements Runnable {
       }
       if (System.currentTimeMillis() - timer > 1000) {
         timer += 1000;
-        System.out.println("FPS: " + frames);
-        System.out.println("Ticks: " + ticks);
-        System.out.println("HP: " + Player.HEALTH);
-        System.out.println("Seconds Ran: " + secondsRunning);
+        //System.out.println("FPS: " + frames);
+        //System.out.println("Ticks: " + ticks);
+        //System.out.println("HP: " + Player.HEALTH);
         frames = 0;
         ticks = 0;
       }
@@ -161,11 +165,8 @@ public class Game extends Canvas implements Runnable {
       handler.render(g);
       hud.render(g);
       player.render(g);
-      if (state == STATE.PauseMenu)
-        menu.pauseRender(g);
-    } else {
-      menu.render(g);
     }
+    menu.render(g);
     g.dispose();
     bs.show();
   }

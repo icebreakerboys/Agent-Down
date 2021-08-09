@@ -1,7 +1,6 @@
 
 import javax.swing.*;
 import java.awt.*;
-import java.beans.ConstructorProperties;
 
 /**
  * Player class
@@ -9,22 +8,22 @@ import java.beans.ConstructorProperties;
 public class Player extends Canvas {
   public static int X, Y;
   public static int velX = 0, velY = 0;
-  private static Color color;
-  private static int w, h;
-  private static Boolean justHit = false;
+  private static final int w = 48, h = 48;
+  private static final Color color = Color.gray;
+  private static boolean justHit = false;
+  public static boolean hasShotgun = false;
+  public static boolean speedBuff = false;
+  public static boolean healthBuff = false;
+  public static boolean resistanceBuff = false;
   private static int counter = 0;
   public static int AMMO = 0;
   public static int HEALTH;
 
   //constructor
-  public Player(int x, int y, int w, int h, Color color) {
+  public Player(int x, int y) {
     X = x;
     Y = y;
-    Player.w = w;
-    Player.h = h;
-    Player.color = color;
     HEALTH = 100;
-    Game.handler.addObject(new JetStreams());
   }
 
   /**
@@ -46,6 +45,8 @@ public class Player extends Canvas {
         justHit = false;
       }
     }
+    //HEALTH = 100;
+    //AMMO = 10;
   }
 
   public Rectangle getBounds() {
@@ -60,10 +61,15 @@ public class Player extends Canvas {
   public void render(Graphics g) {
     Image image = new ImageIcon(getClass().getClassLoader().getResource("images/Player.png")).getImage();
     if (justHit) {
-      if (counter % 5 != 0)
-        g.drawImage(image, X - 8, Y - 4, 69, 56, this);
+      if (counter % 5 != 0) {
+        //g.drawImage(image, X - 8, Y - 4, 69, 56, this);
+        g.setColor(color);
+        g.fillRect(X, Y, w, h);
+      }
     } else {
-      g.drawImage(image, X - 8, Y - 4, 69, 56, this);
+      //g.drawImage(image, X - 8, Y - 4, 69, 56, this);
+      g.setColor(color);
+      g.fillRect(X, Y, w, h);
     }
   }
 
@@ -100,6 +106,23 @@ public class Player extends Canvas {
   }
 
   public static void shoot(int x, int y) {
-    Game.handler.addObject(new Bullet(Player.X + 24, Player.Y + 24, x, y, ID.BulletFriendly));
+    if(!hasShotgun) {
+      Game.handler.addObject(new Bullet(X + 24, Y + 24, x, y, ID.BulletFriendly));
+    } else if((x < X && y < Y) || (x > X && y > Y)){
+      Game.handler.addObject(new Bullet(X + 24, Y + 24, x - 25, y + 25, ID.BulletFriendly));
+      Game.handler.addObject(new Bullet(X + 24, Y + 24, x - 12, y + 12, ID.BulletFriendly));
+      Game.handler.addObject(new Bullet(X + 24, Y + 24, x - 12, y - 12, ID.BulletFriendly));
+      Game.handler.addObject(new Bullet(X + 24, Y + 24, x - 25, y - 25, ID.BulletFriendly));
+    } else if(Math.abs(x - X) > 50 && y > Y){
+      Game.handler.addObject(new Bullet(X + 24, Y + 24, x + 25, y, ID.BulletFriendly));
+      Game.handler.addObject(new Bullet(X + 24, Y + 24, x + 12, y, ID.BulletFriendly));
+      Game.handler.addObject(new Bullet(X + 24, Y + 24, x - 12, y, ID.BulletFriendly));
+      Game.handler.addObject(new Bullet(X + 24, Y + 24, x - 25, y, ID.BulletFriendly));
+    } else {
+      Game.handler.addObject(new Bullet(X + 24, Y + 24, x + 25, y + 25, ID.BulletFriendly));
+      Game.handler.addObject(new Bullet(X + 24, Y + 24, x + 12, y + 12, ID.BulletFriendly));
+      Game.handler.addObject(new Bullet(X + 24, Y + 24, x - 12, y - 12, ID.BulletFriendly));
+      Game.handler.addObject(new Bullet(X + 24, Y + 24, x - 25, y - 25, ID.BulletFriendly));
+    }
   }
 }

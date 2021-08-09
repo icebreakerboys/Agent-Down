@@ -5,11 +5,6 @@ import java.awt.event.KeyEvent;
 public class KeyInput extends KeyAdapter {
   private Boolean[] keysDown = new Boolean[4];
 
-  /**
-   * moves player from moving after key is pressed
-   *
-   * @param e KeyEvent
-   */
   public KeyInput() {
     keysDown[0] = false;
     keysDown[1] = false;
@@ -39,7 +34,7 @@ public class KeyInput extends KeyAdapter {
     if (key == KeyEvent.VK_P) {
       if (Game.state == Game.STATE.PlayScreen) {
         Game.state = Game.STATE.PauseMenu;
-      } else if (Game.state == Game.STATE.PauseMenu || Game.state == Game.STATE.StartMenu) {
+      } else if (Game.state == Game.STATE.PauseMenu) {
         Game.state = Game.STATE.PlayScreen;
       }
     }

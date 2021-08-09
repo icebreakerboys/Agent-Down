@@ -32,6 +32,8 @@ public abstract class GameObject extends Canvas {
       GameObject tempObject = Game.handler.object.get(i);
       if (tempObject.getId() == ID.BulletFriendly && getBounds().intersects(tempObject.getBounds())) {
         Game.handler.removeObject(this);
+        HUD.score += 100;
+        HUD.points += 100;
       }
     }
   }

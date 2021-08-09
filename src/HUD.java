@@ -1,9 +1,9 @@
 
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.*;
 
 public class HUD {
   public static int points = 0;
+  public static int score = 0;
   private long counter = 0L;
   /**
    * this method is called repeatedly to update the HUD
@@ -11,6 +11,7 @@ public class HUD {
   public void tick() {
     counter++;
     if(counter % 5 == 0 ){
+      score++;
       points++;
     }
     Player.HEALTH = Game.clamp(Player.HEALTH, 0, 100);
@@ -39,8 +40,11 @@ public class HUD {
     g.fillRect(15, 15, Player.HEALTH * 2, 16);
     g.setColor(Color.black);
     g.drawRect(15, 15, 200, 16);
-    g.drawString("Ammo: " + Player.AMMO, 500, 55);
-    g.drawString("Points: " + points, 500, 80);
+    g.setFont(new Font("Helvetica", Font.PLAIN, 30));
+    g.setColor(Menu.myColor);
+    g.drawString("Ammo: " + Player.AMMO, 15, 660);
+    g.drawString("Points: " + points, 15, 690);
+    //g.drawString("Score: " + score, 15, 690);
 
   }
 }
