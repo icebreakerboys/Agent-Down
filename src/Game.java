@@ -19,8 +19,8 @@ public class Game extends Canvas implements Runnable {
   private final Menu menu;
   private final Background background;
   private static String musicPath;
-  private static int challengeVar = 1;
-  public static STATE state = STATE.StartMenu;
+  public static int challengeVar = 1;
+  public static STATE state = STATE.PlayScreen;
 
   public enum STATE {
     PlayScreen(),
@@ -44,7 +44,7 @@ public class Game extends Canvas implements Runnable {
     this.addMouseListener(new MouseInput());
     musicPath = ("sounds/Possible Song 1.wav");
     musicPath = ("sounds/Theme.wav");
-    //playMusic(musicPath);
+    playMusic(musicPath);
     Timer timer = new Timer();
     TimerTask updateStage = new TimerTask() {
       int timeRunning = 0;
@@ -57,6 +57,7 @@ public class Game extends Canvas implements Runnable {
       }
     };
     timer.scheduleAtFixedRate(updateStage, 0, 100);
+    handler.addObject(new BossEnemy(3));
   }
 
   private static void Spawner(int timeRunning) {
@@ -146,8 +147,8 @@ public class Game extends Canvas implements Runnable {
       handler.tick();
       hud.tick();
       Player.tick();
-    } else if(state == STATE.StartMenu){
-
+    } else {
+      menu.tick();
     }
   }
 
@@ -161,12 +162,15 @@ public class Game extends Canvas implements Runnable {
     g.setColor(Color.WHITE);
     g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
     background.render(g);
-    if (state == STATE.PlayScreen || state == STATE.PauseMenu) {
-      handler.render(g);
-      hud.render(g);
+    if (state == STATE.PlayScreen || state == STATE.PauseMenu || state == STATE.EndMenu) {
       player.render(g);
+      handler.render(g);
+      if(state == STATE.PlayScreen)
+        hud.render(g);
+
     }
-    menu.render(g);
+    if(state != STATE.PlayScreen)
+      menu.render(g);
     g.dispose();
     bs.show();
   }

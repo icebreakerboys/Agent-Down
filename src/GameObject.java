@@ -63,7 +63,6 @@ public abstract class GameObject extends Canvas {
     //g.drawImage(image, x, y, 90, 60, this);
   }
 
-  //getters and setters
   public void setX(int x) {
     this.x = x;
   }
@@ -86,6 +85,10 @@ public abstract class GameObject extends Canvas {
 
   public ID getId() {
     return id;
+  }
+
+  public int getSpeed(){
+    return speed;
   }
 
   public void setVelX(int velX) {

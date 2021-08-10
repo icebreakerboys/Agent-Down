@@ -1,8 +1,11 @@
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MouseInput extends MouseAdapter {
+
   public void mousePressed(MouseEvent e) {
     //FIXME Not every click fires a bullet
     // my best guess is that it has to do with the MouseInput Class
@@ -14,28 +17,22 @@ public class MouseInput extends MouseAdapter {
         Player.shoot(mx, my);
         Player.AMMO--;
       }
-    } else if (Game.state == Game.STATE.StartMenu) {
-      if (mouseOver(mx, my, 150, 270, 300, 100)) {
-        Game.state = Game.STATE.PlayScreen;
-        Player.HEALTH = 100;
-        Player.AMMO = 0;
-        Player.X = Window.WIDTH/2;
-        Player.Y = 100;
-        HUD.points = 0;
-        HUD.score = 0;
+      if(mouseOver(mx,my, 580, 10, 40, 40))
+        Game.state = Game.STATE.PauseMenu;
 
-        while(Game.handler.object.size() != 0){
-          Game.handler.object.remove(0);
-        }
-        Game.handler.addObject(new JetStreams());
+    } else if (Game.state == Game.STATE.StartMenu) {
+      if (mouseOver(mx, my, Menu.x + 150, Menu.y + 270, 300, 100)) {
+        Menu.startGame();
       }
-      if (mouseOver(mx, my, 150, 410, 300, 100))
+      if (mouseOver(mx, my, Menu.x + 150, Menu.y + 410, 300, 100))
         Game.state = Game.STATE.OptionsMenu;
-      if(mouseOver(mx, my, 150, 550, 300, 100))
+      if(mouseOver(mx, my, Menu.x + 150, Menu.y + 550, 300, 100))
         Game.state = Game.STATE.HelpMenu;
+
     } else if (Game.state == Game.STATE.OptionsMenu || Game.state == Game.STATE.HelpMenu || Game.state == Game.STATE.EndMenu){
       if (mouseOver(mx, my, 150, 550, 300, 100))
         Game.state = Game.STATE.StartMenu;
+
     } else if (Game.state == Game.STATE.PauseMenu){
       if(mouseOver(mx, my, 400, 120, 120, 100) && HUD.points == 5000)
         Player.hasShotgun = true;
@@ -45,6 +42,9 @@ public class MouseInput extends MouseAdapter {
         Player.healthBuff = true;
       if(mouseOver(mx, my, 400, 519, 120, 100) && HUD.points == 5000)
         Player.resistanceBuff = true;
+      if(mouseOver(mx, my, 580, 10, 40, 40)){
+        Menu.unPauseGame();
+      }
     }
   }
 
@@ -59,4 +59,5 @@ public class MouseInput extends MouseAdapter {
       } else return false;
     } else return false;
   }
+
 }

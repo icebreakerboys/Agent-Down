@@ -17,6 +17,9 @@ public class HUD {
     Player.HEALTH = Game.clamp(Player.HEALTH, 0, 100);
     if (Player.HEALTH == 0) {
       Game.state = Game.STATE.EndMenu;
+      Menu.y = 1480;
+      Menu.started = false;
+      Menu.restarted = true;
     }
   }
 
@@ -35,15 +38,21 @@ public class HUD {
    */
   public void render(Graphics g) {
     g.setColor(Color.darkGray);
-    g.fillRect(15, 15, 200, 16);
+    g.fillRect(300, 680, 200, 16);
     g.setColor(Color.green);
-    g.fillRect(15, 15, Player.HEALTH * 2, 16);
+    g.fillRect(300, 680, Player.HEALTH * 2, 16);
     g.setColor(Color.black);
-    g.drawRect(15, 15, 200, 16);
-    g.setFont(new Font("Helvetica", Font.PLAIN, 30));
+    g.drawRect(300, 680, 200, 16);
+    g.fillRect(520, 680, 20, 8);
+    g.fillRect(535, 680, 5, 16);
+    g.setFont(Menu.font30);
     g.setColor(Menu.myColor);
-    g.drawString("Ammo: " + Player.AMMO, 15, 660);
-    g.drawString("Points: " + points, 15, 690);
+    g.drawString("" + Player.AMMO, 550, 695);
+    g.drawString("" + points, 15, 690);
+    g.fillRect(580, 10, 40, 40);
+    g.setColor(Color.WHITE);
+    g.fillRect(590, 20, 5, 20);
+    g.fillRect(605, 20, 5, 20);
     //g.drawString("Score: " + score, 15, 690);
 
   }
