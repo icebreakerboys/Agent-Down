@@ -20,7 +20,7 @@ public class Game extends Canvas implements Runnable {
   private final Background background;
   private static String musicPath;
   public static int challengeVar = 1;
-  public static STATE state = STATE.PlayScreen;
+  public static STATE state = STATE.StartMenu;
 
   public enum STATE {
     PlayScreen(),
