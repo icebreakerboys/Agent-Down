@@ -47,7 +47,7 @@ public class Game extends Canvas implements Runnable {
     playMusic(musicPath);
     Timer timer = new Timer();
     TimerTask updateStage = new TimerTask() {
-      int timeRunning = 0;
+      int timeRunning = 1;
       @Override
       public void run() {
         if(Game.state == STATE.PlayScreen){
@@ -57,7 +57,6 @@ public class Game extends Canvas implements Runnable {
       }
     };
     timer.scheduleAtFixedRate(updateStage, 0, 100);
-    handler.addObject(new BossEnemy(3));
   }
 
   private static void Spawner(int timeRunning) {
@@ -73,10 +72,12 @@ public class Game extends Canvas implements Runnable {
       }
     }
     if (timeRunning % 100  == 0) {
-      handler.addObject(new HealthPack(r.nextInt(Window.WIDTH) - 16, Window.HEIGHT + r.nextInt(10), ID.HealthPack, 16, 16, Color.green));
-      handler.addObject(new Magazine(r.nextInt(Window.WIDTH) - 16, Window.HEIGHT + r.nextInt(10), ID.Magazine, 16, 16, Color.blue));
+      handler.addObject(new HealthPack(r.nextInt(Window.WIDTH) - 16, Window.HEIGHT + r.nextInt(200), ID.HealthPack, 16, 16, Color.green));
+      handler.addObject(new Magazine(r.nextInt(Window.WIDTH) - 16, Window.HEIGHT + r.nextInt(200), ID.Magazine, 16, 16, Color.blue));
     }
-    if(timeRunning % 300 == 0){
+    if(timeRunning % 1200 == 0){
+      handler.addObject(new BossEnemy(challengeVar));
+      BossEnemy.spawnWeakPoints();
       challengeVar++;
     }
   }
@@ -163,10 +164,10 @@ public class Game extends Canvas implements Runnable {
     g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
     background.render(g);
     if (state == STATE.PlayScreen || state == STATE.PauseMenu || state == STATE.EndMenu) {
-      player.render(g);
       handler.render(g);
       if(state == STATE.PlayScreen)
         hud.render(g);
+      player.render(g);
 
     }
     if(state != STATE.PlayScreen)

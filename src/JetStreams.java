@@ -21,7 +21,7 @@ public class JetStreams extends GameObject {
   @Override
   public void render(Graphics g) {
     g.setColor(color);
-    g.fillRect(x, y, w, h);
-    g.fillRect(x + 67, y, w, h);
+    g.fillRect((int) x, (int) y, w, h);
+    g.fillRect((int) x + 67, (int) y, w, h);
   }
 }

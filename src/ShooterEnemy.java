@@ -21,7 +21,10 @@ public class ShooterEnemy extends GameObject {
 	}
 	
 	public void shoot() {
-		Game.handler.addObject(new Bullet(x + 13, y + 13, Player.X + 24, Player.Y + 24, ID.BulletEnemy));
+        int xC = Player.X - (int) x;
+        int yC = Player.Y - (int) y;
+        double angle = Math.atan2(yC,xC);
+		Game.handler.addObject(new Bullet((int) x + 13, (int) y + 13, Player.X, Player.Y, angle, ID.BulletEnemy));
 	}
 
   public void tick() {

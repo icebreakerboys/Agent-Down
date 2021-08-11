@@ -14,7 +14,7 @@ public class MouseInput extends MouseAdapter {
     // System.out.println(x + ", " + y);
     if (Game.state == Game.STATE.PlayScreen) {
       if (Player.AMMO != 0) {
-        Player.shoot(mx, my);
+        Player.shoot(Player.X + 24, Player.Y + 24, mx, my);
         Player.AMMO--;
       }
       if(mouseOver(mx,my, 580, 10, 40, 40))

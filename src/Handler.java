@@ -15,7 +15,7 @@ public class Handler {
 
   //Runs all visuals for GameObjects
   public void render(Graphics g) {
-    for (int i = 0; i < object.size() ; i--) {
+    for (int i = 0; i < object.size(); i++) {
       GameObject tempObject = object.get(i);
       tempObject.render(g);
     }
@@ -30,12 +30,4 @@ public class Handler {
     this.object.remove(object);
   }
 
-  public void makeForDelete() {
-    for (int i = 0; i < object.size(); i++) {
-      GameObject tempObject = object.get(i);
-      if (tempObject.getId() == ID.Enemy || tempObject.getId() == ID.ShooterEnemy) {
-        tempObject.markForDelete();
-      }
-    }
-  }
 }

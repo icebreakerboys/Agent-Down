@@ -150,6 +150,8 @@ public class Menu extends Canvas{
                 HUD.points = 0;
                 HUD.score = 0;
                 while(Game.handler.object.size() != 0){
+                    GameObject tempObject = Game.handler.object.get(0);
+                    System.out.println(tempObject.getId());
                     Game.handler.object.remove(0);
                 }
                 Game.handler.addObject(new JetStreams());

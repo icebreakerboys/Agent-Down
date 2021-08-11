@@ -1,11 +1,11 @@
 
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.*;
 
 public class Bullet extends GameObject {
-  public Bullet(int x, int y, int tX, int tY, ID id) {
+
+  public Bullet(int x, int y, int tX, int tY, double angle, ID id) {
     super(x, y, id, 12, 12, Color.black);
-    target(x, y, tX, tY);
+    target(x, y, tX, tY, angle);
   }
 
   public void tick() {
@@ -15,17 +15,33 @@ public class Bullet extends GameObject {
     removeGameObject();
   }
 
-  public void target(int x, int y, int tX, int tY) {
-    int xD = tX - x;
-    int yD = tY - y;
-    velY = ((7 * yD) / (int) (Math.sqrt(xD * xD + yD * yD)));
-    velX = ((7 * xD) / (int) (Math.sqrt(xD * xD + yD * yD)));
-  }
-
   @Override
   public void render(Graphics g) {
     g.setColor(color);
-    g.fillOval(x, y, w, h);
+    g.fillOval((int) x, (int) y, w, h);
+  }
+
+  public void removeGameObject() {
+    if (x <= -w || x >= Window.WIDTH + w || y <= -h || y >= Window.HEIGHT + h)
+      Game.handler.removeObject(this);
+  }
+
+  public void target(int x, int y, int tX, int tY, double angle) {
+    double yD = Math.tan(angle);
+    double xD  = 1;
+    if(tX < x){
+      xD = -1;
+      yD = -yD;
+    }
+    if(Math.abs(tX - x) <= 10){
+      if(tY - y > 0){
+        yD = Math.abs(yD);
+      } else {
+        yD = - Math.abs(yD);
+      }
+    }
+    velY = ((7 * yD) / (Math.sqrt(xD * xD + yD * yD)));
+    velX = ((7 * xD) / (Math.sqrt(xD * xD + yD * yD)));
   }
 
   @Override
@@ -35,5 +51,10 @@ public class Bullet extends GameObject {
       if (tempObject.getId() == ID.BulletFriendly && id == ID.BulletEnemy && getBounds().intersects(tempObject.getBounds()))
         Game.handler.removeObject(this);
     }
+  }
+
+  @Override
+  public Rectangle getBounds() {
+    return new Rectangle((int) x, (int) y, w, h);
   }
 }
