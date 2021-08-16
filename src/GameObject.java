@@ -14,6 +14,7 @@ public abstract class GameObject extends Canvas {
   protected Image image;
   protected boolean markedForDelete = false;
   protected int health = 1;
+
   //constructor
   public GameObject(double x, double y, ID id, int w, int h, Color color) {
     this.x = x;
@@ -22,8 +23,6 @@ public abstract class GameObject extends Canvas {
     this.w = w;
     this.h = h;
     this.color = color;
-    this.health = health;
-
   }
 
   //tick
@@ -43,18 +42,14 @@ public abstract class GameObject extends Canvas {
     for (int i = 0; i < Game.handler.object.size(); i++) {
       GameObject tempObject = Game.handler.object.get(i);
       if (tempObject.getId() == ID.BulletFriendly && getBounds().intersects(tempObject.getBounds())) {
-        takeDamage(1);
+        health--;
+        if(health <= 0) {
+          Game.handler.removeObject(this);
+        }
         HUD.score += 100;
         HUD.points += 100;
+        Game.handler.removeObject(tempObject);
       }
-    }
-  }
-
-  public void takeDamage(int damage){
-    health -= damage;
-    if(health <= 0) {
-      Game.handler.removeObject(this);
-      BossEnemy.numWeakPoints--;
     }
   }
 
@@ -87,4 +82,5 @@ public abstract class GameObject extends Canvas {
   public ID getId() {
     return id;
   }
+
 }

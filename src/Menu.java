@@ -8,6 +8,7 @@ public class Menu extends Canvas{
     public static final Color myColor = new Color(58, 68, 102, 255);
     Color myColorSTP = new Color(58, 68, 102, 200);
     Color myColorTP = new Color(58, 68, 102, 150);
+    Color myColor2 = new Color(90, 105, 136);
     public static Font font30 = new Font("Helvetica", Font.PLAIN, 30);
     public static Font font40 = new Font("Helvetica", Font.PLAIN, 40);
     Font font50 = new Font("Helvetica", Font.PLAIN, 50);
@@ -89,11 +90,31 @@ public class Menu extends Canvas{
     private void renderPauseMenu(Graphics g){
         g.setColor(myColorTP);
         g.fillRect(0, 0, 640, 740);
-        g.setColor(myColor);
+        if(Player.hasShotgun){
+            g.setColor(myColor2);
+        } else {
+            g.setColor(myColor);
+        }
         g.fillRect(400, 128, 120, 100);
+        if(Player.speedBuff) {
+            g.setColor(myColor2);
+        } else {
+            g.setColor(myColor);
+        }
         g.fillRect(400, 250, 120, 100);
+        if(Player.healthBuff) {
+            g.setColor(myColor2);
+        } else {
+            g.setColor(myColor);
+        }
         g.fillRect(400, 372, 120, 100);
+        if(Player.resistanceBuff) {
+            g.setColor(myColor2);
+        } else {
+            g.setColor(myColor);
+        }
         g.fillRect(400, 494, 120, 100);
+        g.setColor(myColor);
         g.fillRect(580, 10, 40, 40);
         g.setColor(Color.white);
         g.setFont(font50);
@@ -104,6 +125,14 @@ public class Menu extends Canvas{
         g.drawString("Parachute Bounce", 130, 312);
         g.drawString("Better HealthPacks", 125, 434);
         g.drawString("Shock Resistance", 130, 556);
+        g.drawString("5000", 427, 173);
+        g.drawString("points", 420, 203);
+        g.drawString("5000", 427, 295);
+        g.drawString("points", 420, 325);
+        g.drawString("5000", 427, 417);
+        g.drawString("points", 420, 447);
+        g.drawString("5000", 427, 539);
+        g.drawString("points", 420, 569);
         g.setFont(font40);
         g.drawString("x", 590, 40);
     }

@@ -2,9 +2,10 @@ import java.awt.*;
 
 public class BossWeakPoint extends GameObject {
 
+    private final BossEnemy boss;
     private int counter = 0;
 
-    public BossWeakPoint(double x, double y, int speed, int counter){
+    public BossWeakPoint(double x, double y, int speed, int counter, BossEnemy boss){
         super(x, y, ID.BossWeakPoint, 40, 40, new Color(255, 100, 100));
         this.speed = speed;
         this.counter = counter;
@@ -12,6 +13,7 @@ public class BossWeakPoint extends GameObject {
         if(speed >= 3){
             velX = r.nextInt(speed) + 1;
         }
+        this.boss = boss;
     }
 
     public void tick(){
@@ -34,6 +36,24 @@ public class BossWeakPoint extends GameObject {
         g.setFont(Menu.font30);
         g.drawString("" + health, (int) x + 3, (int) y + 30);
         g.drawRect((int) x, (int) y, w, h);
+    }
+
+    @Override
+    public void collision(){
+        for (int i = 0; i < Game.handler.object.size(); i++) {
+            GameObject tempObject = Game.handler.object.get(i);
+            if (tempObject.getId() == ID.BulletFriendly && getBounds().intersects(tempObject.getBounds())) {
+                health--;
+                if(health <= 0){
+                    getBoss().killWeakPoint(getBoss());
+                    Game.handler.removeObject(this);
+                }
+            }
+        }
+    }
+
+    private BossEnemy getBoss() {
+        return boss;
     }
 
 }

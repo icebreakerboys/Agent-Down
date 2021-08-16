@@ -34,13 +34,13 @@ public class MouseInput extends MouseAdapter {
         Game.state = Game.STATE.StartMenu;
 
     } else if (Game.state == Game.STATE.PauseMenu){
-      if(mouseOver(mx, my, 400, 120, 120, 100) && HUD.points == 5000)
+      if(mouseOver(mx, my, 400, 120, 120, 100) && HUD.points >= 5000)
         Player.hasShotgun = true;
-      if(mouseOver(mx, my, 400, 253, 120, 100) && HUD.points == 5000)
+      if(mouseOver(mx, my, 400, 253, 120, 100) && HUD.points >= 5000)
         Player.speedBuff = true;
-      if(mouseOver(mx, my, 400, 386, 120, 100) && HUD.points == 5000)
+      if(mouseOver(mx, my, 400, 386, 120, 100) && HUD.points >= 5000)
         Player.healthBuff = true;
-      if(mouseOver(mx, my, 400, 519, 120, 100) && HUD.points == 5000)
+      if(mouseOver(mx, my, 400, 519, 120, 100) && HUD.points >= 5000)
         Player.resistanceBuff = true;
       if(mouseOver(mx, my, 580, 10, 40, 40)){
         Menu.unPauseGame();

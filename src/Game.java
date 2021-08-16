@@ -20,7 +20,7 @@ public class Game extends Canvas implements Runnable {
   private final Background background;
   private static String musicPath;
   public static int challengeVar = 1;
-  public static STATE state = STATE.StartMenu;
+  public static STATE state = STATE.PlayScreen;
 
   public enum STATE {
     PlayScreen(),
@@ -77,7 +77,6 @@ public class Game extends Canvas implements Runnable {
     }
     if(timeRunning % 1200 == 0){
       handler.addObject(new BossEnemy(challengeVar));
-      BossEnemy.spawnWeakPoints();
       challengeVar++;
     }
   }

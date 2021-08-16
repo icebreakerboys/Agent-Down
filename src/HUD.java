@@ -14,6 +14,7 @@ public class HUD {
       score++;
       points++;
     }
+    points = 5000;
     Player.HEALTH = Game.clamp(Player.HEALTH, 0, 100);
     if (Player.HEALTH == 0) {
       Game.state = Game.STATE.EndMenu;

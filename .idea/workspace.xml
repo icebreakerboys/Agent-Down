@@ -11,17 +11,26 @@
   <component name="ChangeListManager">
     <list default="true" id="b5c558b8-f9f5-4e28-8844-6c14bf93ca2d" name="Default Changelist" comment="Alpha Version 1.7 added menu transitions">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Background.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Background.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BossEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BossEnemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BossWeakPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BossWeakPoint.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bullet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/HUD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HUD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Handler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Handler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/HealthPack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HealthPack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ID.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ID.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/JetStreams.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JetStreams.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/KeyInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/KeyInput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Magazine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Magazine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Menu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MouseInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MouseInput.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ShooterEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ShooterEnemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Window.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,17 +60,17 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/Player.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Handler.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/ShooterEnemy.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/.idea/workspace.xml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/KeyInput.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Game.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Magazine.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Menu.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Window.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/GameObject.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/HealthPack.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/MouseInput.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Game.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/GameObject.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/ShooterEnemy.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Magazine.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/HealthPack.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Handler.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProblemsViewState">
     <option name="showPreview" value="true" />

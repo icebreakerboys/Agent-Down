@@ -46,8 +46,8 @@ public class Player extends Canvas {
         justHit = false;
       }
     }
-    //HEALTH = 100;
-    //AMMO = 10;
+    HEALTH = 100;
+    AMMO = 10;
   }
 
   /**
