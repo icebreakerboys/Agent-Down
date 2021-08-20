@@ -1,8 +1,8 @@
 import java.awt.*;
 
 public class HealthPack extends GameObject {
-  public HealthPack(int x, int y, ID id, int w, int h, Color color) {
-    super(x, y, id, w, h, color);
+  public HealthPack(int x, int y, int w, int h) {
+    super(x, y, ID.HealthPack, w, h, Color.green);
     velY = -1;
     markedForDelete = false;
   }

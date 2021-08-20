@@ -8,5 +8,6 @@ public enum ID {
   BulletFriendly(),
   Magazine(),
   HealthPack(),
+  Parachute,
   JetStream()
 }

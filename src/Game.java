@@ -72,8 +72,8 @@ public class Game extends Canvas implements Runnable {
       }
     }
     if (timeRunning % 100  == 0) {
-      handler.addObject(new HealthPack(r.nextInt(Window.WIDTH) - 16, Window.HEIGHT + r.nextInt(200), ID.HealthPack, 16, 16, Color.green));
-      handler.addObject(new Magazine(r.nextInt(Window.WIDTH) - 16, Window.HEIGHT + r.nextInt(200), ID.Magazine, 16, 16, Color.blue));
+      handler.addObject(new HealthPack(r.nextInt(Window.WIDTH) - 16, Window.HEIGHT + r.nextInt(200), 16, 16));
+      handler.addObject(new Magazine(r.nextInt(Window.WIDTH) - 16, Window.HEIGHT + r.nextInt(200), 16, 16));
     }
     if(timeRunning % 1200 == 0){
       handler.addObject(new BossEnemy(challengeVar));
@@ -184,7 +184,7 @@ public class Game extends Canvas implements Runnable {
    * @param max bound
    * @return the bound back
    */
-  public static int clamp(int var, int min, int max) {
+  public static double clamp(double var, double min, double max) {
     if (var >= max)
       return max;
     else return Math.max(var, min);

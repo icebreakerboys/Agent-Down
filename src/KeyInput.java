@@ -3,7 +3,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class KeyInput extends KeyAdapter {
-  private Boolean[] keysDown = new Boolean[4];
+  public static Boolean[] keysDown = new Boolean[4];
 
   public KeyInput() {
     keysDown[0] = false;
@@ -24,11 +24,11 @@ public class KeyInput extends KeyAdapter {
       keysDown[1] = true;
     }
     if (key == KeyEvent.VK_S || key == KeyEvent.VK_DOWN) {
-      Player.velY = 2;
+      //Player.velY = 2;
       keysDown[2] = true;
     }
     if (key == KeyEvent.VK_W || key == KeyEvent.VK_UP) {
-      Player.velY = -2;
+      Player.velY = -4;
       keysDown[3] = true;
     }
     if (key == KeyEvent.VK_P) {
@@ -63,5 +63,6 @@ public class KeyInput extends KeyAdapter {
       Player.velY = 0;
     }
   }
+
 }
 

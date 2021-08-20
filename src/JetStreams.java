@@ -1,6 +1,7 @@
 import java.awt.*;
 
 public class JetStreams extends GameObject {
+
   public JetStreams() {
     super(Player.X, Player.Y - 20, ID.JetStream, 2, 50, Color.white);
   }

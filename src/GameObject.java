@@ -38,6 +38,10 @@ public abstract class GameObject extends Canvas {
     return new Rectangle((int) x, (int) y, w, h);
   }
 
+  public Rectangle getBounds2(int x1, int y1, int w1, int h1) {
+    return new Rectangle((int) x + x1, (int) y + y1, w1, h1);
+  }
+
   public void collision() {
     for (int i = 0; i < Game.handler.object.size(); i++) {
       GameObject tempObject = Game.handler.object.get(i);
@@ -83,4 +87,7 @@ public abstract class GameObject extends Canvas {
     return id;
   }
 
+  public double getVelY() {
+    return velY;
+  }
 }
