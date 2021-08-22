@@ -7,8 +7,6 @@ import java.util.TimerTask;
 public class MouseInput extends MouseAdapter {
 
   public void mousePressed(MouseEvent e) {
-    //FIXME Not every click fires a bullet
-    // my best guess is that it has to do with the MouseInput Class
     int mx = e.getX();
     int my = e.getY();
     // System.out.println(x + ", " + y);
@@ -17,7 +15,7 @@ public class MouseInput extends MouseAdapter {
         Player.shoot(Player.X + 24, Player.Y + 24, mx, my);
         Player.AMMO--;
       }
-      if(mouseOver(mx,my, 580, 10, 40, 40))
+      if(mouseOver(mx,my, 580, 4, 40, 40))
         Game.state = Game.STATE.PauseMenu;
 
     } else if (Game.state == Game.STATE.StartMenu) {
@@ -30,9 +28,10 @@ public class MouseInput extends MouseAdapter {
         Game.state = Game.STATE.HelpMenu;
 
     } else if (Game.state == Game.STATE.OptionsMenu || Game.state == Game.STATE.HelpMenu || Game.state == Game.STATE.EndMenu){
-      if (mouseOver(mx, my, 150, 550, 300, 100))
+      if (mouseOver(mx, my, 150, 550, 300, 100)) {
         Game.state = Game.STATE.StartMenu;
-
+        Background.isPlaying = false;
+      }
     } else if (Game.state == Game.STATE.PauseMenu){
       if(mouseOver(mx, my, 400, 120, 120, 100) && HUD.points >= 5000)
         Player.hasShotgun = true;
@@ -42,7 +41,7 @@ public class MouseInput extends MouseAdapter {
         Player.hasHealthBuff = true;
       if(mouseOver(mx, my, 400, 519, 120, 100) && HUD.points >= 5000)
         Player.hasResistanceBuff = true;
-      if(mouseOver(mx, my, 580, 10, 40, 40)){
+      if(mouseOver(mx, my, 580, 4, 40, 40)){
         Menu.unPauseGame();
       }
     }

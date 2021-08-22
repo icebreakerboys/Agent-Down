@@ -14,6 +14,6 @@ public class Enemy extends GameObject {
     x += velX;
     y += velY;
     collision();
-    removeEnemy();
+    removeGameObject(true);
   }
 }

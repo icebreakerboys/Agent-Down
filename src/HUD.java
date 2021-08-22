@@ -39,21 +39,21 @@ public class HUD {
    */
   public void render(Graphics g) {
     g.setColor(Color.darkGray);
-    g.fillRect(300, 680, 200, 16);
+    g.fillRect(254, 680, 200, 16);
     g.setColor(Color.green);
-    g.fillRect(300, 680, Player.HEALTH * 2, 16);
+    g.fillRect(254, 680, Player.HEALTH * 2, 16);
     g.setColor(Color.black);
-    g.drawRect(300, 680, 200, 16);
-    g.fillRect(520, 680, 20, 8);
-    g.fillRect(535, 680, 5, 16);
+    g.drawRect(254, 680, 200, 16);
+    g.fillRect(474, 680, 20, 8);
+    g.fillRect(488, 680, 6, 16);
     g.setFont(Menu.font30);
     g.setColor(Menu.myColor);
-    g.drawString("" + Player.AMMO, 550, 695);
-    g.drawString("" + points, 15, 690);
-    g.fillRect(580, 10, 40, 40);
+    g.drawString("" + Player.AMMO, 504, 695);
+    g.drawString("" + points, 64, 690);
+    g.fillRect(580, 4, 40, 40);
     g.setColor(Color.WHITE);
-    g.fillRect(590, 20, 5, 20);
-    g.fillRect(605, 20, 5, 20);
+    g.fillRect(590, 14, 6, 20);
+    g.fillRect(604, 14, 6, 20);
     //g.drawString("Score: " + score, 15, 690);
 
   }

@@ -57,10 +57,13 @@ public abstract class GameObject extends Canvas {
     }
   }
 
-  public void removeEnemy() {
-    if (y <= -h) {
-      Game.handler.removeObject(this);
+  public void removeGameObject(boolean movesUp) {
+    int height = h;
+    if(movesUp){
+      height = Window.HEIGHT;
     }
+    if (x <= -w || x >= Window.WIDTH + w || y <= -h || y >= Window.HEIGHT + height)
+      Game.handler.removeObject(this);
   }
 
   public void setX(int x) {

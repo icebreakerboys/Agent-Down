@@ -11,13 +11,12 @@ public class Player extends Canvas {
   public static double velX = 0, velY = 0;
   private static final int w = 48, h = 48;
   private static final Color color = Color.gray;
-  private static boolean justHit = false, justOnParachute = false;
+  private static boolean justHit = false, justOnParachute = false, stunned = false;
   public static boolean hasShotgun = false, hasSpeedBuff = false, hasHealthBuff = false, hasResistanceBuff = false;
-  private static int counter = 0, counter2 = 0;
+  private static int counter = 0, counter2 = 0, counter3 = 0;
   private static double timeDown = 0;
   public static int AMMO = 0;
   public static int HEALTH;
-  private static int timeOnParachute = 60;
   private static GameObject parachute = null;
   private static double minVelY = -100;
 
@@ -33,15 +32,25 @@ public class Player extends Canvas {
    * and keeps player within window bounds
    */
   public static void tick() {
-    X += (int) velX;
-    Y += (int) velY;
 
+    if(!stunned) {
+      X += (int) velX;
+      Y += (int) velY;
+    }
 
     if (justHit) {
       counter++;
       if (counter % 30 == 0) {
         counter = 0;
         justHit = false;
+      }
+    }
+
+    if (stunned) {
+      counter2++;
+      if (counter2 % 30 == 0) {
+        counter2 = 0;
+        stunned = false;
       }
     }
 
@@ -53,13 +62,13 @@ public class Player extends Canvas {
     }
 
     if(justOnParachute){
-      counter2++;
-      if(counter2 % 90 == 0){
-        counter2 = 0;
+      counter3++;
+      if(counter3 % 90 == 0){
+        counter3 = 0;
         justOnParachute = false;
         parachute = null;
       }
-      if(counter2 < 60 && parachute != null && X >= parachute.getX() - 36 && X <= parachute.getX() + 36){
+      if(counter3 < 60 && parachute != null && X >= parachute.getX() - 36 && X <= parachute.getX() + 36){
         Y += parachute.getVelY();
         timeDown = 2;
       }
@@ -67,7 +76,7 @@ public class Player extends Canvas {
 
     collision();
 
-    X = (int) Game.clamp(X, 0, Window.WIDTH - 45);
+    X = (int) Game.clamp(X, 48, Window.WIDTH - 110);
     Y = (int) Game.clamp(Y, 0, 3 * (Window.HEIGHT / 4) - 45);
     velY = Game.clamp(velY, minVelY, 10);
     minVelY = -5;
@@ -149,12 +158,15 @@ public class Player extends Canvas {
         HEALTH = 0;
       }
       if (tempObject.getId() == ID.Parachute && Game.player.getBounds().intersects(tempObject.getBounds()) && !justOnParachute) {
-        timeOnParachute = 1;
         parachute = tempObject;
         justOnParachute = true;
       }
       if (tempObject.getId() == ID.Parachute && Game.player.getBounds2(0, 0, 48, 12).intersects(tempObject.getBounds2(0, +25, 48, 10))) {
         minVelY = -2;
+      }
+      if (tempObject.getId() == ID.ShockBulletEnemy && Game.player.getBounds().intersects(tempObject.getBounds()) && !justHit){
+        stunned = true;
+        Game.handler.removeObject(tempObject);
       }
     }
   }
@@ -168,17 +180,17 @@ public class Player extends Canvas {
     int yC = tY - y;
     double angle = Math.atan2(yC,xC);
     if(!hasShotgun) {
-      Game.handler.addObject(new Bullet(x, y, tX, tY, angle, ID.BulletFriendly));
+      Game.handler.addObject(new Bullet(x, y, tX, tY, angle, (int) velY, ID.BulletFriendly));
     } else {
       double angle1 = angle + (3.14/36);
       double angle2 = angle - (3.14/36);
       double angle3 = angle + (3.14/72);
       double angle4 = angle - (3.14/72);
-      Game.handler.addObject(new Bullet(x, y, tX, tY, angle, ID.BulletFriendly));
-      Game.handler.addObject(new Bullet(x, y, tX, tY, angle1, ID.BulletFriendly));
-      Game.handler.addObject(new Bullet(x, y, tX, tY, angle2, ID.BulletFriendly));
-      Game.handler.addObject(new Bullet(x, y, tX, tY, angle3, ID.BulletFriendly));
-      Game.handler.addObject(new Bullet(x, y, tX, tY, angle4, ID.BulletFriendly));
+      Game.handler.addObject(new Bullet(x, y, tX, tY, angle, (int) velY, ID.BulletFriendly));
+      Game.handler.addObject(new Bullet(x, y, tX, tY, angle1, (int) velY, ID.BulletFriendly));
+      Game.handler.addObject(new Bullet(x, y, tX, tY, angle2, (int) velY, ID.BulletFriendly));
+      Game.handler.addObject(new Bullet(x, y, tX, tY, angle3, (int) velY, ID.BulletFriendly));
+      Game.handler.addObject(new Bullet(x, y, tX, tY, angle4, (int) velY, ID.BulletFriendly));
     }
   }
 }

@@ -9,6 +9,6 @@ public class HealthPack extends GameObject {
 
   public void tick() {
     y += velY;
-    removeEnemy();
+    removeGameObject(true);
   }
 }

@@ -10,7 +10,7 @@ public class BossEnemy extends GameObject{
     private boolean hasNotSpawnedWeakPoints;
 
     public BossEnemy(int speed){
-       super(0, 740, ID.BossEnemy, 640, 40, new Color(255, 128, 128));
+       super(0, 740, ID.BossEnemy, 624, 48, new Color(255, 128, 128));
        this.speed = speed;
         numWeakPoints = speed + 1;
        hasNotSpawnedWeakPoints = true;
@@ -49,7 +49,7 @@ public class BossEnemy extends GameObject{
 
     public void spawnWeakPoints(){
        for(int i = 0; i < numWeakPoints; i++){
-           Game.handler.addObject(new BossWeakPoint(R.nextInt(15)*40, y, numWeakPoints, counter, this));
+           Game.handler.addObject(new BossWeakPoint(R.nextInt(13) * 48, y, numWeakPoints, counter, this));
         }
     }
 

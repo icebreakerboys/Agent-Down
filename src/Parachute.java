@@ -16,6 +16,7 @@ public class Parachute extends GameObject {
         x += velX;
         y += velY;
         collision();
+        removeGameObject(true);
     }
 
     @Override

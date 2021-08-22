@@ -39,7 +39,7 @@ public class ShooterEnemy extends GameObject {
         shoot();
       } else counter = 49;
     }
-   removeEnemy();
+    removeGameObject(true);
     counter++;
   }
 
@@ -48,10 +48,10 @@ public class ShooterEnemy extends GameObject {
   }
 
   public void shoot() {
-    int xC = Player.X - (int) x;
-    int yC = Player.Y - (int) y;
+    int xC = Player.X - ((int) x + 24);
+    int yC = Player.Y - ((int) y + 24);
     double angle = Math.atan2(yC,xC);
-    Game.handler.addObject(new Bullet((int) x + 13, (int) y + 13, Player.X, Player.Y, angle, ID.BulletEnemy));
+    Game.handler.addObject(new Bullet((int) x + 24, (int) y + 24, Player.X, Player.Y, angle, (int) velY, ID.BulletEnemy));
   }
 
   public void fall() {

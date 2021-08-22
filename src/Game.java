@@ -20,8 +20,10 @@ public class Game extends Canvas implements Runnable {
   private final Background background;
   private static String musicPath;
   public static int challengeVar = 1;
-  public static STATE state = STATE.PlayScreen;
-
+  public static STATE state = STATE.StartMenu;
+  /**
+   * Used to determine what phase the game is in
+   */
   public enum STATE {
     PlayScreen(),
     PauseMenu(),
@@ -30,7 +32,14 @@ public class Game extends Canvas implements Runnable {
     OptionsMenu,
     HelpMenu()
   }
-
+  /**
+   * Game Constructor that
+   * 1. Prepares all game objects
+   * 2. Starts the Game Window which runs the start method
+   * 3. Sets up a mouse and key listener
+   * 4. Plays Music
+   * 5. Starts the Spawner method in a timer
+   */
   public Game() {
     this.setFocusable(true);
     handler = new Handler();
@@ -42,9 +51,13 @@ public class Game extends Canvas implements Runnable {
     new Window(this);
     this.addKeyListener(new KeyInput());
     this.addMouseListener(new MouseInput());
-    musicPath = ("sounds/Possible Song 1.wav");
+    //musicPath = ("sounds/Possible Song 1.wav");
     musicPath = ("sounds/Theme.wav");
     playMusic(musicPath);
+
+    //FIXME need to optimize this thread with the thread
+    // that holds back on transitions between game phases
+    // Potentially make a new class
     Timer timer = new Timer();
     TimerTask updateStage = new TimerTask() {
       int timeRunning = 1;
@@ -58,35 +71,47 @@ public class Game extends Canvas implements Runnable {
     };
     timer.scheduleAtFixedRate(updateStage, 0, 100);
   }
-
+  /**
+   * Spawns enemies and items every so often &
+   * Increases the challenge of the game depending
+   * on how much time has passed
+   *
+   * @param timeRunning time that the game has been played
+   */
   private static void Spawner(int timeRunning) {
-    int randomVar = r.nextInt(3);
+    int randomVar = r.nextInt(6);
     int timeDelay = 11 - challengeVar;
     if(timeDelay <= 1)
       timeDelay = 1;
     if(timeRunning % timeDelay == 0){
       if(randomVar == 0){
-        handler.addObject(new ShooterEnemy(r.nextInt(Window.WIDTH), r.nextInt(Window.HEIGHT) + Window.HEIGHT, challengeVar, enemyPic1, enemyPic1));
+        handler.addObject(new ShooterEnemy(r.nextInt(11) * 48 + 48, r.nextInt(Window.HEIGHT) + Window.HEIGHT, challengeVar, enemyPic1, enemyPic1));
+      } else if(randomVar <= 3){
+        handler.addObject(new Enemy(r.nextInt(33) * 16 + 48, r.nextInt(Window.HEIGHT) + Window.HEIGHT, challengeVar));
       } else {
-        handler.addObject(new Enemy(r.nextInt(Window.WIDTH), r.nextInt(Window.HEIGHT) + Window.HEIGHT, challengeVar));
+        handler.addObject(new ShockEnemy(r.nextInt(2) * 576, r.nextInt(Window.HEIGHT) + Window.HEIGHT, challengeVar));
       }
     }
     if (timeRunning % 100  == 0) {
-      handler.addObject(new HealthPack(r.nextInt(Window.WIDTH) - 16, Window.HEIGHT + r.nextInt(200), 16, 16));
-      handler.addObject(new Magazine(r.nextInt(Window.WIDTH) - 16, Window.HEIGHT + r.nextInt(200), 16, 16));
+      handler.addObject(new HealthPack(r.nextInt(33)* 16 + 48, Window.HEIGHT + r.nextInt(200), 16, 16));
+      handler.addObject(new Magazine(r.nextInt(33)* 16 + 48, Window.HEIGHT + r.nextInt(200), 16, 16));
     }
     if(timeRunning % 1200 == 0){
       handler.addObject(new BossEnemy(challengeVar));
       challengeVar++;
     }
   }
-
+  /**
+   * Starts the Game loop
+   */
   public synchronized void start() {
     thread = new Thread(this);
     thread.start();
     running = true;
   }
-
+  /**
+   * Stops the game loop
+   */
   public synchronized void stop() {
     try {
       thread.join();
@@ -95,7 +120,11 @@ public class Game extends Canvas implements Runnable {
       e.printStackTrace();
     }
   }
-
+  /**
+   * Game Loop
+   * Aims for 80 frames per second
+   * with a consistent 60 ticks per second
+   */
   public void run() {
     requestFocus();
     long lastTime = System.nanoTime();
@@ -140,7 +169,10 @@ public class Game extends Canvas implements Runnable {
     }
     stop();
   }
-
+  /**
+   * Updates all of objects
+   * Runs 60 times per second
+   */
   private void tick() {
     background.tick();
     if (state == STATE.PlayScreen) {
@@ -151,7 +183,10 @@ public class Game extends Canvas implements Runnable {
       menu.tick();
     }
   }
-
+  /**
+   * Renders all of the objects
+   * Runs about 80 times per second
+   */
   private void render() {
     BufferStrategy bs = this.getBufferStrategy();
     if (bs == null) {
@@ -167,14 +202,12 @@ public class Game extends Canvas implements Runnable {
       if(state == STATE.PlayScreen)
         hud.render(g);
       player.render(g);
-
     }
     if(state != STATE.PlayScreen)
       menu.render(g);
     g.dispose();
     bs.show();
   }
-
   /**
    * keeps a variable within bounds
    * Used in tick method for HUD and Player classes
@@ -189,7 +222,14 @@ public class Game extends Canvas implements Runnable {
       return max;
     else return Math.max(var, min);
   }
+  /**
+   * Plays songs on repeat
+   *
+   * @param file the file of the song
+   */
 
+  //FIXME needs to be put in separate class
+  // to be able to change the song and play song effects (another separate class)
   public synchronized void playMusic(String file) {
     new Thread(() -> {
       try {

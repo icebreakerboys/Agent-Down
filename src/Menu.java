@@ -6,7 +6,7 @@ import java.util.TimerTask;
 public class Menu extends Canvas{
 
     public static final Color myColor = new Color(58, 68, 102, 255);
-    Color myColorSTP = new Color(58, 68, 102, 200);
+    public static final Color myColorSTP = new Color(58, 68, 102, 200);
     Color myColorTP = new Color(58, 68, 102, 150);
     Color myColor2 = new Color(90, 105, 136);
     public static Font font30 = new Font("Helvetica", Font.PLAIN, 30);
@@ -115,7 +115,7 @@ public class Menu extends Canvas{
         }
         g.fillRect(400, 494, 120, 100);
         g.setColor(myColor);
-        g.fillRect(580, 10, 40, 40);
+        g.fillRect(580, 4, 40, 40);
         g.setColor(Color.white);
         g.setFont(font50);
         g.drawString("Paused", 230, 95);
@@ -134,7 +134,7 @@ public class Menu extends Canvas{
         g.drawString("5000", 427, 539);
         g.drawString("points", 420, 569);
         g.setFont(font40);
-        g.drawString("x", 590, 40);
+        g.drawString("x", 590, 34);
     }
 
     public void tick(){
@@ -188,6 +188,7 @@ public class Menu extends Canvas{
         };
         int d = (y + 740)/120*1000;
         started = true;
+        Background.isPlaying = true;
         timer.schedule(startTransition, d);
     }
 

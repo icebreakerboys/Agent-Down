@@ -3,27 +3,29 @@ import java.awt.*;
 
 public class Bullet extends GameObject {
 
-  public Bullet(int x, int y, int tX, int tY, double angle, ID id) {
+  public Bullet(int x, int y, int tX, int tY, double angle, int velY, ID id) {
     super(x, y, id, 12, 12, Color.black);
-    target(x, y, tX, tY, angle);
+    if(id != ID.ShockBulletEnemy) {
+      target(x, y, tX, tY, angle);
+    } else {
+      this.velY = velY;
+      this.velX = Game.challengeVar + 7;
+      if(x == 600)
+        this.velX = -this.velX;
+    }
   }
 
   public void tick() {
     x += velX;
     y += velY;
     collision();
-    removeGameObject();
+    removeGameObject(false);
   }
 
   @Override
   public void render(Graphics g) {
     g.setColor(color);
     g.fillOval((int) x, (int) y, w, h);
-  }
-
-  public void removeGameObject() {
-    if (x <= -w || x >= Window.WIDTH + w || y <= -h || y >= Window.HEIGHT + h)
-      Game.handler.removeObject(this);
   }
 
   public void target(int x, int y, int tX, int tY, double angle) {

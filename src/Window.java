@@ -3,7 +3,7 @@ import java.awt.*;
 import javax.swing.*;
 
 public class Window extends Canvas {
-  public static final int WIDTH = 640, HEIGHT = 740;
+  public static final int WIDTH = 638, HEIGHT = 740;
 
   public Window(Game game) {
     JFrame frame = new JFrame("Agent Down");
