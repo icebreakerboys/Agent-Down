@@ -70,6 +70,7 @@ public class Game extends Canvas implements Runnable {
       }
     };
     timer.scheduleAtFixedRate(updateStage, 0, 100);
+    handler.addObject(new BossEnemy(challengeVar));
   }
   /**
    * Spawns enemies and items every so often &
@@ -89,7 +90,10 @@ public class Game extends Canvas implements Runnable {
       } else if(randomVar <= 3){
         handler.addObject(new Enemy(r.nextInt(33) * 16 + 48, r.nextInt(Window.HEIGHT) + Window.HEIGHT, challengeVar));
       } else {
-        handler.addObject(new ShockEnemy(r.nextInt(2) * 576, r.nextInt(Window.HEIGHT) + Window.HEIGHT, challengeVar));
+        if(Player.hasShockHacker && randomVar == 4) {
+          handler.addObject(new ShockEnemy(r.nextInt(2) * 576, r.nextInt(Window.HEIGHT) + Window.HEIGHT, challengeVar, ID.HackedShockEnemy));
+        }
+        handler.addObject(new ShockEnemy(r.nextInt(2) * 576, r.nextInt(Window.HEIGHT) + Window.HEIGHT, challengeVar, ID.ShockEnemy));
       }
     }
     if (timeRunning % 100  == 0) {
@@ -97,7 +101,7 @@ public class Game extends Canvas implements Runnable {
       handler.addObject(new Magazine(r.nextInt(33)* 16 + 48, Window.HEIGHT + r.nextInt(200), 16, 16));
     }
     if(timeRunning % 1200 == 0){
-      handler.addObject(new BossEnemy(challengeVar));
+      //handler.addObject(new BossEnemy(challengeVar));
       challengeVar++;
     }
   }

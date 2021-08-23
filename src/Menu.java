@@ -96,19 +96,19 @@ public class Menu extends Canvas{
             g.setColor(myColor);
         }
         g.fillRect(400, 128, 120, 100);
-        if(Player.hasSpeedBuff) {
+        if(Player.hasShockHacker) {
             g.setColor(myColor2);
         } else {
             g.setColor(myColor);
         }
         g.fillRect(400, 250, 120, 100);
-        if(Player.hasHealthBuff) {
+        if(Player.hasBetterHealthPacks) {
             g.setColor(myColor2);
         } else {
             g.setColor(myColor);
         }
         g.fillRect(400, 372, 120, 100);
-        if(Player.hasResistanceBuff) {
+        if(Player.hasBetterBullets) {
             g.setColor(myColor2);
         } else {
             g.setColor(myColor);

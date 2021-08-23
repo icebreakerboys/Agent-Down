@@ -2,8 +2,11 @@ import java.awt.*;
 
 public class ShockEnemy extends GameObject {
     boolean notShot = true;
-    public ShockEnemy(int x, int y, int speed){
-        super(x, y, ID.ShockEnemy, 48, 48, new Color(138, 43, 226));
+    public ShockEnemy(int x, int y, int speed, ID id){
+        super(x, y, id, 48, 48, new Color(138, 43, 226));
+        if(id == ID.HackedShockEnemy){
+            this.color = new Color(160, 82, 45);
+        }
         this.speed = speed;
         velY = -(r.nextInt(speed)) - 3;
     }
@@ -23,7 +26,11 @@ public class ShockEnemy extends GameObject {
 
     private void shoot() {
         if(notShot)
-            Game.handler.addObject(new Bullet((int) x + 24, (int) y + 24, Player.X, Player.Y, 0, (int) velY, ID.ShockBulletEnemy));
+            if(id == ID.HackedShockEnemy){
+                Game.handler.addObject(new Bullet((int) x + 24, (int) y + 24, Player.X, Player.Y, 0, (int) velY, ID.ShockBulletFriendly, color));
+            } else {
+                Game.handler.addObject(new Bullet((int) x + 24, (int) y + 24, Player.X, Player.Y, 0, (int) velY, ID.ShockBulletEnemy, color));
+            }
         notShot = false;
     }
 }

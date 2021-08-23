@@ -36,11 +36,11 @@ public class MouseInput extends MouseAdapter {
       if(mouseOver(mx, my, 400, 120, 120, 100) && HUD.points >= 5000)
         Player.hasShotgun = true;
       if(mouseOver(mx, my, 400, 253, 120, 100) && HUD.points >= 5000)
-        Player.hasSpeedBuff = true;
+        Player.hasShockHacker = true;
       if(mouseOver(mx, my, 400, 386, 120, 100) && HUD.points >= 5000)
-        Player.hasHealthBuff = true;
+        Player.hasBetterHealthPacks = true;
       if(mouseOver(mx, my, 400, 519, 120, 100) && HUD.points >= 5000)
-        Player.hasResistanceBuff = true;
+        Player.hasBetterBullets = true;
       if(mouseOver(mx, my, 580, 4, 40, 40)){
         Menu.unPauseGame();
       }
@@ -53,9 +53,7 @@ public class MouseInput extends MouseAdapter {
 
   private boolean mouseOver(int mx, int my, int x, int y, int w, int h) {
     if (mx > x && mx < x + w) {
-      if (my > y && my < y + h) {
-        return true;
-      } else return false;
+      return my > y && my < y + h;
     } else return false;
   }
 

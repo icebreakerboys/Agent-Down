@@ -3,9 +3,9 @@ import java.awt.*;
 
 public class Bullet extends GameObject {
 
-  public Bullet(int x, int y, int tX, int tY, double angle, int velY, ID id) {
-    super(x, y, id, 12, 12, Color.black);
-    if(id != ID.ShockBulletEnemy) {
+  public Bullet(int x, int y, int tX, int tY, double angle, int velY, ID id, Color color) {
+    super(x, y, id, 12, 12, color);
+    if(id != ID.ShockBulletEnemy && id != ID.ShockBulletFriendly) {
       target(x, y, tX, tY, angle);
     } else {
       this.velY = velY;
@@ -42,8 +42,19 @@ public class Bullet extends GameObject {
         yD = - Math.abs(yD);
       }
     }
-    velY = ((7 * yD) / (Math.sqrt(xD * xD + yD * yD)));
-    velX = ((7 * xD) / (Math.sqrt(xD * xD + yD * yD)));
+    double magnitude = Math.sqrt(xD * xD + yD * yD);
+    if(id == ID.BulletFriendly){
+      if(Player.hasBetterBullets) {
+        velY = ((11 * yD) / magnitude);
+        velX = ((11 * xD) / magnitude);
+      } else {
+        velY = ((7 * yD) / magnitude);
+        velX = ((7 * xD) / magnitude);
+      }
+    } else {
+      velY = (((Game.challengeVar + 5) * yD) / magnitude);
+      velX = (((Game.challengeVar + 5) * xD) / magnitude);
+    }
   }
 
   @Override

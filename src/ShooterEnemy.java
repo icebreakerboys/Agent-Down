@@ -43,6 +43,11 @@ public class ShooterEnemy extends GameObject {
     counter++;
   }
 
+//  @Override
+//  public void render(Graphics g) {
+//    g.drawImage(image, x, y, 90, 60, this);
+//  }
+
   public boolean onScreen() {
     return x > 0 && x < Window.WIDTH - w && y > 0 && y < Window.HEIGHT;
   }
@@ -51,7 +56,7 @@ public class ShooterEnemy extends GameObject {
     int xC = Player.X - ((int) x + 24);
     int yC = Player.Y - ((int) y + 24);
     double angle = Math.atan2(yC,xC);
-    Game.handler.addObject(new Bullet((int) x + 24, (int) y + 24, Player.X, Player.Y, angle, (int) velY, ID.BulletEnemy));
+    Game.handler.addObject(new Bullet((int) x + 24, (int) y + 24, Player.X, Player.Y, angle, (int) velY, ID.BulletEnemy, color));
   }
 
   public void fall() {
@@ -64,10 +69,4 @@ public class ShooterEnemy extends GameObject {
   public void startFalling() {
     falling = true;
   }
-
-
-//  @Override
-//  public void render(Graphics g) {
-//    g.drawImage(image, x, y, 90, 60, this);
-//  }
 }
