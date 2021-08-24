@@ -176,9 +176,9 @@ public class Menu extends Canvas{
         g.setFont(font30);
         g.drawString("Current Score: " + HUD.score, 110, 125);
         g.drawString("Shotgun", 195, 180);
-        g.drawString("Parachute Bounce", 130, 312);
+        g.drawString("Shocker Hacker", 130, 312);
         g.drawString("Better HealthPacks", 125, 434);
-        g.drawString("Shock Resistance", 130, 556);
+        g.drawString("Better Bullets", 130, 556);
         g.drawString("5000", 427, 173);
         g.drawString("points", 420, 203);
         g.drawString("5000", 427, 295);
