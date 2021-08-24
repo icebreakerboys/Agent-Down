@@ -1,8 +1,10 @@
 import java.awt.*;
 
 public class ShockEnemy extends GameObject {
+
     boolean notShot = true;
-    public ShockEnemy(int x, int y, int speed, ID id){
+
+    public ShockEnemy(int x, int y, int speed, ID id) {
         super(x, y, id, 48, 48, new Color(138, 43, 226));
         if(id == ID.HackedShockEnemy){
             this.color = new Color(160, 82, 45);
@@ -11,7 +13,6 @@ public class ShockEnemy extends GameObject {
         velY = -(r.nextInt(speed)) - 3;
     }
 
-    @Override
     public void tick() {
         y += velY;
         if(Player.X >= 576/3) {
@@ -23,14 +24,17 @@ public class ShockEnemy extends GameObject {
         }
         removeGameObject(true);
     }
-
+    /**
+     * Shoots ShockBullets at an angle
+     */
     private void shoot() {
-        if(notShot)
-            if(id == ID.HackedShockEnemy){
+        if(notShot) {
+            if (id == ID.HackedShockEnemy) {
                 Game.handler.addObject(new Bullet((int) x + 24, (int) y + 24, Player.X, Player.Y, 0, (int) velY, ID.ShockBulletFriendly, color));
             } else {
                 Game.handler.addObject(new Bullet((int) x + 24, (int) y + 24, Player.X, Player.Y, 0, (int) velY, ID.ShockBulletEnemy, color));
             }
-        notShot = false;
+            notShot = false;
+        }
     }
 }

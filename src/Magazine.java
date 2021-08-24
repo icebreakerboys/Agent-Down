@@ -1,4 +1,3 @@
-
 import java.awt.*;
 
 public class Magazine extends GameObject{
@@ -12,5 +11,4 @@ public class Magazine extends GameObject{
         y += velY;
         removeGameObject(true);
     }
-
 }

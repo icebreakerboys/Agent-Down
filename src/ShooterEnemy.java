@@ -1,9 +1,7 @@
-
-import org.w3c.dom.html.HTMLImageElement;
-
 import java.awt.*;
 
 public class ShooterEnemy extends GameObject {
+
   private int counter = 20;
   private boolean hasNotSpawnedParachute;
   private boolean falling = false;
@@ -23,12 +21,12 @@ public class ShooterEnemy extends GameObject {
   }
 
   public void tick() {
-    if(hasNotSpawnedParachute){
-      Game.handler.addObject(new Parachute(x, y, w, h, velX, velY, this));
+    if(hasNotSpawnedParachute) {
+      Game.handler.addObject(new Parachute(x, y, velX, velY, this));
       hasNotSpawnedParachute = false;
     }
     x += velX;
-    if(falling){
+    if(falling) {
       fall();
     } else {
       y += velY;
@@ -42,30 +40,30 @@ public class ShooterEnemy extends GameObject {
     removeGameObject(true);
     counter++;
   }
-
-//  @Override
-//  public void render(Graphics g) {
-//    g.drawImage(image, x, y, 90, 60, this);
-//  }
-
+  /**
+   * returns whether the ShooterEnemy is on Screen
+   */
   public boolean onScreen() {
     return x > 0 && x < Window.WIDTH - w && y > 0 && y < Window.HEIGHT;
   }
-
+  /**
+   * Shoots Enemy Bullets at an angle
+   */
   public void shoot() {
     int xC = Player.X - ((int) x + 24);
     int yC = Player.Y - ((int) y + 24);
     double angle = Math.atan2(yC,xC);
     Game.handler.addObject(new Bullet((int) x + 24, (int) y + 24, Player.X, Player.Y, angle, (int) velY, ID.BulletEnemy, color));
   }
-
+  /**
+   * Controls velY when Parachute is destroyed
+   */
   public void fall() {
     y += velY;
     velY = time;
     if(time <= 8)
       time += .2;
   }
-
   public void startFalling() {
     falling = true;
   }

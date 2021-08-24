@@ -1,6 +1,4 @@
 import java.awt.*;
-import java.net.CookieHandler;
-import java.util.Random;
 
 public class BossEnemy extends GameObject{
 
@@ -37,13 +35,17 @@ public class BossEnemy extends GameObject{
             Game.handler.removeObject(this);
         collision();
     }
-
+    /**
+     * Spawns the correct amount of WeakPoints
+     */
     public void spawnWeakPoints(){
        for(int i = 0; i < numWeakPoints; i++){
            Game.handler.addObject(new BossWeakPoint(r.nextInt(13) * 48, y, numWeakPoints, this));
         }
     }
-
+    /**
+     * Removes one WeakPoint
+     */
     public void killWeakPoint(BossEnemy boss) {
         boss.numWeakPoints--;
     }

@@ -1,10 +1,14 @@
-
 import java.awt.*;
 import javax.swing.*;
 
 public class Window extends Canvas {
-  public static final int WIDTH = 638, HEIGHT = 740;
 
+  public static final int WIDTH = 638, HEIGHT = 740;
+  /**
+   * Makes the window of which the game is on
+   *
+   * @param game Used to add & start the game
+   */
   public Window(Game game) {
     JFrame frame = new JFrame("Agent Down");
     frame.setSize(new Dimension(WIDTH, HEIGHT));

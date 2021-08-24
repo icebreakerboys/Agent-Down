@@ -1,10 +1,7 @@
-
-import javax.swing.*;
 import java.awt.*;
 
-/**
- * Player class
- */
+//FIXME Try to integrate this into GameObject to Save File Space
+// not completely necessary but something to look into
 public class Player extends Canvas {
 
   public static int X, Y;
@@ -20,19 +17,18 @@ public class Player extends Canvas {
   private static GameObject parachute = null;
   private static double minVelY = -100;
 
-  //constructor
   public Player(int x, int y) {
     X = x;
     Y = y;
     HEALTH = 100;
   }
-
   /**
-   * Tick class controls usr movement
-   * and keeps player within window bounds
+   * Handles players movement
+   * Keeps player within window bounds
+   * Determines if the player hits anything
+   * Ends the game when necessary
    */
   public static void tick() {
-
     if(!stunned) {
       X += (int) velX;
       Y += (int) velY;
@@ -41,7 +37,10 @@ public class Player extends Canvas {
         Y += (int) velY;
       }
     }
-
+    /**
+     * FIXME try to write an method that condenses the next 6 if statements
+     *  Timers that work with justHit, stunned, and hasSpeedBuff
+     */
     if (justHit) {
       counter++;
       if (counter % 30 == 0) {
@@ -49,7 +48,6 @@ public class Player extends Canvas {
         justHit = false;
       }
     }
-
     if (stunned) {
       counter2++;
       if (counter2 % 30 == 0) {
@@ -57,7 +55,6 @@ public class Player extends Canvas {
         stunned = false;
       }
     }
-
     if (hasSpeedBuff) {
       counter4++;
       if (counter4 % 30000 == 0) {
@@ -65,14 +62,12 @@ public class Player extends Canvas {
         hasSpeedBuff = false;
       }
     }
-
     if(KeyInput.keysDown[2] || KeyInput.keysDown[3]){
       determineVelY();
     } else {
       velY = 0;
       timeDown = 1;
     }
-
     if(justOnParachute){
       counter3++;
       if(counter3 % 90 == 0){
@@ -85,22 +80,23 @@ public class Player extends Canvas {
         timeDown = 2;
       }
     }
-
     collision();
-
     X = (int) Game.clamp(X, 48, Window.WIDTH - 110);
     Y = (int) Game.clamp(Y, 0, 3 * (Window.HEIGHT / 4) - 45);
     velY = Game.clamp(velY, minVelY, 10);
     minVelY = -5;
-
-    HEALTH = 100;
-    AMMO = 10;
+    //HEALTH = 100;
+    //AMMO = 10;
+    HEALTH = (int) Game.clamp(Player.HEALTH, 0, 100);
+    if (HEALTH == 0) {
+      Game.state = Game.STATE.EndMenu;
+      Menu.y = 1480;
+      Menu.started = false;
+      Menu.restarted = true;
+    }
   }
-
-
-
   /**
-   * Render controls the visual components of the player
+   * Handles the visual components of the player
    *
    * @param g Graphics
    */
@@ -119,8 +115,7 @@ public class Player extends Canvas {
     }
   }
   /**
-   * Handles player collision with
-   * enemies
+   * Handles player collision with GameObjects
    */
   private static void collision() {
     for (int i = 0; i < Game.handler.object.size(); i++) {
@@ -167,10 +162,12 @@ public class Player extends Canvas {
       if (tempObject.getId() == ID.Parachute && Game.player.getBounds2(0, 0, 48, 12).intersects(tempObject.getBounds2(0, +25, 48, 10))) {
         minVelY = -2;
       }
-
     }
   }
-
+  /**
+   * Handles player collision with
+   * GameObjects
+   */
   private static void determineVelY() {
     if(KeyInput.keysDown[2] && KeyInput.keysDown[3]) {
       velY = 0;
@@ -185,7 +182,9 @@ public class Player extends Canvas {
       timeDown = 1;
     }
   }
-
+  /**
+   * Shoots Friendly Bullets at an angle
+   */
   public static void shoot(int x, int y, int tX, int tY) {
     int xC = tX - x;
     int yC = tY - y;
@@ -204,14 +203,22 @@ public class Player extends Canvas {
       Game.handler.addObject(new Bullet(x, y, tX, tY, angle4, (int) velY, ID.BulletFriendly, color));
     }
   }
-
+  /**
+   * Returns the Hit box of the Player
+   */
   public Rectangle getBounds() {
     return new Rectangle(X, Y, w, h);
   }
-
+  /**
+   * Returns a different Hit box of the Player
+   * Used for parachute collision
+   *
+   * @param x1 added to the integer X
+   * @param y1 added to the integer Y
+   * @param w1 replaces w
+   * @param h1 replaces h
+   */
   private Rectangle getBounds2(int x1, int y1, int w1, int h1) {
     return new Rectangle(X + x1, Y + y1, w1, h1);
   }
-
-
 }

@@ -1,4 +1,3 @@
-
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.util.Random;
@@ -31,6 +30,10 @@ public class Game extends Canvas implements Runnable {
     EndMenu(),
     OptionsMenu,
     HelpMenu()
+  }
+
+  public static void main(String[] args) {
+    new Game();
   }
   /**
    * Game Constructor that
@@ -70,7 +73,6 @@ public class Game extends Canvas implements Runnable {
       }
     };
     timer.scheduleAtFixedRate(updateStage, 0, 100);
-    handler.addObject(new BossEnemy(challengeVar));
   }
   /**
    * Spawns enemies and items every so often &
@@ -80,17 +82,17 @@ public class Game extends Canvas implements Runnable {
    * @param timeRunning time that the game has been played
    */
   private static void Spawner(int timeRunning) {
-    int randomVar = r.nextInt(6);
+    int randomVar = r.nextInt(7);
     int timeDelay = 11 - challengeVar;
     if(timeDelay <= 1)
       timeDelay = 1;
     if(timeRunning % timeDelay == 0){
-      if(randomVar == 0){
+      if(randomVar <= 2){
         handler.addObject(new ShooterEnemy(r.nextInt(11) * 48 + 48, r.nextInt(Window.HEIGHT) + Window.HEIGHT, challengeVar, enemyPic1, enemyPic1));
-      } else if(randomVar <= 3){
+      } else if(randomVar <= 4){
         handler.addObject(new Enemy(r.nextInt(33) * 16 + 48, r.nextInt(Window.HEIGHT) + Window.HEIGHT, challengeVar));
       } else {
-        if(Player.hasShockHacker && randomVar == 4) {
+        if(Player.hasShockHacker && randomVar == 5) {
           handler.addObject(new ShockEnemy(r.nextInt(2) * 576, r.nextInt(Window.HEIGHT) + Window.HEIGHT, challengeVar, ID.HackedShockEnemy));
         }
         handler.addObject(new ShockEnemy(r.nextInt(2) * 576, r.nextInt(Window.HEIGHT) + Window.HEIGHT, challengeVar, ID.ShockEnemy));
@@ -101,7 +103,7 @@ public class Game extends Canvas implements Runnable {
       handler.addObject(new Magazine(r.nextInt(33)* 16 + 48, Window.HEIGHT + r.nextInt(200), 16, 16));
     }
     if(timeRunning % 1200 == 0){
-      //handler.addObject(new BossEnemy(challengeVar));
+      handler.addObject(new BossEnemy(challengeVar));
       challengeVar++;
     }
   }
@@ -176,6 +178,7 @@ public class Game extends Canvas implements Runnable {
   /**
    * Updates all of objects
    * Runs 60 times per second
+   * Usually controls movement and collision
    */
   private void tick() {
     background.tick();
@@ -246,9 +249,5 @@ public class Game extends Canvas implements Runnable {
         System.err.println(e.getMessage());
       }
     }).start();
-  }
-
-  public static void main(String[] args) {
-    new Game();
   }
 }

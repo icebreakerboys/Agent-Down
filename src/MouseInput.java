@@ -1,11 +1,14 @@
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class MouseInput extends MouseAdapter {
-
+  /**
+   * Runs when Player clicks the Screen
+   *
+   * @param e MouseEvent
+   */
   public void mousePressed(MouseEvent e) {
     int mx = e.getX();
     int my = e.getY();
@@ -50,11 +53,19 @@ public class MouseInput extends MouseAdapter {
   public void mouseReleased(MouseEvent e) {
 
   }
-
+  /**
+   * Determines if the Mouse is over something
+   *
+   * @param mx Mouse's x
+   * @param my Mouse's y
+   * @param x X value of object
+   * @param y Y value of object
+   * @param w width of object
+   * @param h height of object
+   */
   private boolean mouseOver(int mx, int my, int x, int y, int w, int h) {
     if (mx > x && mx < x + w) {
       return my > y && my < y + h;
     } else return false;
   }
-
 }

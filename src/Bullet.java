@@ -1,4 +1,3 @@
-
 import java.awt.*;
 
 public class Bullet extends GameObject {
@@ -27,7 +26,10 @@ public class Bullet extends GameObject {
     g.setColor(color);
     g.fillOval((int) x, (int) y, w, h);
   }
-
+  /**
+   * Sets the x & y velocities of the bullet
+   * to x and y vector components
+   */
   public void target(int x, int y, int tX, int tY, double angle) {
     double yD = Math.tan(angle);
     double xD  = 1;

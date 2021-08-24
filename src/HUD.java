@@ -1,4 +1,3 @@
-
 import java.awt.*;
 
 public class HUD {
@@ -6,7 +5,7 @@ public class HUD {
   public static int score = 0;
   private long counter = 0L;
   /**
-   * this method is called repeatedly to update the HUD
+   * Handles the Math of the HUD
    */
   public void tick() {
     counter++;
@@ -14,14 +13,7 @@ public class HUD {
       score++;
       points++;
     }
-    points = 5000;
-    Player.HEALTH = (int) Game.clamp(Player.HEALTH, 0, 100);
-    if (Player.HEALTH == 0) {
-      Game.state = Game.STATE.EndMenu;
-      Menu.y = 1480;
-      Menu.started = false;
-      Menu.restarted = true;
-    }
+    //points = 5000;
   }
 
   public int getPoints() {
@@ -33,9 +25,9 @@ public class HUD {
   }
 
   /**
-   * renders the hud and health of player
+   * Handles the visual components of the HUD
    *
-   * @param g
+   * @param g Graphics
    */
   public void render(Graphics g) {
     g.setColor(Color.darkGray);
@@ -55,6 +47,5 @@ public class HUD {
     g.fillRect(590, 14, 6, 20);
     g.fillRect(604, 14, 6, 20);
     //g.drawString("Score: " + score, 15, 690);
-
   }
 }

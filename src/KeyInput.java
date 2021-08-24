@@ -1,17 +1,22 @@
-
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class KeyInput extends KeyAdapter {
+  /**
+   * Used to determine what key(s) is pressed
+   */
   public static Boolean[] keysDown = new Boolean[4];
-
   public KeyInput() {
     keysDown[0] = false;
     keysDown[1] = false;
     keysDown[2] = false;
     keysDown[3] = false;
   }
-
+  /**
+   * Sets X & Y velocities of the player when a key is pressed
+   *
+   * @param e KeyEvent
+   */
   public void keyPressed(KeyEvent e) {
     int key = e.getKeyCode();
     //Key Events for Player
@@ -63,6 +68,5 @@ public class KeyInput extends KeyAdapter {
       Player.velY = 0;
     }
   }
-
 }
 

@@ -4,14 +4,13 @@ public class Parachute extends GameObject {
 
     private final ShooterEnemy shooter;
 
-    public Parachute(double x, double y, int w, int h, double velX, double velY, ShooterEnemy shooter) {
-        super(x, y - h - 24, ID.Parachute, 48, 24, Color.yellow);
+    public Parachute(double x, double y, double velX, double velY, ShooterEnemy shooter) {
+        super(x, y - 48, ID.Parachute, 48, 24, Color.yellow);
         this.shooter = shooter;
         this.velX = velX;
         this.velY = velY;
     }
 
-    @Override
     public void tick() {
         x += velX;
         y += velY;

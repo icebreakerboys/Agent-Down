@@ -14,14 +14,44 @@ public class Menu extends Canvas{
     Font font50 = new Font("Helvetica", Font.PLAIN, 50);
     public static int x = 0;
     public static int y = 940;
-    public static boolean restarted = false;
-    public static boolean started = false;
-    public static boolean unPaused = false;
-    private static int seconds = 4;
-    private static int counter = 0;
-
+    public static boolean restarted = false, started = false, unPaused = false;
+    private static int seconds = 4, counter = 0;
+    /**
+     * Handles the movement of the Menu
+     */
+    public void tick() {
+        if(Game.state == Game.STATE.StartMenu || Game.state == Game.STATE.OptionsMenu || Game.state == Game.STATE.HelpMenu){
+            if(y > 0)
+                y -= 2;
+        }
+        if(Game.state == Game.STATE.StartMenu){
+            if(x > 0)
+                x -= 2;
+            if(x < 0)
+                x += 2;
+        }
+        if(Game.state == Game.STATE.OptionsMenu && x < 640) {
+            x += 2;
+        }
+        if(Game.state == Game.STATE.HelpMenu && x > -640) {
+            x -= 2;
+        }
+        if(Game.state == Game.STATE.EndMenu && y > 740)
+            y -= 2;
+        if(started)
+            y -= 2;
+        if(unPaused){
+            if(counter % 60 == 0)
+                seconds--;
+            counter++;
+        }
+    }
+    /**
+     * Handles the visual components of the Menus
+     *
+     * @param g Graphics
+     */
     public void render(Graphics g) {
-
         if (Game.state == Game.STATE.StartMenu || Game.state == Game.STATE.OptionsMenu
                 || Game.state == Game.STATE.HelpMenu || Game.state == Game.STATE.EndMenu) {
             renderStartMenu(g);
@@ -40,7 +70,11 @@ public class Menu extends Canvas{
             }
         }
     }
-
+    /**
+     * Handles the visual components of the Start Menu
+     *
+     * @param g Graphics
+     */
     private void renderStartMenu(Graphics g){
         g.setColor(myColorSTP);
         g.drawImage(new ImageIcon(getClass().getClassLoader().getResource("images/Agent Down.png")).getImage(), x + 75, y + 75, 490, 189, this);
@@ -53,6 +87,11 @@ public class Menu extends Canvas{
         g.drawString("Options", x + 220, y + 475);
         g.drawString("Help", x + 245, y + 615);
     }
+    /**
+     * Handles the visual components of the Options Menu
+     *
+     * @param g Graphics
+     */
     private void renderOptionsMenu(Graphics g){
         g.setColor(myColorSTP);
         g.fillRect(x + 150 - 640, y + 550, 300, 100);
@@ -60,6 +99,11 @@ public class Menu extends Canvas{
         g.setFont(font40);
         g.drawString("Back to Start", x + 190 - 640, y + 615);
     }
+    /**
+     * Handles the visual components of the Help Menu
+     *
+     * @param g Graphics
+     */
     private void renderHelpMenu(Graphics g){
         g.setColor(myColorSTP);
         g.fillRect(x + 150 + 640, y + 550, 300, 100);
@@ -75,6 +119,11 @@ public class Menu extends Canvas{
         g.drawString("Press P to Pause.", x + 150 + 640, y + 480);
         g.drawString("Back to Start", x + 190 + 640, y + 615);
     }
+    /**
+     * Handles the visual components of the End Menu
+     *
+     * @param g Graphics
+     */
     private void renderEndMenu(Graphics g){
         g.setColor(myColorSTP);
         g.fillRect(x + 100, y + 100 - 740, 425, 400);
@@ -87,6 +136,11 @@ public class Menu extends Canvas{
         g.setFont(font40);
         g.drawString("Back to Start", x + 190, y + 615 - 740);
     }
+    /**
+     * Handles the visual components of the Pause Menu
+     *
+     * @param g Graphics
+     */
     private void renderPauseMenu(Graphics g){
         g.setColor(myColorTP);
         g.fillRect(0, 0, 640, 740);
@@ -136,35 +190,9 @@ public class Menu extends Canvas{
         g.setFont(font40);
         g.drawString("x", 590, 34);
     }
-
-    public void tick(){
-        if(Game.state == Game.STATE.StartMenu || Game.state == Game.STATE.OptionsMenu || Game.state == Game.STATE.HelpMenu){
-            if(y > 0)
-                y -= 2;
-        }
-        if(Game.state == Game.STATE.StartMenu){
-            if(x > 0)
-                x -= 2;
-            if(x < 0)
-                x += 2;
-        }
-        if(Game.state == Game.STATE.OptionsMenu && x < 640) {
-            x += 2;
-        }
-        if(Game.state == Game.STATE.HelpMenu && x > -640) {
-            x -= 2;
-        }
-        if(Game.state == Game.STATE.EndMenu && y > 740)
-            y -= 2;
-        if(started)
-            y -= 2;
-        if(unPaused){
-            if(counter % 60 == 0)
-                seconds--;
-            counter++;
-        }
-    }
-
+    /**
+     * Starts a timer to delay the start of the Game
+     */
     public static void startGame() {
         java.util.Timer timer = new Timer();
         TimerTask startTransition = new TimerTask() {
@@ -191,7 +219,9 @@ public class Menu extends Canvas{
         Background.isPlaying = true;
         timer.schedule(startTransition, d);
     }
-
+    /**
+     * Starts a timer to delay unPausing the Game
+     */
     public static void unPauseGame() {
         Timer pauseTimer = new Timer();
         TimerTask pauseTransition = new TimerTask() {
@@ -206,5 +236,4 @@ public class Menu extends Canvas{
         counter = 0;
         seconds = 4;
     }
-
 }
