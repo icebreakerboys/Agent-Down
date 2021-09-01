@@ -1,5 +1,10 @@
+package GameObjects;
+
 import java.awt.*;
+import Main.*;
 import java.util.Random;
+import GameObjects.Enemies.*;
+import GameObjects.Player.*;
 
 public abstract class GameObject extends Canvas {
 
@@ -9,21 +14,20 @@ public abstract class GameObject extends Canvas {
   protected int speed, health = 1;
   protected ID id;
   protected Color color;
-  protected Image image;
   protected boolean stunned = false;
   protected BossEnemy boss;
 
   public GameObject(double x, double y, ID id, int w, int h, Color color) {
-    this.x = x;
-    this.y = y;
     this.id = id;
+    this.color = color;
     this.w = w;
     this.h = h;
-    this.color = color;
+    this.x = x;
+    this.y = y;
   }
 
   /**
-   * Handles GameObject movement & collision
+   * Handles GameObjects.GameObject movement & collision
    */
   public abstract void tick();
 
@@ -38,29 +42,29 @@ public abstract class GameObject extends Canvas {
     //g.drawImage(image, x, y, 90, 60, this);
   }
   /**
-   * Determines if the GameObject needs to be deleted & then deletes it
+   * Determines if the GameObjects.GameObject needs to be deleted & then deletes it
    *
    * @param movesUp Determines if it needs to be deleted while below the screen
    */
   public void removeGameObject(boolean movesUp) {
     int height = h;
     if(movesUp){
-      height = Window.HEIGHT;
+      height = HEIGHT;
     }
-    if (x <= -w || x >= Window.WIDTH + w || y <= -h || y >= Window.HEIGHT + height)
+    if (x <= -w || x >= WIDTH + w || y <= -h || y >= HEIGHT + height)
       Game.handler.removeObject(this);
   }
   /**
    * Handles GameObjects collision with Friendly Bullets
    */
   public void collision() {
-    for (int i = 0; i < Game.handler.object.size(); i++) {
-      GameObject tempObject = Game.handler.object.get(i);
-      if (tempObject.getId() == ID.BulletFriendly){
+    for (int i = 0; i < Game.handler.objects.size(); i++) {
+      GameObject tempObject = Game.handler.objects.get(i);
+      if (tempObject.getId() == ID.FriendlyBullet){
         if (getId() == ID.BossEnemy) {
           if (getBounds2(0, h, w, h).intersects(tempObject.getBounds())) {
             Game.handler.removeObject(tempObject);
-            if (Player.hasBetterBullets)
+            if (Player.hasShockerHacker)
               stun();
           }
         } else if(getBounds().intersects(tempObject.getBounds())) {
@@ -68,12 +72,12 @@ public abstract class GameObject extends Canvas {
           Game.handler.removeObject(tempObject);
           if(health <= 0) {
             Game.handler.removeObject(this);
-            HUD.score += 100;
-            HUD.points += 100;
+            HUD.setScore(50 + (Game.challengeVar * 10));
+
             if(getId() == ID.BossWeakPoint){
               boss.killWeakPoint(boss);
             }
-          } else if(Player.hasBetterBullets && getId() == ID.BossWeakPoint){
+          } else if(Player.hasShockerHacker && getId() == ID.BossWeakPoint){
             boss.stun();
           }
         }
@@ -88,7 +92,7 @@ public abstract class GameObject extends Canvas {
   }
   /**
    * Returns a different Hit box of GameObjects
-   * Used for BossEnemy collision
+   * Used for GameObjects.Enemies.BossEnemy collision
    *
    * @param x1 added to the double x
    * @param y1 added to the double Y
@@ -126,4 +130,9 @@ public abstract class GameObject extends Canvas {
   public double getVelY() {
     return velY;
   }
+
+  public boolean getstunned(){
+    return stunned;
+  }
+
 }

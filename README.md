@@ -1,5 +1,5 @@
 # Agent-Down
-Welcome to our 2D SkyDiving Game!
+Welcome to our 2D SkyDiving Main.Game!
 
 Feel free to clone the game directly to your computer to play or contribute.
 Currently the game build is closely tied to the Intellij IDE, so you might have to do some work arounds to get it compiling on your own machine

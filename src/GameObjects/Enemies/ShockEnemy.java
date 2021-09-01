@@ -1,3 +1,9 @@
+package GameObjects.Enemies;
+
+import GameObjects.*;
+import GameObjects.Player.*;
+import Main.*;
+
 import java.awt.*;
 
 public class ShockEnemy extends GameObject {
@@ -22,6 +28,7 @@ public class ShockEnemy extends GameObject {
             if (y <= Player.Y + ((Player.X - 48) / (7 + Game.challengeVar) + 24))
                 shoot();
         }
+        collision();
         removeGameObject(true);
     }
     /**
@@ -30,9 +37,9 @@ public class ShockEnemy extends GameObject {
     private void shoot() {
         if(notShot) {
             if (id == ID.HackedShockEnemy) {
-                Game.handler.addObject(new Bullet((int) x + 24, (int) y + 24, Player.X, Player.Y, 0, (int) velY, ID.ShockBulletFriendly, color));
+                Game.handler.addObject(new Bullet((int) x + 24, (int) y + 24, Player.X, Player.Y, 0, (int) velY, ID.FriendlyShockBullet, color));
             } else {
-                Game.handler.addObject(new Bullet((int) x + 24, (int) y + 24, Player.X, Player.Y, 0, (int) velY, ID.ShockBulletEnemy, color));
+                Game.handler.addObject(new Bullet((int) x + 24, (int) y + 24, Player.X, Player.Y, 0, (int) velY, ID.EnemyShockBullet, color));
             }
             notShot = false;
         }

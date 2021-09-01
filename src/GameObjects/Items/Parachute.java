@@ -1,3 +1,9 @@
+package GameObjects.Items;
+
+import GameObjects.Enemies.ShooterEnemy;
+import GameObjects.*;
+import Main.*;
+
 import java.awt.*;
 
 public class Parachute extends GameObject {
@@ -20,9 +26,9 @@ public class Parachute extends GameObject {
 
     @Override
     public void collision(){
-        for (int i = 0; i < Game.handler.object.size(); i++) {
-            GameObject tempObject = Game.handler.object.get(i);
-            if (tempObject.getId() == ID.BulletFriendly && getBounds().intersects(tempObject.getBounds())) {
+        for (int i = 0; i < Game.handler.objects.size(); i++) {
+            GameObject tempObject = Game.handler.objects.get(i);
+            if (tempObject.getId() == ID.FriendlyBullet && getBounds().intersects(tempObject.getBounds())) {
                 shooter.startFalling();
                 Game.handler.removeObject(this);
             }

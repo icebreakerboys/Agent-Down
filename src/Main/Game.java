@@ -1,44 +1,51 @@
+package Main;
+
+import GameObjects.Enemies.*;
+import GameObjects.*;
+import GameObjects.Items.*;
+import GameObjects.Player.*;
+import Main.MenusAndInputs.*;
+import Main.MenusAndInputs.Menu;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.sound.sampled.*;
-import javax.swing.*;
 
 public class Game extends Canvas implements Runnable {
 
   private Thread thread;
-  public static boolean running = false;
-  private static final Random r = new Random();
+  public static boolean running = false, isPlaying = false;
+
   public static Handler handler;
   public static Player player;
-  public static Image enemyPic1;
   private final HUD hud;
   private final Menu menu;
   private final Background background;
-  private static String musicPath;
+
   public static int challengeVar = 1;
-  public static STATE state = STATE.StartMenu;
+  public static int timeRunning = 1;
+  private static final Random r = new Random();
+
+  public static STATE state = STATE.MainMenu;
   /**
    * Used to determine what phase the game is in
    */
   public enum STATE {
     PlayScreen(),
     PauseMenu(),
-    StartMenu(),
-    EndMenu(),
-    OptionsMenu,
-    HelpMenu()
+    MainMenu(),
+    ShopMenu(),
   }
 
   public static void main(String[] args) {
     new Game();
   }
   /**
-   * Game Constructor that
+   * Main.Game Constructor that
    * 1. Prepares all game objects
-   * 2. Starts the Game Window which runs the start method
+   * 2. Starts the Main.Game Main.Window which runs the start method
    * 3. Sets up a mouse and key listener
    * 4. Plays Music
    * 5. Starts the Spawner method in a timer
@@ -50,20 +57,16 @@ public class Game extends Canvas implements Runnable {
     player = new Player(Window.WIDTH / 2 - 16, 100);
     menu = new Menu();
     background = new Background();
-    enemyPic1 = new ImageIcon(getClass().getClassLoader().getResource("images/Badguy1.png")).getImage();
     new Window(this);
     this.addKeyListener(new KeyInput());
     this.addMouseListener(new MouseInput());
-    //musicPath = ("sounds/Possible Song 1.wav");
-    musicPath = ("sounds/Theme.wav");
-    playMusic(musicPath);
+    playMusic("sounds/Theme.wav");
 
     //FIXME need to optimize this thread with the thread
     // that holds back on transitions between game phases
     // Potentially make a new class
     Timer timer = new Timer();
     TimerTask updateStage = new TimerTask() {
-      int timeRunning = 1;
       @Override
       public void run() {
         if(Game.state == STATE.PlayScreen){
@@ -83,24 +86,30 @@ public class Game extends Canvas implements Runnable {
    */
   private static void Spawner(int timeRunning) {
     int randomVar = r.nextInt(7);
+    if(timeRunning <= 600){
+      randomVar = 4;
+    } else if(timeRunning <= 1200){
+      randomVar = r.nextInt(5);
+    }
     int timeDelay = 11 - challengeVar;
     if(timeDelay <= 1)
       timeDelay = 1;
     if(timeRunning % timeDelay == 0){
-      if(randomVar <= 2){
-        handler.addObject(new ShooterEnemy(r.nextInt(11) * 48 + 48, r.nextInt(Window.HEIGHT) + Window.HEIGHT, challengeVar, enemyPic1, enemyPic1));
+
+      if(randomVar <= 1){
+        handler.addObject(new ShooterEnemy(r.nextInt(11) * 48 + 48, r.nextInt(HEIGHT) + HEIGHT, challengeVar));
       } else if(randomVar <= 4){
-        handler.addObject(new Enemy(r.nextInt(33) * 16 + 48, r.nextInt(Window.HEIGHT) + Window.HEIGHT, challengeVar));
+        handler.addObject(new Enemy(r.nextInt(33) * 16 + 48, r.nextInt(HEIGHT) + HEIGHT, challengeVar));
       } else {
-        if(Player.hasShockHacker && randomVar == 5) {
-          handler.addObject(new ShockEnemy(r.nextInt(2) * 576, r.nextInt(Window.HEIGHT) + Window.HEIGHT, challengeVar, ID.HackedShockEnemy));
+        if(Player.hasShockerHacker && randomVar == 5) {
+          handler.addObject(new ShockEnemy(r.nextInt(2) * 576, r.nextInt(HEIGHT) + HEIGHT, challengeVar, ID.HackedShockEnemy));
         }
-        handler.addObject(new ShockEnemy(r.nextInt(2) * 576, r.nextInt(Window.HEIGHT) + Window.HEIGHT, challengeVar, ID.ShockEnemy));
+        handler.addObject(new ShockEnemy(r.nextInt(2) * 576, r.nextInt(HEIGHT) + HEIGHT, challengeVar, ID.ShockerEnemy));
       }
     }
     if (timeRunning % 100  == 0) {
-      handler.addObject(new HealthPack(r.nextInt(33)* 16 + 48, Window.HEIGHT + r.nextInt(200), 16, 16));
-      handler.addObject(new Magazine(r.nextInt(33)* 16 + 48, Window.HEIGHT + r.nextInt(200), 16, 16));
+      handler.addObject(new HealthPack(r.nextInt(33)* 16 + 48, HEIGHT + r.nextInt(200), 16, 16));
+      handler.addObject(new Magazine(r.nextInt(33)* 16 + 48, HEIGHT + r.nextInt(200), 16, 16));
     }
     if(timeRunning % 1200 == 0){
       handler.addObject(new BossEnemy(challengeVar));
@@ -108,7 +117,7 @@ public class Game extends Canvas implements Runnable {
     }
   }
   /**
-   * Starts the Game loop
+   * Starts the Main.Game loop
    */
   public synchronized void start() {
     thread = new Thread(this);
@@ -127,7 +136,7 @@ public class Game extends Canvas implements Runnable {
     }
   }
   /**
-   * Game Loop
+   * Main.Game Loop
    * Aims for 80 frames per second
    * with a consistent 60 ticks per second
    */
@@ -137,7 +146,7 @@ public class Game extends Canvas implements Runnable {
     double TARGET_TICK = 60.0;
     double OPTIMAL_TIME_TICKS = 1000000000 / TARGET_TICK;
     double delta = 0;
-    final int TARGET_FPS = 60;
+    final int TARGET_FPS = 90;
     final long OPTIMAL_TIME_FRAMES = 1000000000 / TARGET_FPS;
     long lastFpsTime = 0;
     long timer = System.currentTimeMillis();
@@ -166,9 +175,9 @@ public class Game extends Canvas implements Runnable {
       }
       if (System.currentTimeMillis() - timer > 1000) {
         timer += 1000;
-        //System.out.println("FPS: " + frames);
-        //System.out.println("Ticks: " + ticks);
-        //System.out.println("HP: " + Player.HEALTH);
+//        System.out.println("FPS: " + frames);
+//        System.out.println("Ticks: " + ticks);
+        //System.out.println("HP: " + GameObjects.PlayerAndMore.Player.HEALTH);
         frames = 0;
         ticks = 0;
       }
@@ -183,11 +192,12 @@ public class Game extends Canvas implements Runnable {
   private void tick() {
     background.tick();
     if (state == STATE.PlayScreen) {
-      handler.tick();
+      handler.objectTick();
       hud.tick();
       Player.tick();
     } else {
       menu.tick();
+      handler.buttonTick();
     }
   }
   /**
@@ -201,23 +211,29 @@ public class Game extends Canvas implements Runnable {
       return;
     }
     Graphics g = bs.getDrawGraphics();
-    g.setColor(Color.WHITE);
-    g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
+    //g.setColor(Color.WHITE);
+    //g.fillRect(0, 0, Main.Window.WIDTH, Main.Window.HEIGHT);
     background.render(g);
-    if (state == STATE.PlayScreen || state == STATE.PauseMenu || state == STATE.EndMenu) {
-      handler.render(g);
-      if(state == STATE.PlayScreen)
-        hud.render(g);
+    if (state == STATE.PlayScreen || state == STATE.PauseMenu || Menu.menuState == Menu.MSTATE.EndMenu) {
+      handler.objectRender(g);
       player.render(g);
+      if(state == STATE.PlayScreen) {
+        hud.render(g);
+        MouseInput.pauseBtn.render(g);
+        g.setColor(Color.WHITE);
+        g.fillRect(590, 14, 6, 20);
+        g.fillRect(604, 14, 6, 20);
+      }
     }
-    if(state != STATE.PlayScreen)
+    if(state != STATE.PlayScreen) {
       menu.render(g);
+    }
     g.dispose();
     bs.show();
   }
   /**
    * keeps a variable within bounds
-   * Used in tick method for HUD and Player classes
+   * Used in tick method for Main.HUD and GameObjects.PlayerAndMore.Player classes
    *
    * @param var initial var
    * @param min bound

@@ -1,15 +1,16 @@
+package GameObjects;
 
 public enum ID {
   Enemy(),
   ShooterEnemy(),
-  ShockEnemy(),
+  ShockerEnemy(),
   HackedShockEnemy(),
   BossEnemy(),
   BossWeakPoint(),
-  BulletEnemy(),
-  ShockBulletEnemy(),
-  BulletFriendly(),
-  ShockBulletFriendly(),
+  EnemyBullet(),
+  EnemyShockBullet(),
+  FriendlyBullet(),
+  FriendlyShockBullet(),
   Magazine(),
   HealthPack(),
   Parachute,

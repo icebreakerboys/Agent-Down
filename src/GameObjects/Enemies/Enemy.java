@@ -1,3 +1,7 @@
+package GameObjects.Enemies;
+
+import GameObjects.*;
+
 import java.awt.Color;
 
 public class Enemy extends GameObject {

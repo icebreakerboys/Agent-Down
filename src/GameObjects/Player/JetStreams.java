@@ -1,3 +1,8 @@
+package GameObjects.Player;
+
+import GameObjects.GameObject;
+import GameObjects.ID;
+
 import java.awt.*;
 
 public class JetStreams extends GameObject {

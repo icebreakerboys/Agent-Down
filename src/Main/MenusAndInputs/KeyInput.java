@@ -1,3 +1,8 @@
+package Main.MenusAndInputs;
+
+import GameObjects.Player.Player;
+import Main.Game;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -19,7 +24,7 @@ public class KeyInput extends KeyAdapter {
    */
   public void keyPressed(KeyEvent e) {
     int key = e.getKeyCode();
-    //Key Events for Player
+    //Key Events for GameObjects.PlayerAndMore.Player
     if (key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT) {
       Player.velX = 5;
       keysDown[0] = true;
@@ -29,7 +34,7 @@ public class KeyInput extends KeyAdapter {
       keysDown[1] = true;
     }
     if (key == KeyEvent.VK_S || key == KeyEvent.VK_DOWN) {
-      //Player.velY = 2;
+      //GameObjects.PlayerAndMore.Player.velY = 2;
       keysDown[2] = true;
     }
     if (key == KeyEvent.VK_W || key == KeyEvent.VK_UP) {
@@ -52,7 +57,7 @@ public class KeyInput extends KeyAdapter {
    */
   public void keyReleased(KeyEvent e) {
     int key = e.getKeyCode();
-    //Key Events for Player
+    //Key Events for GameObjects.PlayerAndMore.Player
     if (key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT)
       keysDown[0] = false;
     if (key == KeyEvent.VK_A || key == KeyEvent.VK_LEFT)

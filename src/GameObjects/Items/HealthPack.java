@@ -1,3 +1,8 @@
+package GameObjects.Items;
+
+import GameObjects.GameObject;
+import GameObjects.ID;
+
 import java.awt.*;
 
 public class HealthPack extends GameObject {

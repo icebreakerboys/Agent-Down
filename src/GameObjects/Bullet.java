@@ -1,10 +1,15 @@
+package GameObjects;
+
+import Main.*;
+import GameObjects.Player.Player;
+
 import java.awt.*;
 
 public class Bullet extends GameObject {
 
   public Bullet(int x, int y, int tX, int tY, double angle, int velY, ID id, Color color) {
     super(x, y, id, 12, 12, color);
-    if(id != ID.ShockBulletEnemy && id != ID.ShockBulletFriendly) {
+    if(id != ID.EnemyShockBullet && id != ID.FriendlyShockBullet) {
       target(x, y, tX, tY, angle);
     } else {
       this.velY = velY;
@@ -37,7 +42,7 @@ public class Bullet extends GameObject {
       xD = -1;
       yD = -yD;
     }
-    if(Math.abs(tX - x) <= 10){
+    if(Math.abs(tX - x) <= 40){
       if(tY - y > 0){
         yD = Math.abs(yD);
       } else {
@@ -45,10 +50,10 @@ public class Bullet extends GameObject {
       }
     }
     double magnitude = Math.sqrt(xD * xD + yD * yD);
-    if(id == ID.BulletFriendly){
-      if(Player.hasBetterBullets) {
-        velY = ((11 * yD) / magnitude);
-        velX = ((11 * xD) / magnitude);
+    if(id == ID.FriendlyBullet){
+      if(Player.hasFasterBullets) {
+        velY = ((14 * yD) / magnitude);
+        velX = ((14 * xD) / magnitude);
       } else {
         velY = ((7 * yD) / magnitude);
         velX = ((7 * xD) / magnitude);
@@ -61,9 +66,9 @@ public class Bullet extends GameObject {
 
   @Override
   public void collision() {
-    for (int i = 0; i < Game.handler.object.size(); i++) {
-      GameObject tempObject = Game.handler.object.get(i);
-      if (tempObject.getId() == ID.BulletFriendly && id == ID.BulletEnemy && getBounds().intersects(tempObject.getBounds()))
+    for (int i = 0; i < Game.handler.objects.size(); i++) {
+      GameObject tempObject = Game.handler.objects.get(i);
+      if (tempObject.getId() == ID.FriendlyBullet && id == ID.EnemyBullet && getBounds().intersects(tempObject.getBounds()))
         Game.handler.removeObject(this);
     }
   }

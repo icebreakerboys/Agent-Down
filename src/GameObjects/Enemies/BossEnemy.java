@@ -1,6 +1,10 @@
+package GameObjects.Enemies;
+
+import GameObjects.*;
+import Main.*;
 import java.awt.*;
 
-public class BossEnemy extends GameObject{
+public class BossEnemy extends GameObject {
 
     private boolean hasNotSpawnedWeakPoints;
     private int numWeakPoints;
