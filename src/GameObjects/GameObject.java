@@ -5,6 +5,7 @@ import Main.*;
 import java.util.Random;
 import GameObjects.Enemies.*;
 import GameObjects.Player.*;
+import Main.Window;
 
 public abstract class GameObject extends Canvas {
 
@@ -49,9 +50,9 @@ public abstract class GameObject extends Canvas {
   public void removeGameObject(boolean movesUp) {
     int height = h;
     if(movesUp){
-      height = HEIGHT;
+      height = Window.HEIGHT;
     }
-    if (x <= -w || x >= WIDTH + w || y <= -h || y >= HEIGHT + height)
+    if (x <= -w || x >= Window.WIDTH + w || y <= -h || y >= Window.HEIGHT + height)
       Game.handler.removeObject(this);
   }
   /**

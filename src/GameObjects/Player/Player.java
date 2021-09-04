@@ -1,9 +1,12 @@
 package GameObjects.Player;
 
 import GameObjects.*;
+import GameObjects.Items.Bullet;
 import Main.*;
 import Main.MenusAndInputs.*;
 import Main.MenusAndInputs.Menu;
+import Main.Window;
+
 import java.awt.*;
 
 //FIXME Try to integrate this into GameObjects.GameObject to Save File Space
@@ -66,13 +69,13 @@ public class Player extends Canvas {
     }
 
     collision();
-    X = (int) Game.clamp(X, 48, WIDTH - 110);
-    Y = (int) Game.clamp(Y, 0, 3 * (HEIGHT / 4) - 45);
+    X = (int) Game.clamp(X, 48, Window.WIDTH - 110);
+    Y = (int) Game.clamp(Y, 0, 3 * (Window.HEIGHT / 4) - 45);
     velY = Game.clamp(velY, minVelY, 10);
     minVelY = -5;
     //HEALTH = 100;
     //AMMO = 10;
-    //perkPoints = 10;
+    perkPoints = 10;
     health = (int) Game.clamp(health, 0, 100);
     ammo = (int) Game.clamp(ammo, 0, 420);
 
@@ -255,44 +258,54 @@ public class Player extends Canvas {
     hasShockerHacker = false; hasElectricBoogie = false;
   }
 
-  public static void buyMidPerk() {
+  public static boolean buyMidPerk() {
     if(!hasBetterPowerUps && perkPoints >= 1){
       hasBetterPowerUps = true;
       perkPoints--;
       perksBought++;
+      return true;
     } else if(!hasSuperPowerUps && perkPoints >= 2 && perksBought <= 6){
       hasSuperPowerUps = true;
       perkPoints -= 2;
       perksBought += 2;
+      return true;
     } else if(!hasSuperDuperPowerUps && perkPoints >= 3 && perksBought <= 5){
       hasSuperDuperPowerUps = true;
       perkPoints -= 3;
       perksBought += 3;
+      return true;
     }
+    return false;
   }
 
-  public static void buyBotPerk() {
+  public static boolean buyBotPerk() {
     if(!hasShockerHacker && perkPoints >= 2 && perksBought <= 6){
       hasShockerHacker = true;
       perkPoints -= 2;
       perksBought += 2;
+      return true;
     } else if(!hasElectricBoogie && perkPoints >= 3 && perksBought <= 5) {
       hasElectricBoogie = true;
       perkPoints -= 3;
       perksBought += 3;
+      return true;
     }
+    return false;
   }
 
-  public static void buyTopPerk() {
+  public static boolean buyTopPerk() {
     if(!hasFasterBullets && perkPoints >= 2 && perksBought <= 6){
       hasFasterBullets = true;
       perkPoints -= 2;
       perksBought += 2;
+      return true;
     } else if(!hasShotgun && perkPoints >= 3 && perksBought <= 5) {
       hasShotgun = true;
       perkPoints -= 3;
       perksBought += 3;
+      return true;
     }
+    return false;
   }
 
   public static int getPerkPoints() {

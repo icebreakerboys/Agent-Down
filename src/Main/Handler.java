@@ -42,8 +42,9 @@ public class Handler {
   public void buttonRender(Graphics g) {
     for (int i = 0; i < buttons.size(); i++) {
       Button tempButton = buttons.get(i);
-      if(tempButton.getBtnState() == Game.state)
-      tempButton.render(g);
+      if(tempButton.getBtnState() == Game.state) {
+        tempButton.render(g);
+      }
     }
   }
   /**
@@ -61,4 +62,12 @@ public class Handler {
     this.objects.remove(object);
   }
 
+//  public void removeButtons() {
+//    for(int i = 0; i < buttons.size(); i++) {
+//      Button tempBtn = buttons.get(i);
+//      if (tempBtn.getType() == Button.TYPE.UpgradeBtn) {
+//        tempBtn.removeBtn();
+//      }
+//    }
+//  }
 }

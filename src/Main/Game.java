@@ -60,7 +60,7 @@ public class Game extends Canvas implements Runnable {
     new Window(this);
     this.addKeyListener(new KeyInput());
     this.addMouseListener(new MouseInput());
-    playMusic("sounds/Theme.wav");
+    //playMusic("sounds/Theme.wav");
 
     //FIXME need to optimize this thread with the thread
     // that holds back on transitions between game phases
@@ -69,7 +69,7 @@ public class Game extends Canvas implements Runnable {
     TimerTask updateStage = new TimerTask() {
       @Override
       public void run() {
-        if(Game.state == STATE.PlayScreen){
+        if(Game.state == STATE.PauseMenu){
           Spawner(timeRunning);
           timeRunning++;
         }
@@ -97,19 +97,19 @@ public class Game extends Canvas implements Runnable {
     if(timeRunning % timeDelay == 0){
 
       if(randomVar <= 1){
-        handler.addObject(new ShooterEnemy(r.nextInt(11) * 48 + 48, r.nextInt(HEIGHT) + HEIGHT, challengeVar));
+        handler.addObject(new ShooterEnemy(r.nextInt(11) * 48 + 48, r.nextInt(Window.HEIGHT) + Window.HEIGHT, challengeVar));
       } else if(randomVar <= 4){
-        handler.addObject(new Enemy(r.nextInt(33) * 16 + 48, r.nextInt(HEIGHT) + HEIGHT, challengeVar));
+        handler.addObject(new Enemy(r.nextInt(33) * 16 + 48, r.nextInt(Window.HEIGHT) + Window.HEIGHT, challengeVar));
       } else {
         if(Player.hasShockerHacker && randomVar == 5) {
-          handler.addObject(new ShockEnemy(r.nextInt(2) * 576, r.nextInt(HEIGHT) + HEIGHT, challengeVar, ID.HackedShockEnemy));
+          handler.addObject(new ShockEnemy(r.nextInt(2) * 576, r.nextInt(Window.HEIGHT) + Window.HEIGHT, challengeVar, ID.HackedShockEnemy));
         }
-        handler.addObject(new ShockEnemy(r.nextInt(2) * 576, r.nextInt(HEIGHT) + HEIGHT, challengeVar, ID.ShockerEnemy));
+        handler.addObject(new ShockEnemy(r.nextInt(2) * 576, r.nextInt(Window.HEIGHT) + Window.HEIGHT, challengeVar, ID.ShockerEnemy));
       }
     }
     if (timeRunning % 100  == 0) {
-      handler.addObject(new HealthPack(r.nextInt(33)* 16 + 48, HEIGHT + r.nextInt(200), 16, 16));
-      handler.addObject(new Magazine(r.nextInt(33)* 16 + 48, HEIGHT + r.nextInt(200), 16, 16));
+      handler.addObject(new HealthPack(r.nextInt(33)* 16 + 48, Window.HEIGHT + r.nextInt(200), 16, 16));
+      handler.addObject(new Magazine(r.nextInt(33)* 16 + 48, Window.HEIGHT + r.nextInt(200), 16, 16));
     }
     if(timeRunning % 1200 == 0){
       handler.addObject(new BossEnemy(challengeVar));
@@ -175,8 +175,8 @@ public class Game extends Canvas implements Runnable {
       }
       if (System.currentTimeMillis() - timer > 1000) {
         timer += 1000;
-//        System.out.println("FPS: " + frames);
-//        System.out.println("Ticks: " + ticks);
+        System.out.println("FPS: " + frames);
+        System.out.println("Ticks: " + ticks);
         //System.out.println("HP: " + GameObjects.PlayerAndMore.Player.HEALTH);
         frames = 0;
         ticks = 0;

@@ -14,6 +14,7 @@ public class Window extends Canvas {
    * @param game Used to add & start the game
    */
   public Window(Game game) {
+
     JFrame frame = new JFrame("Agent Down");
     frame.setSize(new Dimension(WIDTH, HEIGHT));
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -24,5 +25,6 @@ public class Window extends Canvas {
     frame.add(game);
     frame.setVisible(true);
     game.start();
+
   }
 }

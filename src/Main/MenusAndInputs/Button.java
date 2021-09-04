@@ -5,15 +5,28 @@ import Main.Game;
 import java.awt.*;
 
 public class Button {
-    private int x, y;
-    private final int dX, dY, w, h;
+    protected int x, y;
+    private final int dX, dY;
+    protected final int w, h;
+    protected String label;
     private int sX, sY;
-    private Font fnt;
-    private final Game.STATE btnState;
-    private Color btncolor, fntcolor;
+    protected final Font fnt;
+    protected final Game.STATE btnState;
+    protected Color btncolor, fntcolor;
 
-    //FIXME Try adding Strings to put on top of the buttons
-    public Button(int dX, int dY, int w, int h, Game.STATE btnState, Color btncolor){
+    private TYPE type;
+
+    public TYPE getType() {
+        return type;
+    }
+
+    public enum TYPE {
+        UpgradeBtn(),
+        Btn(),
+    }
+
+
+    public Button(int dX, int dY, int w, int h, String label, Font fnt, Game.STATE btnState, Color btncolor, Color fntcolor){
         this.dX = dX;
         this.dY = dY;
         x = dX;
@@ -22,10 +35,10 @@ public class Button {
         this.h = h;
         this.btnState = btnState;
         this.btncolor = btncolor;
-//        this.name = name;
-        //determineStrPlacement(name);
-//        this.font = font;
-//        this.fntcolor = fntcolor;
+        this.label = label;
+        this.fnt = fnt;
+        this.fntcolor = fntcolor;
+        determineStrPlacement(label);
     }
 
     public void tick() {
@@ -40,18 +53,24 @@ public class Button {
             if(Menu.restarted) {
                 g.setColor(btncolor);
                 g.fillRect(x, y, w, h);
+                g.setColor(fntcolor);
+                g.setFont(fnt);
+                g.drawString(label, sX + x, sY + y);
             }
         } else {
             g.setColor(btncolor);
             g.fillRect(x, y, w, h);
+            g.setColor(fntcolor);
+            g.setFont(fnt);
+            g.drawString(label, x + sX, y + sY);
         }
     }
 
     private void determineStrPlacement(String str){
         int numChar = str.length();
-        sY = (h - fnt.getSize())/2 + dY;
-        sX = (w - fnt.getSize())/2 + dX;
-        System.out.println(numChar);
+        int fntSize = fnt.getSize();
+        sY = (int) (fntSize*0.6 - h)/2 + h;
+        sX = (int) (w - (numChar * fntSize*0.6))/2;
     }
     public Rectangle getRect(){
         return new Rectangle(x, y, w, h);
@@ -63,5 +82,9 @@ public class Button {
 
     public void setBtnColor(Color color) {
         this.btncolor = color;
+    }
+
+    public void removeBtn(){
+        Game.handler.buttons.remove(this);
     }
 }

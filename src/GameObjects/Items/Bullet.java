@@ -1,5 +1,7 @@
-package GameObjects;
+package GameObjects.Items;
 
+import GameObjects.GameObject;
+import GameObjects.ID;
 import Main.*;
 import GameObjects.Player.Player;
 

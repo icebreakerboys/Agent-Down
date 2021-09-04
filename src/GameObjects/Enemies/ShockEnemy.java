@@ -1,6 +1,7 @@
 package GameObjects.Enemies;
 
 import GameObjects.*;
+import GameObjects.Items.Bullet;
 import GameObjects.Player.*;
 import Main.*;
 
