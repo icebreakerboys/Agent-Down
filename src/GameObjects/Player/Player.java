@@ -13,8 +13,8 @@ import java.awt.*;
 // not completely necessary but something to look into
 public class Player extends Canvas {
 
-  public static int X, Y;
-  public static double velX = 0, velY = 0;
+  private static int X, Y;
+  private static double velX = 0, velY = 0;
   private static double minVelY = -100;
   private static int ammo = 0;
   private static int health = 100;
@@ -308,6 +308,30 @@ public class Player extends Canvas {
     return false;
   }
 
+  public static int getXPos(){
+    return X;
+  }
+  public static void setX(int x){
+    X = x;
+  }
+  public static int getYPos(){
+    return Y;
+  }
+  public static void setY(int y){
+    Y = y;
+  }
+  public static double getVelY(){
+    return velY;
+  }
+  public static void setVelY(double VelY){
+    velY = VelY;
+  }
+  public static double getVelX(){
+    return velX;
+  }
+  public static void setVelX(double VelX){
+    velX = VelX;
+  }
   public static int getPerkPoints() {
     return perkPoints;
   }

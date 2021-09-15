@@ -22,11 +22,11 @@ public class ShockEnemy extends GameObject {
 
     public void tick() {
         y += velY;
-        if(Player.X >= 576/3) {
-            if (y <= Player.Y + (Player.X) / (7 + Game.challengeVar) + 40)
+        if(Player.getXPos() >= 576/3) {
+            if (y <= Player.getYPos() + (Player.getXPos()) / (7 + Game.challengeVar) + 40)
                 shoot();
         } else {
-            if (y <= Player.Y + ((Player.X - 48) / (7 + Game.challengeVar) + 24))
+            if (y <= Player.getYPos() + ((Player.getXPos() - 48) / (7 + Game.challengeVar) + 24))
                 shoot();
         }
         collision();
@@ -38,9 +38,9 @@ public class ShockEnemy extends GameObject {
     private void shoot() {
         if(notShot) {
             if (id == ID.HackedShockEnemy) {
-                Game.handler.addObject(new Bullet((int) x + 24, (int) y + 24, Player.X, Player.Y, 0, (int) velY, ID.FriendlyShockBullet, color));
+                Game.handler.addObject(new Bullet((int) x + 24, (int) y + 24, Player.getXPos(), Player.getYPos(), 0, (int) velY, ID.FriendlyShockBullet, color));
             } else {
-                Game.handler.addObject(new Bullet((int) x + 24, (int) y + 24, Player.X, Player.Y, 0, (int) velY, ID.EnemyShockBullet, color));
+                Game.handler.addObject(new Bullet((int) x + 24, (int) y + 24, Player.getXPos(), Player.getYPos(), 0, (int) velY, ID.EnemyShockBullet, color));
             }
             notShot = false;
         }

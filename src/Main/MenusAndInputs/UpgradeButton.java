@@ -9,31 +9,25 @@ public class UpgradeButton extends Button{
     private boolean pawn;
     private int tier;
     private final int tree;
-    private static int perksBought1 = 0, perksBought2 = 0, perksBought3 = 0;
-    private final String[] tree1Names = {"Faster Bullets", "Shotgun", "Max Upgrades"};
-    private final String[] tree2Names = {"Better PowerUps", "Super PowerUps", "Super Duper PowerUps", "Max Upgrades"};
-    private final String[] tree3Names = {"Shocker Hacker", "Electric Boogie", "Max Upgrades"};
+    private static final int[] perksBought = {0, 0, 0};
+    private static final String[][] treeNames = {{"Faster Bullets","Shotgun", "Max Upgrades"},
+            {"Better PowerUps", "Super PowerUps", "Super Duper PowerUps", "Max Upgrades"},
+            {"Shocker Hacker", "Electric Boogie", "Max Upgrades"}};
     private final int[] xPos = {332, 186, 40};
 
 
-    public UpgradeButton(int tier, int tree, String upgradeName, boolean pawn){
+    public UpgradeButton(int tier, int tree, String upgradeName, boolean pawn) {
         super(478, 0,104, 104, upgradeName, Menu.font20, Game.STATE.ShopMenu, Menu.navyBlue, Color.white);
         this.tier = tier;
         this.tree = tree;
         this.pawn = pawn;
-        y = ((tree-1)*150) + 179;
+        y = ((tree-1) * 150) + 179;
     }
     @Override
     public void tick() {
         try {
-            if (pawn) {
-                if (tree == 1 && x > xPos[perksBought1 - tier]) {
-                    x -= 2;
-                } else if (tree == 2 && x > xPos[perksBought2 - tier]) {
-                    x -= 2;
-                } else if (tree == 3 && x > xPos[perksBought3 - tier]) {
-                    x -= 2;
-                }
+            if (pawn && x > xPos[perksBought[tree -1] - tier]) {
+                x -= 4;
             }
         } catch (Exception e){
             removeBtn();
@@ -60,23 +54,16 @@ public class UpgradeButton extends Button{
     public void resetBtn(){
         tier = 1;
         setBtnColor(Menu.navyBlue);
-        perksBought1 = 0;
-        perksBought2 = 0;
-        perksBought3 = 0;
-        if(tree == 1){
-            label = tree1Names[tier - 1];
-        } else if(tree == 2){
-            label = tree2Names[tier - 1];
-        } else if(tree == 3){
-            label = tree3Names[tier - 1];
-        }
+        perksBought[tree -1] = 0;
+        label = treeNames[tree-1][tier - 1];
     }
 
     public void perkBought() {
-        if(tree == 1 && tier != 3 && Player.buyTopPerk()) {
-            perksBought1++;
-            Game.handler.addButton(new UpgradeButton(tier, 1, tree1Names[tier -1], true));
-            label = tree1Names[tier-1];
+        if((tree == 1 && tier != 3 && Player.buyTopPerk()) || (tree == 3 && tier != 3 && Player.buyBotPerk())) {
+            perksBought[tree -1]++;
+            Game.handler.addButton(new UpgradeButton(tier, tree, treeNames[tree-1][tier -1], true));
+            tier++;
+            label = treeNames[tree-1][tier-1];
             if(tier == 3){
                 setBtnColor(Menu.bluishGray);
             }
@@ -85,19 +72,11 @@ public class UpgradeButton extends Button{
                 Game.handler.addButton(MouseInput.topPerkBtn);
                 Game.handler.addButton(MouseInput.botPerkBtn);
             }
-            perksBought2++;
-            Game.handler.addButton(new UpgradeButton(tier, 2, tree2Names[tier-1], true));
+            perksBought[tree -1]++;
+            Game.handler.addButton(new UpgradeButton(tier, tree, treeNames[tree -1][tier-1], true));
             tier++;
-            label = tree2Names[tier-1];
+            label = treeNames[tree- 1][tier-1];
             if(tier == 4){
-                setBtnColor(Menu.bluishGray);
-            }
-        } else if(tree == 3 && tier != 3 && Player.buyBotPerk()){
-            perksBought3++;
-            Game.handler.addButton(new UpgradeButton(tier , 3, tree3Names[tier-1], true));
-            tier++;
-            label = tree3Names[tier-1];
-            if(tier == 3){
                 setBtnColor(Menu.bluishGray);
             }
         }

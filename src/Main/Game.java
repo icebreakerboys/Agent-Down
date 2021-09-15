@@ -69,7 +69,7 @@ public class Game extends Canvas implements Runnable {
     TimerTask updateStage = new TimerTask() {
       @Override
       public void run() {
-        if(Game.state == STATE.PauseMenu){
+        if(Game.state == STATE.PlayScreen){
           Spawner(timeRunning);
           timeRunning++;
         }
@@ -94,8 +94,8 @@ public class Game extends Canvas implements Runnable {
     int timeDelay = 11 - challengeVar;
     if(timeDelay <= 1)
       timeDelay = 1;
+    //System.out.println("this is running");
     if(timeRunning % timeDelay == 0){
-
       if(randomVar <= 1){
         handler.addObject(new ShooterEnemy(r.nextInt(11) * 48 + 48, r.nextInt(Window.HEIGHT) + Window.HEIGHT, challengeVar));
       } else if(randomVar <= 4){
@@ -175,8 +175,9 @@ public class Game extends Canvas implements Runnable {
       }
       if (System.currentTimeMillis() - timer > 1000) {
         timer += 1000;
-        System.out.println("FPS: " + frames);
-        System.out.println("Ticks: " + ticks);
+        //System.out.println("FPS: " + frames);
+        //System.out.println("Ticks: " + ticks);
+        System.out.println(handler.objects.size());
         //System.out.println("HP: " + GameObjects.PlayerAndMore.Player.HEALTH);
         frames = 0;
         ticks = 0;

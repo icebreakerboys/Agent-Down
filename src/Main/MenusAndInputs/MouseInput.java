@@ -67,7 +67,7 @@ public class MouseInput extends MouseAdapter {
         Game.isPlaying = false;
       } else {
         if (Player.getAmmo() != 0) {
-          Player.shoot(Player.X + 24, Player.Y + 24, mx, my);
+          Player.shoot(Player.getXPos() + 24, Player.getYPos() + 24, mx, my);
         }
       }
     } else if (Game.state == Game.STATE.MainMenu) {

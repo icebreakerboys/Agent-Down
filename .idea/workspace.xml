@@ -9,19 +9,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b5c558b8-f9f5-4e28-8844-6c14bf93ca2d" name="Default Changelist" comment="Lots">
-      <change afterPath="$PROJECT_DIR$/src/Main/MenusAndInputs/UpgradeButton.java" afterDir="false" />
+    <list default="true" id="b5c558b8-f9f5-4e28-8844-6c14bf93ca2d" name="Default Changelist" comment="Upgrade Button Rework">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameObjects/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Items/Bullet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/background.png" beforeDir="false" afterPath="$PROJECT_DIR$/res/images/background.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameObjects/Enemies/ShockEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Enemies/ShockEnemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameObjects/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/GameObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameObjects/Enemies/ShooterEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Enemies/ShooterEnemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameObjects/Player/JetStreams.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Player/JetStreams.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameObjects/Player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Player/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Handler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Handler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/MenusAndInputs/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/MenusAndInputs/Button.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/MenusAndInputs/KeyInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/MenusAndInputs/KeyInput.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main/MenusAndInputs/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/MenusAndInputs/Menu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main/MenusAndInputs/MouseInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/MenusAndInputs/MouseInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Window.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/MenusAndInputs/UpgradeButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/MenusAndInputs/UpgradeButton.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -293,7 +292,14 @@
       <option name="project" value="LOCAL" />
       <updated>1630484444034</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Upgrade Button Rework">
+      <created>1630714281610</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1630714281610</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -329,7 +335,8 @@
     <MESSAGE value="Nice Comment Blocks" />
     <MESSAGE value="Fixed Pause Menu" />
     <MESSAGE value="Lots" />
-    <option name="LAST_COMMIT_MESSAGE" value="Lots" />
+    <MESSAGE value="Upgrade Button Rework" />
+    <option name="LAST_COMMIT_MESSAGE" value="Upgrade Button Rework" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

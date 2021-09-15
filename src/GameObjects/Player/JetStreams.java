@@ -8,17 +8,17 @@ import java.awt.*;
 public class JetStreams extends GameObject {
 
   public JetStreams() {
-    super(Player.X, Player.Y - 50, ID.JetStream, 2, 50, Color.white);
+    super(Player.getXPos(), Player.getYPos() - 50, ID.JetStream, 2, 50, Color.white);
   }
 
   public void tick() {
-    if (Player.velY > 0) {
+    if (Player.getVelY() > 0) {
       h = 64;
-    } else if (Player.velY < 0) {
+    } else if (Player.getVelY() < 0) {
       h = 30;
     } else h = 48;
-    x = Player.X;
-    y = Player.Y - h;
+    x = Player.getXPos();
+    y = Player.getYPos() - h;
   }
 
   @Override
