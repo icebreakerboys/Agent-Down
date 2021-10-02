@@ -59,12 +59,12 @@ public abstract class GameObject extends Canvas {
   /**
    * Handles GameObjects collision with Friendly Bullets
    */
-  public void collision() {
+  protected void collision() {
     justHit = effect.coolDown();
     for (int i = 0; i < Game.handler.objects.size(); i++) {
       GameObject tempObject = Game.handler.objects.get(i);
       if (tempObject.getId() == ID.Bullet && tempObject.getFriendly()) {
-        if (id == ID.BossEnemy && getBounds2(0, 48, w, 24).intersects(tempObject.getBounds())) {
+        if (id == ID.BossEnemy && new Rectangle((int) x, (int) y+48, w, 24).intersects(tempObject.getBounds())) {
             Game.handler.removeObject(tempObject);
             if (Player.perks[2][0])
               stun();
@@ -97,18 +97,6 @@ public abstract class GameObject extends Canvas {
    */
   public Rectangle getBounds() {
     return new Rectangle((int) x, (int) y, w, h);
-  }
-  /**
-   * Returns a different Hit box of GameObjects
-   * Used for GameObjects.Enemies.BossEnemy collision
-   *
-   * @param x1 added to the double x
-   * @param y1 added to the double Y
-   * @param w1 replaces w
-   * @param h1 replaces h
-   */
-  public Rectangle getBounds2(int x1, int y1, int w1, int h1) {
-    return new Rectangle((int) x + x1, (int) y + y1, w1, h1);
   }
   public void sizeNPosVar(boolean size){
     if(size){
@@ -150,23 +138,35 @@ public abstract class GameObject extends Canvas {
     if(object.health <= 0)
       Game.handler.removeObject(object);
   }
+  public void stun(){
+    stunned = true;
+  }
   /**
    * Getters and Setters
    */
-  public void stun(){
-    stunned = true;
+  public int getX() {
+    return (int) x;
   }
   public void setX(int x) {
     this.x = x;
   }
+  public int getY() {
+    return (int) y;
+  }
   public void setY(int y) {
     this.y = y;
   }
-  public int getX() {
-    return (int) x;
+  public double getVelY() {
+    return velY;
   }
-  public int getY() {
-    return (int) y;
+  public void setVelY(double VelY){
+    velY = VelY;
+  }
+  public double getVelX(){
+    return velX;
+  }
+  public void setVelX(double VelX){
+    velX = VelX;
   }
   public int getW(){
     return w;
@@ -174,14 +174,11 @@ public abstract class GameObject extends Canvas {
   public int getH(){
     return h;
   }
-  public void setId(ID id) {
-    this.id = id;
-  }
   public ID getId() {
     return id;
   }
-  public double getVelY() {
-    return velY;
+  public void setId(ID id) {
+    this.id = id;
   }
   public boolean getStunned(){
     return stunned;

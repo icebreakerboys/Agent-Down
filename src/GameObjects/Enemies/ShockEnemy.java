@@ -23,7 +23,7 @@ public class ShockEnemy extends GameObject {
 
     public void tick() {
         y += velY;
-        if ((Player.getYPos() - y)/velY == ((Player.getXPos() - 48) / (5 + Game.challengeVar)))
+        if ((Game.player.getY() - y)/velY == ((Game.player.getX() - 48) / (5 + Game.challengeVar)))
             shoot();
         collision();
         removeGameObject(true);

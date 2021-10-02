@@ -6,20 +6,12 @@ import Main.*;
 import Main.MenusAndInputs.*;
 import Main.MenusAndInputs.Menu;
 import Main.Window;
-
 import java.awt.*;
 
-//FIXME Try to integrate this into GameObjects.GameObject to Save File Space
-// not completely necessary but something to look into
-public class Player extends Canvas {
+public class Player extends GameObject {
 
-  private static int X, Y;
-  private static double velX = 0, velY = 0;
   private static double minVelY = -100;
   private static int ammo = 0;
-  private static int health = 100;
-  private static final int w = 48, h = 48;
-  private static final Color color = Color.gray;
   public static boolean[][] perks = {{false, false}, {false, false, false}, {false, false}};
   private static int[] treeTiers = {2,1,2};
   private static int perkPoints = 0, perksBought = 0;
@@ -30,8 +22,11 @@ public class Player extends Canvas {
   private static GameObject parachute = null;
 
   public Player(int x, int y) {
-    X = x;
-    Y = y;
+    super(ID.Player, Color.gray, true);
+    this.x = x;
+    this.y = y;
+    w = 48;
+    h = 48;
     health = 100;
   }
   /**
@@ -40,37 +35,33 @@ public class Player extends Canvas {
    * Determines if the player hits anything
    * Ends the game when necessary
    */
-  public static void tick() {
+  public void tick() {
     if(!stunned) {
-      X += (int) velX;
-      Y += (int) velY;
+      x += velX;
+      y += velY;
       if(hasSpeedBuff){
-        X += (int) velX;
-        Y += (int) velY;
+        x += velX;
+        y += velY;
       }
     }
-
     justHit = effect1.coolDown();
     stunned = effect2.coolDown();
     hasSpeedBuff = effect3.coolDown();
-
     justOnParachute = effect4.coolDown();
     parachute = effect4.getGameObject();
-    if(effect4.getCounter() < 60 && parachute != null && X >= parachute.getX() - 36 && X <= parachute.getX() + 36){
-      Y += parachute.getVelY();
+    if(effect4.getCounter() < 60 && parachute != null && x >= parachute.getX() - 36 && x <= parachute.getX() + 36){
+      y += parachute.getVelY();
       timeDown = 2;
     }
-
     if(KeyInput.keysDown[2] || KeyInput.keysDown[3]){
       determineVelY();
     } else {
       velY = 0;
       timeDown = 1;
     }
-
     collision();
-    X = (int) Game.clamp(X, 48, Window.WIDTH - 110);
-    Y = (int) Game.clamp(Y, 0, 3 * (Window.HEIGHT / 4) - 45);
+    x = Game.clamp(x, 48, Window.WIDTH - 110);
+    y = Game.clamp(y, 0, 3*(Window.HEIGHT/4) - 45);
     velY = Game.clamp(velY, minVelY, 10);
     minVelY = -5;
     //health = 100;
@@ -89,28 +80,30 @@ public class Player extends Canvas {
    *
    * @param g Graphics
    */
+  @Override
   public void render(Graphics g) {
     //Image image = new ImageIcon(getClass().getClassLoader().getResource("images/GameObjects.PlayerAndMore.Player.png")).getImage();
     if (justHit) {
       if (effect1.getCounter() % 5 != 0) {
         //g.drawImage(image, X - 8, Y - 4, 69, 56, this);
         g.setColor(color);
-        g.fillRect(X, Y, w, h);
+        g.fillRect((int) x, (int) y, w, h);
       }
     } else {
       //g.drawImage(image, X - 8, Y - 4, 69, 56, this);
       g.setColor(color);
-      g.fillRect(X, Y, w, h);
+      g.fillRect((int)x, (int)y, w, h);
     }
     if(Menu.menuState == Menu.MSTATE.EndMenu) {
       g.setColor(color);
-      g.fillRect(X, Y, w, h);
+      g.fillRect((int)x, (int)y, w, h);
     }
   }
   /**
    * Handles player collision with GameObjects
    */
-  private static void collision() {
+  @Override
+  protected void collision() {
     for (int i = 0; i < Game.handler.objects.size(); i++) {
       GameObject tempObject = Game.handler.objects.get(i);
       ID tempID = tempObject.getId();
@@ -170,7 +163,9 @@ public class Player extends Canvas {
             }
         }
       }
-      if (tempID ==  ID.Parachute && Game.player.getBounds2(0, 0, 48, 12).intersects(tempObject.getBounds2(0, +25, 48, 10))) {
+
+      if (tempID ==  ID.Parachute && new Rectangle((int)x, (int)y, 48, 12).intersects(
+              new Rectangle(tempObject.getX(), tempObject.getY() + 25, 48, 10))) {
         minVelY = tempObject.getVelY();
       }
     }
@@ -178,7 +173,7 @@ public class Player extends Canvas {
   /**
    * Handles player Velocity Y
    */
-  private static void determineVelY() {
+  private void determineVelY() {
     if(KeyInput.keysDown[2] && KeyInput.keysDown[3]) {
       velY = 0;
       timeDown = 1;
@@ -195,10 +190,10 @@ public class Player extends Canvas {
   /**
    * Shoots Friendly Bullets at angles
    */
-  public static void shoot(int tX, int tY) {
+  public void shoot(int tX, int tY) {
     ammo--;
-    int x = X + 24;
-    int y = Y + 24;
+    int x =(int) this.x + 24;
+    int y =(int) this.y + 24;
     int xC = tX - x;
     int yC = tY - y;
     double angle = Math.atan2(yC,xC);
@@ -220,22 +215,10 @@ public class Player extends Canvas {
    * Returns the Hit box of the GameObjects.PlayerAndMore.Player
    */
   public Rectangle getBounds() {
-    return new Rectangle(X, Y, w, h);
-  }
-  /**
-   * Returns a different Hit box of the GameObjects.PlayerAndMore.Player
-   * Used for parachute collision
-   *
-   * @param x1 added to the integer X
-   * @param y1 added to the integer Y
-   * @param w1 replaces w
-   * @param h1 replaces h
-   */
-  private Rectangle getBounds2(int x1, int y1, int w1, int h1) {
-    return new Rectangle(X + x1, Y + y1, w1, h1);
+    return new Rectangle((int)x, (int)y, w, h);
   }
 
-  private static void takeDamage(int damage){
+  private void takeDamage(int damage){
     if(!justHit) {
       health -= damage;
       effect1.setEffect(true);
@@ -247,7 +230,7 @@ public class Player extends Canvas {
     perksBought = 0;
   }
 
-  private static void die() {
+  private void die() {
     Game.state = Game.STATE.MainMenu; Game.isPlaying = false;
     Menu.menuState = Menu.MSTATE.EndMenu; Menu.restarted = true; Menu.y = 1480;
     health = 100; ammo = 0;
@@ -297,41 +280,15 @@ public class Player extends Canvas {
     }
   }
 
-  public static int getXPos(){
-    return X;
-  }
-  public static void setX(int x){
-    X = x;
-  }
-  public static int getYPos(){
-    return Y;
-  }
-  public static void setY(int y){
-    Y = y;
-  }
-  public static double getVelY(){
-    return velY;
-  }
-  public static void setVelY(double VelY){
-    velY = VelY;
-  }
-  public static double getVelX(){
-    return velX;
-  }
-  public static void setVelX(double VelX){
-    velX = VelX;
-  }
   public static boolean getDamageBoost() {
     return haveDamageBoost;
   }
   public static int getPerkPoints() {
     return perkPoints;
   }
-
-  public static int getHealth() {
+  public int getHealth() {
     return health;
   }
-
   public static int getAmmo(){
     return ammo;
   }

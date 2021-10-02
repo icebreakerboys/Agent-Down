@@ -87,7 +87,7 @@ public class Game extends Canvas implements Runnable {
   private static void Spawner(int timeRunning) {
     int rVar;
     int timeDelay = Math.max(1, 11 - challengeVar);
-    if(challengeVar == 1){
+    if(timeRunning <= 600){
       rVar = 0;
     } else {
       rVar = r.nextInt(10);
@@ -95,6 +95,7 @@ public class Game extends Canvas implements Runnable {
     //System.out.println("this is running");
     if(timeRunning % timeDelay == 0){
       if(rVar <= 4){
+        handler.addObject(new Enemy(challengeVar));
         handler.addObject(new Enemy(challengeVar));
       } else if(rVar <= 7){
         handler.addObject(new ShooterEnemy(challengeVar));
@@ -193,7 +194,7 @@ public class Game extends Canvas implements Runnable {
     if (state == STATE.PlayScreen) {
       handler.objectTick();
       hud.tick();
-      Player.tick();
+      player.tick();
     } else {
       menu.tick();
       handler.buttonTick();

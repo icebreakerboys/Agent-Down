@@ -34,7 +34,7 @@ public class HUD {
     g.setColor(Color.darkGray);
     g.fillRect(254, 680, 200, 16);
     g.setColor(Color.green);
-    g.fillRect(254, 680, Player.getHealth() * 2, 16);
+    g.fillRect(254, 680, Game.player.getHealth() * 2, 16);
     g.setColor(Color.black);
     g.drawRect(254, 680, 200, 16);
     g.fillRect(474, 680, 20, 8);

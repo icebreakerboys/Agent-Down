@@ -2,6 +2,7 @@ package GameObjects.Player;
 
 import GameObjects.GameObject;
 import GameObjects.ID;
+import Main.Game;
 
 import java.awt.*;
 
@@ -9,20 +10,20 @@ public class JetStreams extends GameObject {
 
   public JetStreams() {
     super(ID.JetStream, Color.white, true);
-    x = Player.getXPos();
-    y = Player.getYPos() - 48;
+    x = Game.player.getX();
+    y = Game.player.getY() - 48;
     w = 2;
     h = 48;
   }
 
   public void tick() {
-    if (Player.getVelY() > 0) {
+    if (Game.player.getVelY() > 0) {
       h = 64;
-    } else if (Player.getVelY() < 0) {
+    } else if (Game.player.getVelY() < 0) {
       h = 32;
     } else h = 48;
-    x = Player.getXPos();
-    y = Player.getYPos() - h;
+    x = Game.player.getX();
+    y = Game.player.getY() - h;
   }
 
   @Override

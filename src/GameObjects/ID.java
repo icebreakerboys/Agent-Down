@@ -1,6 +1,7 @@
 package GameObjects;
 
 public enum ID {
+  Player(),
   Enemy(),
   ShooterEnemy(),
   ShockerEnemy(),

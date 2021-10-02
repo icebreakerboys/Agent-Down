@@ -66,7 +66,7 @@ public class MouseInput extends MouseAdapter {
         Menu.paused = true;
         Game.isPlaying = false;
       } else if (Player.getAmmo() != 0) {
-          Player.shoot(mx, my);
+          Game.player.shoot(mx, my);
       }
     } else if (Game.state == Game.STATE.MainMenu) {
       if (mouseOver(mx, my, playBtn.getRect()))

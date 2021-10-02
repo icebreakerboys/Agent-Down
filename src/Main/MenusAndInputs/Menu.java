@@ -185,8 +185,8 @@ public class Menu extends Canvas{
                 Game.challengeVar = 1;
                 Game.timeRunning = 1;
                 HUD.setScore(-HUD.getScore());
-                Player.setX(Window.WIDTH/2);
-                Player.setY(100);
+                Game.player.setX(Window.WIDTH/2);
+                Game.player.setY(100);
                 while(Game.handler.objects.size() != 0){
                     GameObject tempObject = Game.handler.objects.get(0);
                     System.out.println(tempObject.getId());

@@ -26,11 +26,11 @@ public class KeyInput extends KeyAdapter {
     int key = e.getKeyCode();
     //Key Events for GameObjects.PlayerAndMore.Player
     if (key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT) {
-      Player.setVelX(5);
+      Game.player.setVelX(5);
       keysDown[0] = true;
     }
     if (key == KeyEvent.VK_A || key == KeyEvent.VK_LEFT) {
-      Player.setVelX(-5);
+      Game.player.setVelX(-5);
       keysDown[1] = true;
     }
     if (key == KeyEvent.VK_S || key == KeyEvent.VK_DOWN) {
@@ -38,7 +38,7 @@ public class KeyInput extends KeyAdapter {
       keysDown[2] = true;
     }
     if (key == KeyEvent.VK_W || key == KeyEvent.VK_UP) {
-      Player.setVelY(-4);
+      Game.player.setVelY(-4);
       keysDown[3] = true;
     }
     if (key == KeyEvent.VK_P) {
@@ -67,10 +67,10 @@ public class KeyInput extends KeyAdapter {
     if (key == KeyEvent.VK_W || key == KeyEvent.VK_UP)
       keysDown[3] = false;
     if (!keysDown[0] && !keysDown[1]) {
-      Player.setVelX(0);
+      Game.player.setVelX(0);
     }
     if (!keysDown[2] && !keysDown[3]) {
-      Player.setVelY(0);
+      Game.player.setVelY(0);
     }
   }
 }

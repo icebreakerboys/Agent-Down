@@ -35,7 +35,8 @@ public class ShooterEnemy extends GameObject {
     }
     collision();
     if (onScreen() && counter % 50 == 0) {
-      if ((Player.getXPos() < x - 50 && Player.getYPos() < y - 50) || (Player.getXPos() > x + 50 && Player.getYPos() < y - 50) || Player.getYPos() > y + 50) {
+      if ((Game.player.getX() < x - 50 && Game.player.getY() < y - 50) ||
+              (Game.player.getX() > x + 50 && Game.player.getY() < y - 50) || Game.player.getY() > y + 50) {
         shoot();
       } else counter = 49;
     }
@@ -55,10 +56,10 @@ public class ShooterEnemy extends GameObject {
    * Shoots GameObjects.Enemies.Enemy Bullets at an angle
    */
   public void shoot() {
-    int xC = Player.getXPos() - ((int) x + 24);
-    int yC = Player.getYPos() - ((int) y + 24);
+    int xC = Game.player.getX() - ((int) x + 24);
+    int yC = Game.player.getY() - ((int) y + 24);
     double angle = Math.atan2(yC,xC);
-    Game.handler.addObject(new Bullet((int) x + 24, (int) y + 24, Player.getXPos(), Player.getYPos(), angle, ID.Bullet, color, friendly));
+    Game.handler.addObject(new Bullet((int) x + 24, (int) y + 24, Game.player.getX(), Game.player.getY(), angle, ID.Bullet, color, friendly));
   }
   /**
    * Controls velY when GameObjects.ItemsAndMore.Parachute is destroyed
