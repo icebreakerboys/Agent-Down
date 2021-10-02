@@ -20,7 +20,7 @@ public class MouseInput extends MouseAdapter {
   private static final Button quitBtn = new Button(156, 546, 312, 68,
           "Quit", Menu.font50, Game.STATE.MainMenu, Menu.nvyBluSemiTransprnt, Color.white);
   private static final Button returnBtn1 = new Button(156 + 638, 546, 312, 68,
-          "Return", Menu.font40, Game.STATE.MainMenu, Menu.nvyBluSemiTransprnt, Color.white);
+          "Return", Menu.font40, Game.STATE.MainMenu, Menu.navyBlue, Color.white);
   private static final Button returnBtn2 = new Button(156 - 638, 546, 312, 68,
           "Return", Menu.font40, Game.STATE.MainMenu, Menu.nvyBluSemiTransprnt, Color.white);
   private static final Button returnBtn3 = new Button(156, 546 - 740, 312, 68,
@@ -39,9 +39,9 @@ public class MouseInput extends MouseAdapter {
           "Sell", Menu.font40, Game.STATE.ShopMenu, Color.red, Color.white);
   private static final Button returnBtn4 = new Button(56, 110, 105, 40,
           "Return", Menu.font30, Game.STATE.ShopMenu, Menu.navyBlue, Color.white);
-  public static final UpgradeButton topPerkBtn = new UpgradeButton(1, 1, "Better Bullets", false);
-  public static final UpgradeButton midPerkBtn = new UpgradeButton(1, 2, "Better Power Ups", false);
-  public static final UpgradeButton botPerkBtn = new UpgradeButton(1, 3, "Shocker Hacker", false);
+  public static final UpgradeButton topPerkBtn = new UpgradeButton(1, 1, "Armor Piercin' Rounds", false);
+  public static final UpgradeButton midPerkBtn = new UpgradeButton(1, 2, "Better PowerUps", false);
+  public static final UpgradeButton botPerkBtn = new UpgradeButton(1, 3, "Shocka Hacka", false);
 
   public MouseInput(){
     Game.handler.addButton(playBtn); Game.handler.addButton(optionsBtn);
@@ -65,10 +65,8 @@ public class MouseInput extends MouseAdapter {
         Game.state = Game.STATE.PauseMenu;
         Menu.paused = true;
         Game.isPlaying = false;
-      } else {
-        if (Player.getAmmo() != 0) {
-          Player.shoot(Player.getXPos() + 24, Player.getYPos() + 24, mx, my);
-        }
+      } else if (Player.getAmmo() != 0) {
+          Player.shoot(mx, my);
       }
     } else if (Game.state == Game.STATE.MainMenu) {
       if (mouseOver(mx, my, playBtn.getRect()))
@@ -142,13 +140,8 @@ public class MouseInput extends MouseAdapter {
    * @param rect Rectangle of Buttons
    */
   private boolean mouseOver(int mx, int my, Rectangle rect) {
-    int x = (int) rect.getX();
-    int y = (int) rect.getY();
-    int w = (int) rect.getWidth();
-    int h = (int) rect.getHeight();
-
-    if (mx > x && mx < x + w) {
-      return my > y && my < y + h;
+    if (mx > rect.getX() && mx < rect.getX() + rect.getWidth()) {
+      return my > rect.getY() && my < rect.getY() + rect.getHeight();
     } else return false;
   }
 }

@@ -85,35 +85,33 @@ public class Game extends Canvas implements Runnable {
    * @param timeRunning time that the game has been played
    */
   private static void Spawner(int timeRunning) {
-    int randomVar = r.nextInt(7);
-    if(timeRunning <= 600){
-      randomVar = 4;
-    } else if(timeRunning <= 1200){
-      randomVar = r.nextInt(5);
+    int rVar;
+    int timeDelay = Math.max(1, 11 - challengeVar);
+    if(challengeVar == 1){
+      rVar = 0;
+    } else {
+      rVar = r.nextInt(10);
     }
-    int timeDelay = 11 - challengeVar;
-    if(timeDelay <= 1)
-      timeDelay = 1;
     //System.out.println("this is running");
     if(timeRunning % timeDelay == 0){
-      if(randomVar <= 1){
-        handler.addObject(new ShooterEnemy(r.nextInt(11) * 48 + 48, r.nextInt(Window.HEIGHT) + Window.HEIGHT, challengeVar));
-      } else if(randomVar <= 4){
-        handler.addObject(new Enemy(r.nextInt(33) * 16 + 48, r.nextInt(Window.HEIGHT) + Window.HEIGHT, challengeVar));
+      if(rVar <= 4){
+        handler.addObject(new Enemy(challengeVar));
+      } else if(rVar <= 7){
+        handler.addObject(new ShooterEnemy(challengeVar));
       } else {
-        if(Player.hasShockerHacker && randomVar == 5) {
-          handler.addObject(new ShockEnemy(r.nextInt(2) * 576, r.nextInt(Window.HEIGHT) + Window.HEIGHT, challengeVar, ID.HackedShockEnemy));
+        if(Player.perks[2][0] && rVar == 8) {
+          handler.addObject(new ShockEnemy(challengeVar, true));
+        } else {
+          handler.addObject(new ShockEnemy(challengeVar, false));
         }
-        handler.addObject(new ShockEnemy(r.nextInt(2) * 576, r.nextInt(Window.HEIGHT) + Window.HEIGHT, challengeVar, ID.ShockerEnemy));
       }
     }
     if (timeRunning % 100  == 0) {
-      handler.addObject(new HealthPack(r.nextInt(33)* 16 + 48, Window.HEIGHT + r.nextInt(200), 16, 16));
-      handler.addObject(new Magazine(r.nextInt(33)* 16 + 48, Window.HEIGHT + r.nextInt(200), 16, 16));
+      handler.addObject(new PowerUp(ID.HealthPack, Color.green));
+      handler.addObject(new PowerUp(ID.Magazine, Color.blue));
     }
     if(timeRunning % 1200 == 0){
       handler.addObject(new BossEnemy(challengeVar));
-      challengeVar++;
     }
   }
   /**
@@ -175,9 +173,9 @@ public class Game extends Canvas implements Runnable {
       }
       if (System.currentTimeMillis() - timer > 1000) {
         timer += 1000;
-        //System.out.println("FPS: " + frames);
+        System.out.println("FPS: " + frames);
         //System.out.println("Ticks: " + ticks);
-        System.out.println(handler.objects.size());
+        //System.out.println(handler.objects.size());
         //System.out.println("HP: " + GameObjects.PlayerAndMore.Player.HEALTH);
         frames = 0;
         ticks = 0;

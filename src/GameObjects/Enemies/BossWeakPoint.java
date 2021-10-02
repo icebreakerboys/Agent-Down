@@ -8,18 +8,22 @@ import java.awt.*;
 
 public class BossWeakPoint extends GameObject {
 
-    public BossWeakPoint(double x, double y, int speed, BossEnemy boss){
-        super(x, y, ID.BossWeakPoint, 48, 48, new Color(255, 100, 100));
+    public BossWeakPoint(int speed, BossEnemy boss){
+        super(ID.BossWeakPoint, new Color(255, 100, 100), false);
+        this.boss = boss;
+        x = r.nextInt(13) * 48;
+        y = boss.getY();
+        w = 48;
+        h = 48;
         this.speed = speed;
         this.health = (speed - 1) * 4;
         if(speed >= 3){
             velX = r.nextInt(speed) + 1;
         }
-        this.boss = boss;
     }
 
     public void tick(){
-        if(!boss.getstunned()) {
+        if(!boss.getStunned()) {
             y = boss.getY();
             x += velX;
             x = Game.clamp((int) x, 0, 576);

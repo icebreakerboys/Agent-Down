@@ -119,16 +119,17 @@ public class Menu extends Canvas{
      */
     private void renderHelpMenu(Graphics g){
         g.setColor(nvyBluSemiTransprnt);
-        g.fillRect(x + 100 + 640, y + 100, 425, 400);
+        g.fillRect(x + 640, y, 624, 740);
         g.setColor(Color.white);
         g.setFont(font40);
-        g.drawString("Try to avoid the bullets", x + 110 + 640, y + 150);
-        g.drawString("and shrapnel, while", x + 140 + 640, y + 205);
-        g.drawString("falling from the sky.", x + 140 + 640, y + 260);
-        g.drawString("Aliens won't shoot you", x + 110 + 640, y + 315);
-        g.drawString("if you're right above", x + 135 + 640, y + 370);
-        g.drawString("them. Good Luck!", x + 150 + 640, y + 425);
-        g.drawString("Press P to Pause.", x + 150 + 640, y + 480);
+        g.drawString("Try to avoid the", x + 60 + 640, y + 112);
+        g.drawString("bullets and shrapnel,", x + 60 + 640, y + 162);
+        g.drawString("while falling from", x + 60 + 640, y + 212);
+        g.drawString("the sky. Aliens won't", x + 60 + 640, y + 262);
+        g.drawString("shoot you if you're", x + 60 + 640, y + 312);
+        g.drawString("right above them.", x + 60 + 640, y + 362);
+        g.drawString("Good Luck!", x + 60 + 640, y + 412);
+        g.drawString("Press P to Pause.", x + 60 + 640, y + 462);
     }
     /**
      * Handles the visual components of the End Main.MenusAndInputs.Menu
@@ -140,11 +141,11 @@ public class Menu extends Canvas{
         g.fillRect(x + 100, y + 100 - 740, 425, 400);
         g.setColor(Color.WHITE);
         g.setFont(font50);
-        g.drawString("Main.Game Over!", x + 175, y + 200 - 740);
-        g.drawString("Score:", x + 250, y + 300 - 740);
-        g.drawString("" + HUD.getScore(), x + 200, y + 400 - 740);
-        g.drawString("Time:", x + 250, y + 300 - 740);
-        g.drawString("" + Game.timeRunning / 10, x + 200, y + 400 - 740);
+        g.drawString("Game Over!", x + 175, y + 150 - 740);
+        g.drawString("Score:", x + 250, y + 210 - 740);
+        g.drawString("" + HUD.getScore(), x + 200, y + 270 - 740);
+        g.drawString("Time:", x + 250, y + 330 - 740);
+        g.drawString(Game.timeRunning / 10 + " secs", x + 200, y + 390 - 740);
     }
     /**
      * Handles the visual components of the Pause Main.MenusAndInputs.Menu

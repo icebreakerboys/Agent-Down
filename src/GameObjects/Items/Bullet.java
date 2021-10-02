@@ -9,16 +9,15 @@ import java.awt.*;
 
 public class Bullet extends GameObject {
 
-  public Bullet(int x, int y, int tX, int tY, double angle, int velY, ID id, Color color) {
-    super(x, y, id, 12, 12, color);
-    if(id != ID.EnemyShockBullet && id != ID.FriendlyShockBullet) {
-      target(x, y, tX, tY, angle);
-    } else {
-      this.velY = velY;
-      this.velX = Game.challengeVar + 7;
-      if(x == 600)
-        this.velX = -this.velX;
-    }
+  public Bullet(int x, int y, int tX, int tY, double angle, ID id, Color color, boolean friendly) {
+    super(id, color, friendly);
+    this.x = x;
+    this.y = y;
+    w = 12;
+    h = 12;
+    if(friendly && Player.perks[0][0])
+      health = 2;
+    target(x, y, tX, tY, angle);
   }
 
   public void tick() {
@@ -41,7 +40,7 @@ public class Bullet extends GameObject {
     double yD = Math.tan(angle);
     double xD  = 1;
     if(tX < x){
-      xD = -1;
+      xD = -xD;
       yD = -yD;
     }
     if(Math.abs(tX - x) <= 40){
@@ -52,31 +51,15 @@ public class Bullet extends GameObject {
       }
     }
     double magnitude = Math.sqrt(xD * xD + yD * yD);
-    if(id == ID.FriendlyBullet){
-      if(Player.hasFasterBullets) {
-        velY = ((14 * yD) / magnitude);
-        velX = ((14 * xD) / magnitude);
+    double speedMultiple = Game.challengeVar + 5;
+    if(friendly) {
+      if (Player.perks[0][0]) {
+        speedMultiple = 14;
       } else {
-        velY = ((7 * yD) / magnitude);
-        velX = ((7 * xD) / magnitude);
+        speedMultiple = 7;
       }
-    } else {
-      velY = (((Game.challengeVar + 5) * yD) / magnitude);
-      velX = (((Game.challengeVar + 5) * xD) / magnitude);
     }
-  }
-
-  @Override
-  public void collision() {
-    for (int i = 0; i < Game.handler.objects.size(); i++) {
-      GameObject tempObject = Game.handler.objects.get(i);
-      if (tempObject.getId() == ID.FriendlyBullet && id == ID.EnemyBullet && getBounds().intersects(tempObject.getBounds()))
-        Game.handler.removeObject(this);
-    }
-  }
-
-  @Override
-  public Rectangle getBounds() {
-    return new Rectangle((int) x, (int) y, w, h);
+    velY = ((speedMultiple * yD) / magnitude);
+    velX = ((speedMultiple * xD) / magnitude);
   }
 }

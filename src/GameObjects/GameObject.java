@@ -1,7 +1,10 @@
 package GameObjects;
 
 import java.awt.*;
+
+import GameObjects.Items.PowerUp;
 import Main.*;
+
 import java.util.Random;
 import GameObjects.Enemies.*;
 import GameObjects.Player.*;
@@ -16,22 +19,20 @@ public abstract class GameObject extends Canvas {
   protected ID id;
   protected Color color;
   protected boolean stunned = false;
+  protected boolean friendly;
   protected BossEnemy boss;
+  protected Effect effect = new Effect(20, false);
+  protected boolean justHit = false;
 
-  public GameObject(double x, double y, ID id, int w, int h, Color color) {
+  public GameObject(ID id, Color color, boolean friendly) {
     this.id = id;
     this.color = color;
-    this.w = w;
-    this.h = h;
-    this.x = x;
-    this.y = y;
+    this.friendly = friendly;
   }
-
   /**
    * Handles GameObjects.GameObject movement & collision
    */
   public abstract void tick();
-
   /**
    * Handles the visual components of GameObjects
    *
@@ -59,32 +60,38 @@ public abstract class GameObject extends Canvas {
    * Handles GameObjects collision with Friendly Bullets
    */
   public void collision() {
+    justHit = effect.coolDown();
     for (int i = 0; i < Game.handler.objects.size(); i++) {
       GameObject tempObject = Game.handler.objects.get(i);
-      if (tempObject.getId() == ID.FriendlyBullet){
-        if (getId() == ID.BossEnemy) {
-          if (getBounds2(0, h, w, h).intersects(tempObject.getBounds())) {
+      if (tempObject.getId() == ID.Bullet && tempObject.getFriendly()) {
+        if (id == ID.BossEnemy && getBounds2(0, 48, w, 24).intersects(tempObject.getBounds())) {
             Game.handler.removeObject(tempObject);
-            if (Player.hasShockerHacker)
+            if (Player.perks[2][0])
               stun();
-          }
-        } else if(getBounds().intersects(tempObject.getBounds())) {
-          health--;
-          Game.handler.removeObject(tempObject);
-          if(health <= 0) {
-            Game.handler.removeObject(this);
-            HUD.setScore(50 + (Game.challengeVar * 10));
-
-            if(getId() == ID.BossWeakPoint){
-              boss.killWeakPoint(boss);
+        } else if(((id == ID.Bullet && !friendly) || (id == ID.ShockBullet && !friendly)
+                && getBounds().intersects(tempObject.getBounds()))) {
+          Game.handler.removeObject(this);
+        } else if(getBounds().intersects(tempObject.getBounds()) && !friendly && id != ID.BossEnemy) {
+            if(!justHit){
+              health--;
+              takeDamage(tempObject);
+              effect.setEffect(true);
             }
-          } else if(Player.hasShockerHacker && getId() == ID.BossWeakPoint){
-            boss.stun();
+            if(health <= 0) {
+              Game.handler.removeObject(this);
+              HUD.setScore(50 + (Game.challengeVar * 10));
+              if(id == ID.BossWeakPoint){
+                boss.killWeakPoint(boss);
+              } else if(Player.perks[1][1]){
+                spawnPowerUps(tempObject);
+              }
+            } else if(Player.perks[2][0] && id == ID.BossWeakPoint){
+              boss.stun();
+            }
           }
         }
       }
     }
-  }
   /**
    * Returns the Hit box of GameObjects
    */
@@ -103,13 +110,52 @@ public abstract class GameObject extends Canvas {
   public Rectangle getBounds2(int x1, int y1, int w1, int h1) {
     return new Rectangle((int) x + x1, (int) y + y1, w1, h1);
   }
+  public void sizeNPosVar(boolean size){
+    if(size){
+      int rInt = r.nextInt(3) + 1;
+      w = 16*rInt;
+      h = 16*rInt;
+    } else {
+      w = 16;
+      h = 16;
+    }
+    if(id == ID.ShockerEnemy){
+      x = r.nextInt(2) * 576;
+    } else {
+      x = r.nextDouble() * (528/w) * w + 48;
+      y = r.nextInt(Window.HEIGHT) + Window.HEIGHT;
+    }
+  }
+
+  private void spawnPowerUps(GameObject object){
+    GameObject powerUp;
+    double randVar = r.nextDouble() * 100;
+    double threshold = 100.0/3;
+    if(randVar >= 85) {
+      randVar = r.nextDouble() * 100;
+      if (!Player.getDamageBoost() && randVar >= 2 * threshold) {
+        powerUp = new PowerUp(ID.DamageBoost, Color.pink);
+      } else if (randVar >= threshold) {
+        powerUp = new PowerUp(ID.Magazine, Color.blue);
+      } else {
+        powerUp = new PowerUp(ID.HealthPack, Color.green);
+      }
+      powerUp.setX(object.getX());
+      powerUp.setY(object.getY());
+      Game.handler.addObject(powerUp);
+    }
+  }
+  private void takeDamage(GameObject object){
+    object.health--;
+    if(object.health <= 0)
+      Game.handler.removeObject(object);
+  }
   /**
    * Getters and Setters
    */
   public void stun(){
     stunned = true;
   }
-
   public void setX(int x) {
     this.x = x;
   }
@@ -122,6 +168,12 @@ public abstract class GameObject extends Canvas {
   public int getY() {
     return (int) y;
   }
+  public int getW(){
+    return w;
+  }
+  public int getH(){
+    return h;
+  }
   public void setId(ID id) {
     this.id = id;
   }
@@ -131,9 +183,10 @@ public abstract class GameObject extends Canvas {
   public double getVelY() {
     return velY;
   }
-
-  public boolean getstunned(){
+  public boolean getStunned(){
     return stunned;
   }
-
+  public boolean getFriendly(){
+    return friendly;
+  }
 }

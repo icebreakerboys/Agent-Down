@@ -20,10 +20,10 @@ public class Player extends Canvas {
   private static int health = 100;
   private static final int w = 48, h = 48;
   private static final Color color = Color.gray;
-  public static boolean hasShotgun = false, hasFasterBullets = false, hasElectricBoogie = false, hasShockerHacker = false,
-          hasBetterPowerUps = false, hasSuperPowerUps = false, hasSuperDuperPowerUps = false, hasSpeedBuff = false;
+  public static boolean[][] perks = {{false, false}, {false, false, false}, {false, false}};
+  private static int[] treeTiers = {2,1,2};
   private static int perkPoints = 0, perksBought = 0;
-  private static boolean justHit = false, justOnParachute = false, stunned = false;
+  private static boolean justHit = false, justOnParachute = false, stunned = false, hasSpeedBuff = false, haveDamageBoost = false;
   private static final Effect effect1 = new Effect(30, false), effect2 = new Effect(30, false),
           effect3 = new Effect(30000, false), effect4 = new Effect(90, true);
   private static double timeDown = 0;
@@ -73,9 +73,9 @@ public class Player extends Canvas {
     Y = (int) Game.clamp(Y, 0, 3 * (Window.HEIGHT / 4) - 45);
     velY = Game.clamp(velY, minVelY, 10);
     minVelY = -5;
-    //HEALTH = 100;
-    //AMMO = 10;
-    perkPoints = 10;
+    //health = 100;
+    //ammo = 10;
+    //perkPoints = 10;
     health = (int) Game.clamp(health, 0, 100);
     ammo = (int) Game.clamp(ammo, 0, 420);
 
@@ -83,6 +83,7 @@ public class Player extends Canvas {
       die();
     }
   }
+
   /**
    * Handles the visual components of the player
    *
@@ -116,27 +117,38 @@ public class Player extends Canvas {
       if(Game.player.getBounds().intersects(tempObject.getBounds())){
         switch(tempID){
           case Enemy:
-            takeDamage(9+ Game.challengeVar);
+            takeDamage(9 + Game.challengeVar);
             break;
-          case EnemyBullet:
-            takeDamage(9+ Game.challengeVar);
-            Game.handler.removeObject(tempObject);
-            break;
-          case EnemyShockBullet:
-            if(!justHit){
-              effect2.setEffect(true);
+          case Bullet:
+            if(!tempObject.getFriendly()){
+              takeDamage(9 + Game.challengeVar);
               Game.handler.removeObject(tempObject);
             }
+            break;
+          case ShockBullet:
+            if(!tempObject.getFriendly()){
+              if(!justHit){
+                effect2.setEffect(true);
+                Game.handler.removeObject(tempObject);
+              }
+            } else {
+              effect3.setEffect(true);
+              Game.handler.removeObject(tempObject);
+            }
+            break;
           case BossEnemy:
             takeDamage(100);
             break;
-          case FriendlyShockBullet:
-            effect3.setEffect(true);
-            //counter4 = 0;
+          case PerkPoint:
+            perkPoints++;
+            Game.handler.removeObject(tempObject);
+            break;
+          case DamageBoost:
+            haveDamageBoost = true;
             Game.handler.removeObject(tempObject);
             break;
           case Magazine:
-            if(hasBetterPowerUps)
+            if (perks[1][0])
               ammo += 12;
             else
               ammo += 8;
@@ -144,7 +156,7 @@ public class Player extends Canvas {
             break;
           case HealthPack:
             if (health < 100) {
-              if (hasBetterPowerUps)
+              if (perks[1][0])
                 health += 50;
               else
                 health += 33;
@@ -183,23 +195,25 @@ public class Player extends Canvas {
   /**
    * Shoots Friendly Bullets at angles
    */
-  public static void shoot(int x, int y, int tX, int tY) {
+  public static void shoot(int tX, int tY) {
     ammo--;
+    int x = X + 24;
+    int y = Y + 24;
     int xC = tX - x;
     int yC = tY - y;
     double angle = Math.atan2(yC,xC);
-    if(!hasShotgun) {
-      Game.handler.addObject(new Bullet(x, y, tX, tY, angle, (int) velY, ID.FriendlyBullet, color));
+    if(!perks[0][1]) {
+      Game.handler.addObject(new Bullet(x, y, tX, tY, angle, ID.Bullet, color, true));
     } else {
       double angle1 = angle + (3.14/9);
       double angle2 = angle - (3.14/9);
       double angle3 = angle + (3.14/18);
       double angle4 = angle - (3.14/18);
-      Game.handler.addObject(new Bullet(x, y, tX, tY, angle, (int) velY, ID.FriendlyBullet, color));
-      Game.handler.addObject(new Bullet(x, y, tX, tY, angle1, (int) velY, ID.FriendlyBullet, color));
-      Game.handler.addObject(new Bullet(x, y, tX, tY, angle2, (int) velY, ID.FriendlyBullet, color));
-      Game.handler.addObject(new Bullet(x, y, tX, tY, angle3, (int) velY, ID.FriendlyBullet, color));
-      Game.handler.addObject(new Bullet(x, y, tX, tY, angle4, (int) velY, ID.FriendlyBullet, color));
+      Game.handler.addObject(new Bullet(x, y, tX, tY, angle, ID.Bullet, color, true));
+      Game.handler.addObject(new Bullet(x, y, tX, tY, angle1, ID.Bullet, color, true));
+      Game.handler.addObject(new Bullet(x, y, tX, tY, angle2, ID.Bullet, color, true));
+      Game.handler.addObject(new Bullet(x, y, tX, tY, angle3, ID.Bullet, color, true));
+      Game.handler.addObject(new Bullet(x, y, tX, tY, angle4, ID.Bullet, color, true));
     }
   }
   /**
@@ -249,63 +263,38 @@ public class Player extends Canvas {
     effect4.setGameObject(null);
     justHit = false; stunned = false;
     hasSpeedBuff = false; justOnParachute = false;
+    haveDamageBoost = false;
     parachute = null;
   }
 
   public static void removePerks() {
-    hasBetterPowerUps = false; hasSuperPowerUps = false; hasSuperDuperPowerUps = false;
-    hasFasterBullets = false; hasShotgun = false;
-    hasShockerHacker = false; hasElectricBoogie = false;
+    perks[0][0] = false; perks[0][1] = false;
+    perks[1][0] = false; perks[1][1] = false; perks[1][2] = false;
+    perks[2][0] = false; perks[2][1] = false;
+    treeTiers[0] = 2; treeTiers[1] = 1; treeTiers[2] = 2;
   }
 
-  public static boolean buyMidPerk() {
-    if(!hasBetterPowerUps && perkPoints >= 1){
-      hasBetterPowerUps = true;
-      perkPoints--;
-      perksBought++;
-      return true;
-    } else if(!hasSuperPowerUps && perkPoints >= 2 && perksBought <= 6){
-      hasSuperPowerUps = true;
-      perkPoints -= 2;
-      perksBought += 2;
-      return true;
-    } else if(!hasSuperDuperPowerUps && perkPoints >= 3 && perksBought <= 5){
-      hasSuperDuperPowerUps = true;
-      perkPoints -= 3;
-      perksBought += 3;
+  public static boolean buyPerk(int tree){
+    if(perkPoints >= treeTiers[tree] && perksBought <= (8 - treeTiers[tree])){
+      perkPoints -= treeTiers[tree];
+      perksBought += treeTiers[tree];
+      if(tree == 1){
+        perks[tree][treeTiers[tree] - 1] = true;
+      } else {
+        perks[tree][treeTiers[tree] - 2] = true;
+      }
+      treeTiers[tree]++;
       return true;
     }
     return false;
   }
 
-  public static boolean buyBotPerk() {
-    if(!hasShockerHacker && perkPoints >= 2 && perksBought <= 6){
-      hasShockerHacker = true;
-      perkPoints -= 2;
-      perksBought += 2;
-      return true;
-    } else if(!hasElectricBoogie && perkPoints >= 3 && perksBought <= 5) {
-      hasElectricBoogie = true;
-      perkPoints -= 3;
-      perksBought += 3;
-      return true;
+  public static void checkPerksBought() {
+    if(perksBought == 7 || perksBought == 8){
+      MouseInput.topPerkBtn.maxOut();
+      MouseInput.midPerkBtn.maxOut();
+      MouseInput.botPerkBtn.maxOut();
     }
-    return false;
-  }
-
-  public static boolean buyTopPerk() {
-    if(!hasFasterBullets && perkPoints >= 2 && perksBought <= 6){
-      hasFasterBullets = true;
-      perkPoints -= 2;
-      perksBought += 2;
-      return true;
-    } else if(!hasShotgun && perkPoints >= 3 && perksBought <= 5) {
-      hasShotgun = true;
-      perkPoints -= 3;
-      perksBought += 3;
-      return true;
-    }
-    return false;
   }
 
   public static int getXPos(){
@@ -331,6 +320,9 @@ public class Player extends Canvas {
   }
   public static void setVelX(double VelX){
     velX = VelX;
+  }
+  public static boolean getDamageBoost() {
+    return haveDamageBoost;
   }
   public static int getPerkPoints() {
     return perkPoints;

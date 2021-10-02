@@ -10,11 +10,11 @@ public class UpgradeButton extends Button{
     private int tier;
     private final int tree;
     private static final int[] perksBought = {0, 0, 0};
-    private static final String[][] treeNames = {{"Faster Bullets","Shotgun", "Max Upgrades"},
-            {"Better PowerUps", "Super PowerUps", "Super Duper PowerUps", "Max Upgrades"},
-            {"Shocker Hacker", "Electric Boogie", "Max Upgrades"}};
+    private static final String[][] treeNames = {{"Armor Piercin' Rounds","The Ex-Wife", "Max Upgrades"},
+            {"Better PowerUps", "More PowerUps", "Super Duper Powers", "Max Upgrades"},
+            {"Shocka Hacka", "Mr. Electric", "Max Upgrades"}};
+    private String[] labels = {"", "", ""};
     private final int[] xPos = {332, 186, 40};
-
 
     public UpgradeButton(int tier, int tree, String upgradeName, boolean pawn) {
         super(478, 0,104, 104, upgradeName, Menu.font20, Game.STATE.ShopMenu, Menu.navyBlue, Color.white);
@@ -22,7 +22,23 @@ public class UpgradeButton extends Button{
         this.tree = tree;
         this.pawn = pawn;
         y = ((tree-1) * 150) + 179;
+        divideString(upgradeName);
     }
+
+    private void divideString(String upgradeName) {
+        int lastSpace = 0;
+        int numLabels = 0;
+        for(int i = 0; i < upgradeName.length(); i++){
+            if(upgradeName.charAt(i) == ' '){
+                labels[numLabels] = upgradeName.substring(lastSpace, i);
+                numLabels++;
+                lastSpace = i+1;
+            } else if(i == upgradeName.length()-1){
+                labels[numLabels] = upgradeName.substring(lastSpace, i + 1);
+            }
+        }
+    }
+
     @Override
     public void tick() {
         try {
@@ -39,15 +55,16 @@ public class UpgradeButton extends Button{
         g.setFont(fnt);
         if(pawn){
             g.drawRect(x, y, w-1, h-1);
-            g.setColor(fntcolor);
-            g.drawString(label, x, y);
         } else {
             g.fillRect(x, y, w, h);
             g.setColor(fntcolor);
-            g.drawString(label, x, y);
             if((tree == 1 && tier != 3 ) || (tree == 2 && tier != 4) || (tree == 3 && tier != 3)) {
-                g.drawString("(" + (tier) + ")", x, y);
+                g.drawString("(" + (tier) + ")", x, y + 100);
             }
+        }
+        g.setColor(fntcolor);
+        for(int i = 0; i < 3; i++){
+            g.drawString(labels[i], x, y + (i+1)*20);
         }
     }
 
@@ -56,10 +73,12 @@ public class UpgradeButton extends Button{
         setBtnColor(Menu.navyBlue);
         perksBought[tree -1] = 0;
         label = treeNames[tree-1][tier - 1];
+        labels[2] = "";
+        divideString(label);
     }
 
     public void perkBought() {
-        if((tree == 1 && tier != 3 && Player.buyTopPerk()) || (tree == 3 && tier != 3 && Player.buyBotPerk())) {
+        if((tree == 1 && tier != 3 && Player.buyPerk(0)) || (tree == 3 && tier != 3 && Player.buyPerk(2))) {
             perksBought[tree -1]++;
             Game.handler.addButton(new UpgradeButton(tier, tree, treeNames[tree-1][tier -1], true));
             tier++;
@@ -67,7 +86,7 @@ public class UpgradeButton extends Button{
             if(tier == 3){
                 setBtnColor(Menu.bluishGray);
             }
-        } else if(tree == 2 && tier != 4 && Player.buyMidPerk()){
+        } else if(tree == 2 && tier != 4 && Player.buyPerk(1)){
             if(tier == 1){
                 Game.handler.addButton(MouseInput.topPerkBtn);
                 Game.handler.addButton(MouseInput.botPerkBtn);
@@ -80,5 +99,21 @@ public class UpgradeButton extends Button{
                 setBtnColor(Menu.bluishGray);
             }
         }
+        labels[2] = "";
+        divideString(label);
+        Player.checkPerksBought();
+    }
+
+    public void maxOut() {
+        if(tree == 2){
+            label = treeNames[1][3];
+            tier = 4;
+        } else {
+            label = treeNames[tree-1][2];
+            tier = 3;
+        }
+        setBtnColor(Menu.bluishGray);
+        labels[2] = "";
+        divideString(label);
     }
 }
