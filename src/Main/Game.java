@@ -60,7 +60,7 @@ public class Game extends Canvas implements Runnable {
     new Window(this);
     this.addKeyListener(new KeyInput());
     this.addMouseListener(new MouseInput());
-    //playMusic("sounds/Theme.wav");
+    playMusic("sounds/Theme.wav");
 
     //FIXME need to optimize this thread with the thread
     // that holds back on transitions between game phases
